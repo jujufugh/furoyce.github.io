@@ -290,6 +290,28 @@ LISTENER_GW =
 [oracle@localhost admin]$
 ```
 
+-- Start LISTENER_GW
+```
+[oracle@localhost admin]$ ps -ef | grep tns
+root        23     2  0 13:58 ?        00:00:00 [netns]
+oracle   21907     1  0 17:55 ?        00:00:00 /u01/app/oracle/product/12.2/db_1/bin/tnslsnr LISTENER -inherit
+oracle   22033 13994  0 17:58 pts/1    00:00:00 grep --color=auto tns
+[oracle@localhost admin]$ env | grep ORA
+ORACLE_UNQNAME=orcl12c
+ORACLE_SID=orcl12c
+ORACLE_BASE=/u01/app/oracle
+ORACLE_HOME=/u01/app/oracle/product/12.2/gw_mssql
+[oracle@localhost admin]$ env | grep TNS
+[oracle@localhost admin]$ export TNS_ADMIN=/u01/app/oracle/product/12.2/gw_mssql/dg4msql/admin
+[oracle@localhost admin]$ lsnrctl start LISTENER_GW
+
+LSNRCTL for Linux: Version 19.0.0.0.0 - Production on 08-SEP-2022 18:00:32
+
+Copyright (c) 1991, 2019, Oracle.  All rights reserved.
+
+TNS-01106: Listener using listener name LISTENER has already been started
+```
+
 -- Reload listener
 ```
 [oracle@localhost admin]$ lsnrctl reload LISTENER_GW
