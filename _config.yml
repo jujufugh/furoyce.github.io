@@ -13,12 +13,11 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Cloud2Dev - Best Practices of Cloud, Engineering, Development
+title: Cloud2Dev - Best Practices of Database Engineering
 email:
 description: >- # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+  Best Practices of Database Engineering, Cloud, Development and and Technologies
+  Oracle Cloud Infrastructure, Oracle Database, Exadata, Platform Engineering
 twitter_username: roycefugh
 github_username: furoyce
 minimal_mistakes_skin: contrast
