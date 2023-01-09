@@ -3,6 +3,17 @@ permalink: /about/
 title: "About"
 ---
 
-Tempor velit sint sunt ipsum tempor enim ad qui ullamco. Est dolore anim ad velit duis dolore minim sunt aliquip amet commodo labore. Ut eu pariatur aute ea aute excepteur laborum. Esse ea esse excepteur minim mollit qui cillum excepteur ex dolore magna. Labore deserunt fugiat incididunt incididunt sint ea. Consequat dolore aute laboris quis proident quis non et est consectetur ex eiusmod sit culpa.
+Welcome to my blog! My name is Royce Fu and I am a Database Solution Architect at Oracle with a passion for database technology and engineering.
 
-Cupidatat ea do et in excepteur in. Ad nostrud ut est esse eu duis ea sunt eiusmod. Aliquip tempor veniam sint elit fugiat. Velit incididunt laboris amet incididunt labore dolore irure velit excepteur commodo deserunt laborum. Consectetur eu fugiat veniam veniam Lorem labore magna eiusmod. Ea occaecat reprehenderit pariatur consectetur minim labore ut aliquip.
+I created this blog as a way to share my knowledge and insights on the latest trends and use cases in the database and broader data industry. Whether you're a fellow architect, engineer, technologist looking to stay up-to-date on the industry, or just have a general interest in technology, science and engineering, I hope my blog will provide you with valuable and informative content.
+
+A little bit about my background: I have a degree in Computer Science from Saint Joseph's University and have been working in the tech industry for over a decade. Throughout my career, I have had the opportunity to work on a variety of projects ranging from Database Administration, Performance Tuning to Database Platform Engineering.
+
+In my free time, you can find me tinkering with the latest gadgets, attending tech conferences, or reading about the latest industry trends.
+
+Thank you for visiting my blog. I hope you enjoy reading my content as much as I enjoy creating it!
+
+Disclaimer
+The views expressed on this blog are my own and do not reflect the views of the company(ies) I work (or have worked for) neither Oracle Corporation. The opinions expressed by visitors on this blog are theirs, not mine.
+
+The information in this blog is written based on personal experiences. You are free to use the information on this blog but I am not responsible and will not compensate to you if you ever happen to suffer a loss/inconvenience/damage because of/while making use of this information.

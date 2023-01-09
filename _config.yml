@@ -13,14 +13,14 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Cloud2Dev - Best Practices of Database Engineering
+title: Royce Fu's Database Insights
 email:
 description: >- # this means to ignore newlines until "baseurl:"
-  Best Practices of Database Engineering, Cloud, Development and and Technologies
+  Use cases of Database Engineering, Cloud, Development and and Technologies
   Oracle Cloud Infrastructure, Oracle Database, Exadata, Platform Engineering
 twitter_username: roycefugh
 github_username: furoyce
-minimal_mistakes_skin: contrast
+minimal_mistakes_skin: default
 search: true
 
 # Build settings
@@ -59,7 +59,7 @@ plugins:
 author:
   name   : "Royce Fu"
   avatar : "/assets/images/bio-photo.jpg"
-  bio    : "I am a Principal Database Solution Architect at Oracle. I know a few things about database management systems over the years in database engineering and administration, espcially about Oracle Database Platform Architecture, Engineering and Hybrid-Cloud and Multi-Cloud Integration."
+  bio    : "Principal Database Solution Architect at Oracle. Engineer, Technologist, Farther and Husband, OCM, GEE. My interest areas of expertise are Oracle Database Platform Architecture, Engineering and Hybrid-Cloud and Multi-Cloud Integration. Shared views and opinions are my own"
   links:
     - label: "Website"
       icon: "fas fa-fw fa-link"
