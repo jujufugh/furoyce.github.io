@@ -9,25 +9,27 @@ main:
     url: /about/
 
 docs:
-  - title: Getting Started
+  - title: Oracle Database
     children:
-      - title: "Quick-Start Guide"
-        url: /docs/quick-start-guide/
-      - title: "Structure"
-        url: /docs/structure/
-      - title: "Installation"
-        url: /docs/installation/
-      - title: "Upgrading"
-        url: /docs/upgrading/
-  - title: Content
+      - title: "23c"
+        url: /oracle/23c/
+      - title: "19c"
+        url: /oracle/19c/
+      - title: "Multitenant"
+        url: /oracle/multitenant/
+      - title: "Migration and Upgrade"
+        url: /oracle/mig_upg/
+  - title: Cloud Engineering
     children:
-      - title: "Working with Posts"
-        url: /docs/posts/
-      - title: "Working with Pages"
-        url: /docs/pages/
-      - title: "Working with Collections"
-        url: /docs/collections/
-      - title: "Helpers"
-        url: /docs/helpers/
-      - title: "Utility Classes"
-        url: /docs/utility-classes/
+      - title: "Cloud Databases"
+        url: /cloud/database/
+      - title: "Kubenetes"
+        url: /cloud/kube/      
+      - title: "Observerability and Monitoring"
+        url: /cloud/onm/
+      - title: "Data Mesh"
+        url: /cloud/datamesh/
+      - title: "Integration"
+        url: /cloud/integration/
+      - title: "Blockchain"
+        url: /cloud/blockchain/
