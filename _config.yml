@@ -107,6 +107,18 @@ defaults:
 category_archive:
   type: liquid
   path: /categories/
+  values:
+      layout: single
+      classes: wide
+      author_profile: false
+      sidebar:
+        nav: "docs"
 tag_archive:
   type: liquid
   path: /tags/
+  values:
+      layout: single
+      classes: wide
+      author_profile: false
+      sidebar:
+        nav: "docs"
