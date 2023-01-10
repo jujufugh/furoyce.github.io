@@ -14,14 +14,14 @@ In my free time, you can find me tinkering with the latest gadgets, attending te
 Thank you for visiting my blog. I hope you enjoy reading my content as much as I enjoy creating it!
 
 {% capture notice-1 %}
-> #### Disclaimer
-> 
-> The views expressed on this blog are my own and do not reflect the views of the company(ies) I work (or have worked for) neither Oracle Corporation. The opinions expressed by visitors on this blog are theirs, not mine.
->
-> The information in this blog is written based on personal experiences. You are free to use the information on this blog but I am not responsible and will not compensate to you if you ever happen to suffer a loss/inconvenience/damage because of/while making use of this information.
->
+#### Disclaimer
+ 
+The views expressed on this blog are my own and do not reflect the views of the company(ies) I work (or have worked for) neither Oracle Corporation. The opinions expressed by visitors on this blog are theirs, not mine.
+
+The information in this blog is written based on personal experiences. You are free to use the information on this blog but I am not responsible and will not compensate to you if you ever happen to suffer a loss/inconvenience/damage because of/while making use of this information.
+
 {% endcapture %}
 
-<div class="notice">
+<div class="notice--warning">
   {{ notice-1 | markdownify }}
 </div>
