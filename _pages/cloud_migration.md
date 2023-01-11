@@ -7,7 +7,7 @@ sidebar:
     nav: "docs"
 ---
 
-# Oracle Cloud Migration MOS References
+
 
 ## Introduction
 
@@ -30,3 +30,19 @@ There are several approaches that can be used to migrate a very large Oracle dat
 ## Use Cases
 
 ## Conclusion
+- Practice, practice, practice
+* Start on small database
+* Prove it works on production-size database
+
+- Automate
+* To ensure consistency and avoid human error
+
+- Save all logs and output
+* Data Pump, RMAN
+
+- Clean-up procedure
+* In case of failure and rollback
+* To repeat tests
+* Offline source database afterwards
+
+## Oracle Cloud Migration MOS References
