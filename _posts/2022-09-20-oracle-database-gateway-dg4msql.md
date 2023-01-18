@@ -17,10 +17,10 @@ tags:
 * VirtualBox
 
 ### References
-How to Configure DG4MSQL (Database Gateway for MS SQL Server) on a 64bit Windows post install (Doc ID 1086365.1)
-https://rkkoranteng.com/2021/09/20/oracle-database-gateway-19c-deployment-for-sql-server/
-http://oracle-help.com/oracle-database/oracle-database-gateway-microsoft-sql-server/
-https://oracle-base.com/articles/misc/heterogeneous-services-generic-connectivity
+- How to Configure DG4MSQL (Database Gateway for MS SQL Server) on a 64bit Windows post install (Doc ID 1086365.1)
+- https://rkkoranteng.com/2021/09/20/oracle-database-gateway-19c-deployment-for-sql-server/
+- http://oracle-help.com/oracle-database/oracle-database-gateway-microsoft-sql-server/
+- https://oracle-base.com/articles/misc/heterogeneous-services-generic-connectivity
 
 ### Synaposis
 The Oracle Database Gateway for MSSQL comes on a separate CD. It can be installed into an existing ORACLE_HOME(attention: if the ORACLE_HOME contains an already patched release of the database, you MUST apply the patchset agian.) Recommended installation is to install into a separate home under the same ORACLE_BASE
