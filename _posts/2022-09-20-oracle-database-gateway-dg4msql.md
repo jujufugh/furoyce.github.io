@@ -209,7 +209,7 @@ You can find the log of this install session at:
 ```
 
 ### Step 2 Oracle Database Gateway software configuration
-<TO-DO>
+TO-DO
 
 ### Step 3 Listener Configuration
 ```
