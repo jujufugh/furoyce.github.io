@@ -1,11 +1,13 @@
 ---
-title: "Post: Notice"
+title: "Minimal Mistake Notice post testing"
+last_modified_at: 2023-01-12T16:20:02-05:00
 categories:
-  - Blog
+  - Test
 tags:
-  - Post Formats
-  - notice
+  - Post testing
 ---
+
+The new blog system uses minimal mistake, I will write a sperate blog about the minimal mistake. In this post, I will go over some of the cool features of the minimal mistake and how we can write blog using markdown language. 
 
 A notice displays information that explains nearby content. Often used to call attention to a particular detail.
 

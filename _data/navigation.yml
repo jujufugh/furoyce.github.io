@@ -33,3 +33,5 @@ docs:
         url: /cloud/integration/
       - title: "Blockchain"
         url: /cloud/blockchain/
+      - title: "Security"
+        url: /cloud/security/
