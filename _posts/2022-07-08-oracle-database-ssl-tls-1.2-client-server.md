@@ -53,6 +53,7 @@ The following steps take place during a standard SSL handshake when RSA key exch
 ```
 
 ![TLS/SSL handshake](../images/posts/2023-01-19/e197a6469c0d6874936092c3990e5be711b54883ee1b96712bc8fa95bddb5205.png)  
+<img src='/images/posts/2023-01-19/e197a6469c0d6874936092c3990e5be711b54883ee1b96712bc8fa95bddb5205.png'/>
 
 
 ## Environment
