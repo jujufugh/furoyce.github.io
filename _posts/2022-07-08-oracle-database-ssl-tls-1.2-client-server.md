@@ -63,6 +63,7 @@ The following steps take place during a standard SSL handshake when RSA key exch
 
 ## Option 1: Create Server Self-signed Certificate
 - Create Oracle Wallet on the server
+
 ```
 $ mkdir /u01/app/oracle/wallet
 
@@ -77,6 +78,7 @@ $
 ```
 
 - Create a self-signed certificate
+
 ```
 $ orapki wallet add -wallet "/u01/app/oracle/wallet" -pwd WalletPasswd123 -dn "CN=`hostname`" -keysize 1024 -self_signed -validity 3650
 Oracle PKI Tool Release 19.0.0.0.0 - Production
@@ -89,6 +91,7 @@ $
 ```
 
 - Verify the wallet contains newly created self-signed certificate
+
 ```
 $ orapki wallet display -wallet "/u01/app/oracle/wallet" -pwd WalletPasswd123
 Oracle PKI Tool Release 19.0.0.0.0 - Production
@@ -112,6 +115,7 @@ $
 ```
 
 - Export the certificate for client wallet
+
 ```
 $ orapki wallet export -wallet "/u01/app/oracle/wallet" -pwd WalletPasswd123 -dn "CN=`hostname`" -cert /home/oracle/`hostname`-cert.crt
 Oracle PKI Tool Release 19.0.0.0.0 - Production
@@ -127,7 +131,8 @@ $
 ```
 
 ## Create Client wallet and Self-Signed Ceritificate
-- Create wallet folder 
+- Create wallet folder
+
 ```
 $ mkdir -p /u01/app/oracle/wallet
 
@@ -140,7 +145,9 @@ Operation is successfully completed.
 
 $
 ```
+
 - Create a Self-Signed certificate into the wallet
+
 ```
 $ orapki wallet add -wallet "/u01/app/oracle/wallet" -pwd WalletPasswd123 -dn "CN=`hostname`" -keysize 1024 -self_signed -validity 3650
 Oracle PKI Tool Release 19.0.0.0.0 - Production
@@ -153,6 +160,7 @@ $
 ```
 
 - Validate the wallet content
+
 ```
 $ orapki wallet display -wallet "/u01/app/oracle/wallet"
 Oracle PKI Tool Release 19.0.0.0.0 - Production
@@ -169,6 +177,7 @@ $
 ```
 
 - Export the Client Wallet into a certificate file
+
 ```
 $ orapki wallet export -wallet "/u01/app/oracle/wallet" -pwd WalletPasswd123 -dn "CN=`hostname`" -cert /home/oracle/`hostname`-cert.crt
 Oracle PKI Tool Release 19.0.0.0.0 - Production
@@ -186,6 +195,8 @@ $
 ## Exchange Server and Client Certificates
 - scp the server certificate to client, and **vice versa**
 - Import the client certificate into server side Oracle Wallet
+
+
 ```
 $ orapki wallet add -wallet "/u01/app/oracle/wallet" -pwd WalletPasswd123 -trusted_cert -cert /home/oracle/instance-20220726-0920-cert.crt
 Oracle PKI Tool Release 19.0.0.0.0 - Production
@@ -198,6 +209,8 @@ $
 ```
 
 - Import the server certificate into client side Oracle Wallet
+
+
 ```
 $ orapki wallet add -wallet "/u01/app/oracle/wallet" -pwd WalletPasswd123 -trusted_cert -cert /home/oracle/instance-20220804-1205-cert.crt
 Oracle PKI Tool Release 19.0.0.0.0 - Production
@@ -233,11 +246,13 @@ You can use oracle orapki or keystore to secure trust certificates and private k
 {: .notice--primary}
 
 - Create the Oracle Wallet
+
 ```
 mkdir -p /home/oraclt/admin/wallet
 
 orapki wallet create -wallet /home/oraclt/admin/wallet -auto_login -pwd *******
 ```
+
 - Create the certificate signing request
 ```
 orapki wallet add -dn “CN=<HOSTNAME>,OU=….,O=….” -wallet /home/oraclt/admin/wallet -pwd <PASSWORD>
@@ -245,7 +260,9 @@ orapki wallet add -dn “CN=<HOSTNAME>,OU=….,O=….” -wallet /home/oraclt/ad
 orapki wallet export -wallet "/home/oraclt/admin/wallet" -dn “CN=<HOSTNAME>,OU=….,O=….” -request /home/oraclt/admin/HOSTNAME.req
 
 ```
+
 - Submit the Certificate Signing Request
+
 ```
 Once the certificate signing request has been created, you must submit it to a certificate authority for certification. You can obtain an SSL certificate from a commercial or public certificate authority or from an internal CA server if your organization uses one. 
 
@@ -254,18 +271,24 @@ Once the certificate signing request has been created, you must submit it to a c
     GeoTrust, Inc. (www.geotrust.com)
     GoDaddy SSL (https://www.godaddy.com/web-security/ssl-certificate) 
 ```
+
 - Import Root and Intermediate Certificates as trusted certificates
+
 ```
 orapki wallet add -wallet "/home/oraclt/admin/wallet" -trusted_cert -cert /home/oraclt/admin/root-ca.cer -pwd ******
 orapki wallet add -wallet "/home/oraclt/admin/wallet" -trusted_cert -cert /home/oraclt/admin/sub.cer -pwd ******
 ```
+
 - Import signed user certificate as user certificate
+
 ```
 orapki wallet add -wallet "/home/oraclt/admin/wallet" -user_cert -cert /home/oraclt/admin/`hostname`.crt -pwd ******
 ```
 
 ## Server side Certificate Configuration
+
 - Add wallet configuration into sqlnet.ora
+
 ```
 $ cat sqlnet.ora
 # sqlnet.ora Network Configuration File: /u01/app/oracle/product/19c/dbhome_1/network/admin/sqlnet.ora
@@ -286,6 +309,7 @@ SSL_CLIENT_AUTHENTICATION = FALSE
 ```
 
 - Add SSL/TLS configuration into listener.ora
+
 ```
 $ cat listener.ora
 # listener.ora Network Configuration File: /u01/app/oracle/product/19c/dbhome_1/network/admin/listener.ora
@@ -313,13 +337,16 @@ LISTENER =
 ```
 
 - Restart your listener
+
 ```
 lsnrctl stop
 lsnrctl start
 ```
 
 ## Client side Certificate Configuration
+
 - Add wallet configuration into sqlnet.ora
+
 ```
 $ cat sqlnet.ora
 # sqlnet.ora Network Configuration File: /u01/app/oracle/product/19c/dbhome_1/network/admin/sqlnet.ora
