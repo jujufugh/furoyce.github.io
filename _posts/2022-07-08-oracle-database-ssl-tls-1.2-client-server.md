@@ -51,8 +51,7 @@ The following steps take place during a standard SSL handshake when RSA key exch
 17. Encryption with Session Key
 18.  Both client and server exchange messages to inform that future messages will be encrypted.
 ```
-
-![TLS/SSL handshake](../images/posts/2023-01-19/e197a6469c0d6874936092c3990e5be711b54883ee1b96712bc8fa95bddb5205.png)  
+ 
 <img src='/images/posts/2023-01-19/e197a6469c0d6874936092c3990e5be711b54883ee1b96712bc8fa95bddb5205.png'/>
 
 
@@ -241,7 +240,7 @@ The chain terminates with a Root CA Certificate. The Root CA Certificate is alwa
 - In order to make the SSL/TLS certificate compatible with all clients, it is necessary that the Intermediate Certificate be installed.
 {: .notice--info}
 
-![Certificate Diagram](../images/posts/2023-01-19/Figure_CA_Chains.jpg)
+<img src='/images/posts/2023-01-19/Figure_CA_Chains.jpg'/>
 
 You can use oracle orapki or keystore to secure trust certificates and private keys. Creat ethe keystore if not using already, else skip the step. 
 {: .notice--primary}
