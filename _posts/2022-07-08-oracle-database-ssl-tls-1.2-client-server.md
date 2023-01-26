@@ -10,9 +10,6 @@ tags:
   - OCI
 ---
 
-# Configure TLS 1.2 network encryption for Oracle database
-
-
 ## Synoposis
 Network encryption is an important security measure that provides encryption for data transmitted between the client and the database. It becomes even critical for companies going through cloud transformation journey. It helps protect data from being accessed by unauthorized users, and it helps keep sensitive information, such as credit card numbers, secure. Additionally, enable SSL/TLS 1.2 connection can help meet compliance requirements, such as the Health Insurance Portability and Accountability Act (HIPPA), Payment Card Industry Data Security Standard (PCI DSS), etc. 
 

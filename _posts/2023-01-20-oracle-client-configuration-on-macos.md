@@ -11,7 +11,7 @@ tags:
   - mkstore
 ---
 
-## Background
+### Background
 
 I recently got a use case to configure SSL/TLS 1.2 network encryption for Oracle Database server, check out the blog post here. During the testing environment configuration, I noticed that Oracle Instant Client for macOS(intel x86) was missing the executable binary for orapki and mkstore. Therefore it posed challenges of creating Oracle Wallet and importing SSL/TLS related certificates. 
 
@@ -38,7 +38,7 @@ java -classpath ${CLASSPATH} oracle.security.pki.textui.OraclePKITextUI "$@"
 
 - **mkstore**
 
-```
+```bash
 #!/bin/bash
 # set classpath for mkstore - align this to your local SQLcl installation
 SQLCL=$(dirname $(which sql))/../lib
