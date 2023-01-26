@@ -1,3 +1,15 @@
+---
+title: "Configure orapki in Oracle Client in MacOS"
+date: 2022-07-08
+last_modified_at: 2023-01-20T16:20:02-05:00
+categories:
+  - Blog
+tags:
+  - Oracle Client
+  - MacOS
+  - orapki
+---
+
 
 ## Welcome to GitHub Pages
 
@@ -22,6 +34,10 @@ Syntax highlighted code block
 1. Numbered
 2. List
 
+<a href="http://www.informationisbeautiful.net/visualizations/worlds-biggest-data-breaches-hacks/">
+  <img src="/images/posts/2016-11-10/breaches.png">
+</a>
+
 **Bold** and _Italic_ and `Code` text
 
 [Link](url) and ![Image](src)
@@ -36,3 +52,5 @@ Your Pages site will use the layout and styles from the Jekyll theme you have se
 ### Support or Contact
 
 Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+
+
