@@ -1,7 +1,7 @@
 ---
 title: "Configure orapki in Oracle Client on macOS"
 date: 2022-07-08
-last_modified_at: 2023-01-20T16:20:02-05:00
+last_modified_at: 2023-01-26T16:20:02-05:00
 categories:
   - Blog
 tags:
