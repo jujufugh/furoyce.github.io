@@ -222,4 +222,4 @@ Run testing again
 
 ```
 
-**Additional Read:** [Oracle Database SSL/TLS 1.2 network encryption configuration]({% post_url 2022-07-08-oracle-database-ssl-tls-1.2-client-server %})
+**Additional Read:** [Oracle Database SSL/TLS 1.2 network encryption configuration]({% post_url 2022-07-08-oracle-database-ssl-tls-1.2-client-server.md %})
