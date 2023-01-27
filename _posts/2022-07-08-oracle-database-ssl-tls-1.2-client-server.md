@@ -13,13 +13,6 @@ tags:
 ## Synoposis
 Network encryption is an important security measure that provides encryption for data transmitted between the client and the database. It becomes even critical for companies going through cloud transformation journey. It helps protect data from being accessed by unauthorized users, and it helps keep sensitive information, such as credit card numbers, secure. Additionally, enable SSL/TLS 1.2 connection can help meet compliance requirements, such as the Health Insurance Portability and Accountability Act (HIPPA), Payment Card Industry Data Security Standard (PCI DSS), etc. 
 
-## References
-- Primary Note For SSL/TLS (Doc ID 2229775.1)
-- Configuring SSL for Client Authentication and Encryption With Self Signed Certificates On Both Ends Using orapki (Doc ID 401251.1)
-- Step by Step Guide To Configure SSL Authentication (Doc ID 736510.1)
-- Tnsping To A TCPS Endpoint Fails With Ora-12560 (Doc ID 2198446.1)
-- https://docs.oracle.com/en/database/oracle/oracle-database/19/dbseg/configuring-secure-sockets-layer-authentication.html#GUID-6AD89576-526F-4D6B-A539-ADF4B840819F 
-
 ## How doe SSL/TLS works? 
 
 Secure Socket Layer and Transport Layer Security are transport protocols which rely on Public Key Infrastructure to create an encrypted link and transmit the packets over the network. In order to have the SSL/TLS negotiation we need a private key and a public key. The private key is created when the certificate request is generated in the wallet and the public key is provided with the signed certificate.  The encryption is performed with the public key and the decryption is performed with the private key. Currently the Oracle SSL layer is using third party PKI libraries. It is using the SSL certificates stored in a wallet(certificate keystore) and encryption algorithms to create a secure channel between the client  and the server(databases, webservices, mail servers,etc.). With SSL encryption sensitive information can be transmitted securely.
@@ -427,6 +420,11 @@ $
 **Note:** As you can see the session context here, we are connecting to the database server via TCPS through the SSL/TLS 1.2 tunnel. 
 
 ## What if you want to setup the SSL/TLS 1.2 connection from your MacOS? 
-Please check out the post: [Create Oracle Wallet and configure SQL Developer to non-default TNS_ADMIN on MacOS.md](#)
+Please check out the post: [Create Oracle Wallet and configure SQL Developer to non-default TNS_ADMIN on MacOS.md]({% post_url 2023-01-20-oracle-client-configuration-on-macos %})
 
-
+## References
+- Primary Note For SSL/TLS (Doc ID 2229775.1)
+- Configuring SSL for Client Authentication and Encryption With Self Signed Certificates On Both Ends Using orapki (Doc ID 401251.1)
+- Step by Step Guide To Configure SSL Authentication (Doc ID 736510.1)
+- Tnsping To A TCPS Endpoint Fails With Ora-12560 (Doc ID 2198446.1)
+- https://docs.oracle.com/en/database/oracle/oracle-database/19/dbseg/configuring-secure-sockets-layer-authentication.html#GUID-6AD89576-526F-4D6B-A539-ADF4B840819F 
