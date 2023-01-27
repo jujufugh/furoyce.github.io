@@ -4,7 +4,7 @@ last_modified_at: 2023-01-12T16:20:02-05:00
 categories:
   - Test
 tags:
-  - Blog
+  - Blog 
 ---
 
 The new blog system uses minimal mistake, I will write a sperate blog about the minimal mistake. In this post, I will go over some of the cool features of the minimal mistake and how we can write blog using markdown language. 

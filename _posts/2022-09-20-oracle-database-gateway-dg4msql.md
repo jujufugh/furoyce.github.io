@@ -1,6 +1,6 @@
 ---
 title: "Oracle Database Gateway DG4MSQL Configuration"
-date: 2019-04-18T15:34:30-04:00
+date: 2021-04-18T15:34:30-04:00
 categories:
   - Cloud Integration
 tags:
