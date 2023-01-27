@@ -26,7 +26,7 @@ As DBA, our first course of actions is to get the AWR report from the standby da
 ### Use Case
 - Check the open mode and database role for the primary and standby databases
 
-```SQL
+```
 -- primary
 SQL> select db_unique_name,open_mode, database_role from v$database;
 
@@ -46,7 +46,7 @@ ORCLSTBY		       READ ONLY WITH APPLY PHYSICAL STANDBY
 
 - The SYS\$UMF user is locked by default and it must be unlocked before deploying the RMF topology:
 
-```SQL
+```
 SQL> alter user "SYS$UMF" identified by oracle account unlock; 
 
 User altered.
@@ -65,7 +65,7 @@ YES OPEN
 
 - Enable hidden parameter _umf_remote_enabled to set to TRUE
 
-```SQL
+```
 -- primary and standby
 SQL> alter system set "_umf_remote_enabled"=TRUE scope=BOTH;
 
@@ -75,7 +75,7 @@ System altered.
 
 - Create database link between the primary database and the standby database and vice versa
 
-```SQL
+```
 -- primary
 SQL> CREATE DATABASE LINK "PRIMARY_TO_STANDBY_DBLINK" CONNECT TO "SYS$UMF" IDENTIFIED BY oracle using 'ORCLSTBY';
 
@@ -106,7 +106,7 @@ ORCL
 
 - Validate the database links
 
-```SQL
+```
 SQL> select db_unique_name from v$database@STANDBY_TO_PRIMARY_DBLINK;
 
 DB_UNIQUE_NAME
@@ -122,7 +122,7 @@ ORCLSTBY
 
 - Configure database nodes to add to the topology, each database node in a topology must be assigned a unique name
 
-```SQL
+```
 -- primary
 SQL> exec dbms_umf.configure_node ('primary_site');
 
@@ -137,7 +137,7 @@ PL/SQL procedure successfully completed.
 
 - Create the UMF topology, 
 
-```SQL
+```
 
 SQL> exec DBMS_UMF.create_topology ('Topology_1');
 
@@ -170,7 +170,7 @@ primary_site
 
 - Add standby node to the topology, you need to include both DBLinks that we created earlier
 
-```SQL
+```
 -- primary
 SQL> exec DBMS_UMF.register_node ('Topology_1', 'standby_site', 'PRIMARY_TO_STANDBY_DBLINK', 'STANDBY_TO_PRIMARY_DBLINK', 'FALSE', 'FALSE');
 
@@ -184,7 +184,8 @@ Topology_1															 standby_site									    18526484	      0 FALSE FALSE 
 ```
 
 - Register standby node for the AWR service
-```SQL
+
+```
 -- primary
 SQL> exec DBMS_WORKLOAD_REPOSITORY.register_remote_database(node_name=>'standby_site');
 
@@ -207,7 +208,7 @@ Topology_1															     18526484 3588577726 STANDBY_TO_PRIMARY_DBLINK
 
 - Once we have everything configured, we can generate some remote snapshots
 
-```SQL
+```
 SQL> alter system archive log current;
 
 System altered.
@@ -228,7 +229,7 @@ PL/SQL procedure successfully completed.
 
 - We can run AWR report for the standby database now, you can run awrrpti.sql script from either primary database or standby database. 
 
-```SQL
+```
 -- primary
 SQL> @?/rdbms/admin/awrrpti.sql
 

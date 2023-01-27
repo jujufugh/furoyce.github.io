@@ -7,6 +7,7 @@ categories:
 tags:
   - Oracle 19c
   - Cloud Database
+  - Cloud Migration
   - MAA
 ---
 
