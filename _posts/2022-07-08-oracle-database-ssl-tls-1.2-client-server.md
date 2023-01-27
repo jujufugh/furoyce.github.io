@@ -5,7 +5,7 @@ last_modified_at: 2023-01-09T16:20:02-05:00
 categories:
   - Blog
 tags:
-  - Oracle
+  - Oracle 19c
   - TLS 1.2
   - OCI
 ---

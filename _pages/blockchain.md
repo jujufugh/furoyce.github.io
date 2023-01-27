@@ -1,16 +1,14 @@
 ---
-permalink: /oracle/MAA/
-title: "Maximum Availability Architecture References"
+permalink: /oracle/blockchain/
+title: "Blockchain"
 author_profile: false
 classes: wide
 sidebar:
     nav: "docs"
 ---
 
-# Maximum Availability Architecture
-
 {% for tag in site.tags %}
-{% if tag[0] == "Oracle MAA" %}
+{% if tag[0] == "Blockchain" %}
   <!--<h3>{{ tag[0] }}</h3>-->
   <ul>
     {% for post in tag[1] %}

@@ -6,6 +6,7 @@ categories:
 tags:
   - Database Gateway
   - Oracle DG4MSQL
+  - Oracle 19c
 ---
 
 # Oracle Gateway for MSSQL DG4MSQL configuration
