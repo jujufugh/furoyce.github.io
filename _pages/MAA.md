@@ -8,7 +8,7 @@ sidebar:
 ---
 
 {% for tag in site.tags %}
-{% if tag[0] == "Oracle MAA" %}
+{% if tag[0] == "MAA" %}
   <!--<h3>{{ tag[0] }}</h3>-->
   <ul>
     {% for post in tag[1] %}

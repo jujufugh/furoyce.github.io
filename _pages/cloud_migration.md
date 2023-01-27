@@ -8,7 +8,7 @@ sidebar:
 ---
 
 {% for tag in site.tags %}
-{% if tag[0] == "Oracle Cloud Migration" %}
+{% if tag[0] == "Cloud Migration" %}
   <!--<h3>{{ tag[0] }}</h3>-->
   <ul>
     {% for post in tag[1] %}
