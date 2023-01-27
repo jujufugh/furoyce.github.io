@@ -1,6 +1,6 @@
 ---
-permalink: /oracle/maa/
-title: "Maximum Availability Architecture References"
+permalink: /cloud/database/
+title: "Cloud Database"
 author_profile: false
 classes: wide
 sidebar:
@@ -8,7 +8,7 @@ sidebar:
 ---
 
 {% for tag in site.tags %}
-{% if tag[0] == "Oracle MAA" %}
+{% if tag[0] == "Cloud Database" %}
   <!--<h3>{{ tag[0] }}</h3>-->
   <ul>
     {% for post in tag[1] %}
