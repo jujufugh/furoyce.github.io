@@ -6,8 +6,8 @@ categories:
   - Blog
 tags:
   - Oracle 19c
-  - Data Guard
-  - OCI
+  - Cloud Database
+  - MAA
 ---
 
 The page is working-in-progress. 
