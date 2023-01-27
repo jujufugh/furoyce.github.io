@@ -1,5 +1,5 @@
 ---
-permalink: /oracle/integration/
+permalink: /cloud/integration/
 title: "Integration"
 author_profile: false
 classes: wide

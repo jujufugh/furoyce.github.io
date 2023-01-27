@@ -1,5 +1,5 @@
 ---
-permalink: /oracle/onm/
+permalink: /cloud/onm/
 title: "Observerability and Monitoring"
 author_profile: false
 classes: wide

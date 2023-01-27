@@ -19,6 +19,8 @@ docs:
         url: /oracle/multitenant/
       - title: "Migration and Upgrade"
         url: /oracle/mig_upg/
+      - title: "MAA"
+        url: /oracle/maa/
   - title: Cloud Engineering
     children:
       - title: "Cloud Databases"

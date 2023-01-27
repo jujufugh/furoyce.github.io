@@ -1,5 +1,5 @@
 ---
-permalink: /oracle/MAA/
+permalink: /oracle/maa/
 title: "Maximum Availability Architecture References"
 author_profile: false
 classes: wide

@@ -1,5 +1,5 @@
 ---
-permalink: /oracle/security/
+permalink: /cloud/security/
 title: "Security"
 author_profile: false
 classes: wide

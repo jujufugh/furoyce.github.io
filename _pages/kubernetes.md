@@ -1,5 +1,5 @@
 ---
-permalink: /oracle/kubenetes/
+permalink: /cloud/kube/    
 title: "Kubenetes"
 author_profile: false
 classes: wide

@@ -1,5 +1,5 @@
 ---
-permalink: /oracle/blockchain/
+permalink: /cloud/blockchain/
 title: "Blockchain"
 author_profile: false
 classes: wide

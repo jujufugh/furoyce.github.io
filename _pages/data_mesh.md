@@ -1,5 +1,5 @@
 ---
-permalink: /oracle/data-mesh/
+permalink: /cloud/datamesh/
 title: "Data Mesh"
 author_profile: false
 classes: wide
