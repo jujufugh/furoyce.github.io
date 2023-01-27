@@ -37,7 +37,7 @@ DBMS_ROLLING has three main phases, Primary database and standby database are di
     * Finish the Upgrade Plan (DBMS_ROLLING.FINISH_PLAN)
 - Post Upgrade Steps
 
-![DBMS_ROLLING diagram](../images/posts/2023-01-19/DBMS_ROLLING_overview_diagram.png)
+<img src='/images/posts/2023-01-19/DBMS_ROLLING_overview_diagram.png'/>
 
 ### MOS reference: 
 - [Mike Dietrich blog on Rolling Upgrade](https://mikedietrichde.com/2018/05/09/transient-logical-standby-rolling-upgrades-overview/)
