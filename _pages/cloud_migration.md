@@ -18,10 +18,6 @@ sidebar:
 {% endif %}
 {% endfor %}
 
-## Introduction
-
-## Overview of Migration Toolkit
-
 ## Migration Approaches
 
 There are several approaches that can be used to migrate a very large Oracle database to Oracle Cloud Infrastructure (OCI). Here are a few common ones:
@@ -36,22 +32,27 @@ There are several approaches that can be used to migrate a very large Oracle dat
 
 * Cloud Data Guard: Finally, you can leverage Oracle's Cloud Data Guard, which allows you to create a physical or logical standby of an on-premises database in OCI. This approach allows you to keep the standby in sync with the primary database, so you can switch over to the standby in the event of a disaster.
 
-## Use Cases
-
 ## Conclusion
 - Practice, practice, practice
-* Start on small database
-* Prove it works on production-size database
-
+- Start on small database
+- Prove it works on production-size database
 - Automate
-* To ensure consistency and avoid human error
-
+  - To ensure consistency and avoid human error
 - Save all logs and output
-* Data Pump, RMAN
-
+  - Data Pump, RMAN
 - Clean-up procedure
-* In case of failure and rollback
-* To repeat tests
-* Offline source database afterwards
+  - In case of failure and rollback
+  - To repeat tests
+  - Offline source database afterwards
 
-## Oracle Cloud Migration MOS References
+## Oracle Migration MOS References
+* Migrate Databases Using the Migration Tools (OCI-C To OCI) (Doc ID 2549638.1)
+* MAA Practices for Cloud Migration Using ZDM (Doc ID 2562063.1)
+* MOS 2674405.1 Using Transportable Tablespaces to Migrate Oracle E-Business Suite Release 12.2 Using Oracle Database 19c Enterprise Edition On a Multitenant Environment)
+* Master Note for Transportable Tablespaces (TTS) -- Common Questions and Issues (Doc ID 1166564.1)
+* Transportable Tablespace (TTS) Restrictions and Limitations: Details, Reference, and Version Where Applicable  (Doc ID 1454872.1)
+* V4 PERL Scripts to reduce Transportable Tablespace Downtime using Cross Platform Incremental Backup (Doc ID 2471245.1)
+* Known Issues for Cross Platform Transportable Tablespaces XTTS (Doc ID 2311677.1)
+* Cross Platform Database Migration using ZDLRA (Doc ID 2460552.1)
+* 11G – Reduce Transportable Tablespace Downtime using Cross Platform Incremental Backup (Doc ID 1389592.1)
+* 12C – Reduce Transportable Tablespace Downtime using Cross Platform Incremental Backup (Doc ID 2005729.1)
