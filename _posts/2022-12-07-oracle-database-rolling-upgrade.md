@@ -6,7 +6,7 @@ categories:
   - Blog
 tags:
   - Oracle 19c
-  - Upgrade
+  - Migration Upgrade
   - MAA
 ---
 
