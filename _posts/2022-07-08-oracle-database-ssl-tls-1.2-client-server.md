@@ -7,7 +7,7 @@ categories:
 tags:
   - Oracle 19c
   - TLS 1.2
-  - OCI
+  - Security
 ---
 
 ## Synoposis

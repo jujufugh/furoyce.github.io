@@ -1,13 +1,19 @@
 ---
-title: "Minimal Mistake Notice post testing"
+title: "A Blog system using Github pages and Minimal Mistake"
 last_modified_at: 2023-01-12T16:20:02-05:00
 categories:
-  - Test
+  - Blog
 tags:
   - Blog 
 ---
 
-The new blog system uses minimal mistake, I will write a sperate blog about the minimal mistake. In this post, I will go over some of the cool features of the minimal mistake and how we can write blog using markdown language. 
+I am always a fan of simplicity, blogging using markdown has been on my list for a while. I have tried a few template to code the blog via Github pages, but most of them failed due to lack of functionality or support. 
+
+I recently found the great framework called [Minimal Mistake](https://mmistakes.github.io/minimal-mistakes/). As the name suggests, it takes minimal mistakes to get the blog up and running. Most importantly, the framework is very simple that you can stand up the blog with only a few components, however in the meanwhile, the framework is still highly customizable when you are comfortable with the framework, you can add more components and continue to integrate more features. 
+
+I will demonstrate some cool features within this blog and add more information along the journey of exploring the framework. 
+
+### Use Notice tag to highlight sentence with different notification level. 
 
 A notice displays information that explains nearby content. Often used to call attention to a particular detail.
 

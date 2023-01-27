@@ -6,7 +6,6 @@ categories:
   - Blog
 tags:
   - Oracle 19c
-  - Data Guard
+  - MAA
 ---
 
-The page is working-in-progress.
