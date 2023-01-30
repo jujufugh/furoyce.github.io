@@ -1,5 +1,5 @@
 ---
-title: "Configure TLS 1.2 network encryption for your Oracle database"
+title: "Simple steps to enable SSL/TLS encryption for your Oracle database"
 date: 2022-12-07
 last_modified_at: 2023-01-09T16:20:02-05:00
 categories:
@@ -57,7 +57,7 @@ The following steps take place during a standard SSL handshake when RSA key exch
 ```
 $ mkdir /u01/app/oracle/wallet
 
-$ orapki wallet create -wallet "/u01/app/oracle/wallet" -pwd WalletPasswd123 -auto_login
+$ orapki wallet create -wallet "/u01/app/oracle/wallet" -pwd xxxxxxxxx -auto_login
 Oracle PKI Tool Release 19.0.0.0.0 - Production
 Version 19.4.0.0.0
 Copyright (c) 2004, 2021, Oracle and/or its affiliates. All rights reserved.
@@ -70,7 +70,7 @@ $
 - Create a self-signed certificate
 
 ```
-$ orapki wallet add -wallet "/u01/app/oracle/wallet" -pwd WalletPasswd123 -dn "CN=`hostname`" -keysize 1024 -self_signed -validity 3650
+$ orapki wallet add -wallet "/u01/app/oracle/wallet" -pwd xxxxxxxxx -dn "CN=`hostname`" -keysize 1024 -self_signed -validity 3650
 Oracle PKI Tool Release 19.0.0.0.0 - Production
 Version 19.4.0.0.0
 Copyright (c) 2004, 2021, Oracle and/or its affiliates. All rights reserved.
@@ -83,7 +83,7 @@ $
 - Verify the wallet contains newly created self-signed certificate
 
 ```
-$ orapki wallet display -wallet "/u01/app/oracle/wallet" -pwd WalletPasswd123
+$ orapki wallet display -wallet "/u01/app/oracle/wallet" -pwd xxxxxxxxx
 Oracle PKI Tool Release 19.0.0.0.0 - Production
 Version 19.4.0.0.0
 Copyright (c) 2004, 2021, Oracle and/or its affiliates. All rights reserved.
@@ -107,7 +107,7 @@ $
 - Export the certificate for client wallet
 
 ```
-$ orapki wallet export -wallet "/u01/app/oracle/wallet" -pwd WalletPasswd123 -dn "CN=`hostname`" -cert /home/oracle/`hostname`-cert.crt
+$ orapki wallet export -wallet "/u01/app/oracle/wallet" -pwd xxxxxxxxx -dn "CN=`hostname`" -cert /home/oracle/`hostname`-cert.crt
 Oracle PKI Tool Release 19.0.0.0.0 - Production
 Version 19.4.0.0.0
 Copyright (c) 2004, 2021, Oracle and/or its affiliates. All rights reserved.
@@ -126,7 +126,7 @@ $
 ```
 $ mkdir -p /u01/app/oracle/wallet
 
-$ orapki wallet create -wallet "/u01/app/oracle/wallet" -pwd WalletPasswd123 -auto_login
+$ orapki wallet create -wallet "/u01/app/oracle/wallet" -pwd xxxxxxxxx -auto_login
 Oracle PKI Tool Release 19.0.0.0.0 - Production
 Version 19.4.0.0.0
 Copyright (c) 2004, 2021, Oracle and/or its affiliates. All rights reserved.
@@ -139,7 +139,7 @@ $
 - Create a Self-Signed certificate into the wallet
 
 ```
-$ orapki wallet add -wallet "/u01/app/oracle/wallet" -pwd WalletPasswd123 -dn "CN=`hostname`" -keysize 1024 -self_signed -validity 3650
+$ orapki wallet add -wallet "/u01/app/oracle/wallet" -pwd xxxxxxxxx -dn "CN=`hostname`" -keysize 1024 -self_signed -validity 3650
 Oracle PKI Tool Release 19.0.0.0.0 - Production
 Version 19.4.0.0.0
 Copyright (c) 2004, 2021, Oracle and/or its affiliates. All rights reserved.
@@ -169,7 +169,7 @@ $
 - Export the Client Wallet into a certificate file
 
 ```
-$ orapki wallet export -wallet "/u01/app/oracle/wallet" -pwd WalletPasswd123 -dn "CN=`hostname`" -cert /home/oracle/`hostname`-cert.crt
+$ orapki wallet export -wallet "/u01/app/oracle/wallet" -pwd xxxxxxxxx -dn "CN=`hostname`" -cert /home/oracle/`hostname`-cert.crt
 Oracle PKI Tool Release 19.0.0.0.0 - Production
 Version 19.4.0.0.0
 Copyright (c) 2004, 2021, Oracle and/or its affiliates. All rights reserved.
@@ -188,7 +188,7 @@ $
 
 
 ```
-$ orapki wallet add -wallet "/u01/app/oracle/wallet" -pwd WalletPasswd123 -trusted_cert -cert /home/oracle/instance-20220726-0920-cert.crt
+$ orapki wallet add -wallet "/u01/app/oracle/wallet" -pwd xxxxxxxxx -trusted_cert -cert /home/oracle/instance-20220726-0920-cert.crt
 Oracle PKI Tool Release 19.0.0.0.0 - Production
 Version 19.4.0.0.0
 Copyright (c) 2004, 2021, Oracle and/or its affiliates. All rights reserved.
@@ -202,7 +202,7 @@ $
 
 
 ```
-$ orapki wallet add -wallet "/u01/app/oracle/wallet" -pwd WalletPasswd123 -trusted_cert -cert /home/oracle/instance-20220804-1205-cert.crt
+$ orapki wallet add -wallet "/u01/app/oracle/wallet" -pwd xxxxxxxxx -trusted_cert -cert /home/oracle/instance-20220804-1205-cert.crt
 Oracle PKI Tool Release 19.0.0.0.0 - Production
 Version 19.4.0.0.0
 Copyright (c) 2004, 2021, Oracle and/or its affiliates. All rights reserved.

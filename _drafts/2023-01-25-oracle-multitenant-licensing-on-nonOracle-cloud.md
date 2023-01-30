@@ -1,56 +1,65 @@
 ---
-title: "Configure orapki in Oracle Client in MacOS"
-date: 2022-07-08
-last_modified_at: 2023-01-20T16:20:02-05:00
+title: "Oracle Multitenant licensing change on Non-Oracle Cloud"
+date: 2023-01-29
+last_modified_at: 2023-01-29T16:20:02-05:00
 categories:
   - Blog
 tags:
-  - Oracle Client
-  - MacOS
-  - orapki
+  - Oracle 19c
+  - Oracle License
 ---
 
+You might come across the following issue when creating PDBs on Non-Oracle Cloud vendors such as AWS, Google GCP, Microsoft Azure etc in Oracle 12c, 18c or 19c. 
 
-## Welcome to GitHub Pages
+```
+SQL> create pluggable database PDB4;
 
-You can use the [editor on GitHub](https://github.com/furoyce/furoyce.github.io/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
+create pluggable database PDB4
+                          *
+ERROR at line 1:
+ORA-65010: maximum number of pluggable databases created
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-<a href="http://www.informationisbeautiful.net/visualizations/worlds-biggest-data-breaches-hacks/">
-  <img src="/images/posts/2016-11-10/breaches.png">
-</a>
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
 ```
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+Even you have the max_pdbs parameter set to a much higher value
 
-### Jekyll Themes
+```
+SQL> show parameter max_pdbs
+NAME     TYPE    VALUE
+-------- ------- -----
+max_pdbs integer 10
+```
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/furoyce/furoyce.github.io/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+You can check your multitenant feature usage using following SQL: 
 
-### Support or Contact
+```
+SQL> select name feature_name,version,detected_usages,aux_count 
+     from dba_feature_usage_statistics 
+     where name like '%Pluggable%' or name like '%Multitenant%';
+ 
+FEATURE_NAME
+--------------------------------------------------------------------------------
+VERSION           DETECTED_USAGES  AUX_COUNT
+----------------- --------------- ----------
+Oracle Multitenant
+19.12                    3       10
+```
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+So with the Multitenant feature, you can't create the fourth user PDB on Non-Oracle Cloud Environment. You probably tried to use following workaround to bypass this limitation due to the bug. 
 
+```
+SQL> alter system set "_cdb_disable_pdb_limit"=true scope=spfile;
+System altered.
+```
+
+When you run the strace on the Oracle process, you can see that it checks for the non_oracle_cloud_provider
+
+```
+> /u01/app/oracle/product/18/db_home1/bin/oracle(kgcs_clouddb_provider_detect+0xf9) [0x49ffce9]
+ > /u01/app/oracle/product/18/db_home1/bin/oracle(kscs_is_non_oracle_cloud+0x244) [0x13f1104]
+```
+
+With the latest update in the licensing document by **Jan-29-2023**, you can see that the Multitenant use is limted to three pluggable databases per container for Non-Oracle Cloud Environments. I guess it's the time to make sure that you are compliant with this limitation. 
+
+<img src='/images/posts/2023-01-29/snap-2023-01-29-at-12.59.56-AM.png'>
 

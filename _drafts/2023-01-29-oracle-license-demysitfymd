@@ -1,0 +1,65 @@
+---
+title: "Demystify Oracle Licensing"
+date: 2023-01-29
+last_modified_at: 2023-01-30T16:20:02-05:00
+categories:
+  - Blog
+tags:
+  - Oracle Bug
+---
+
+
+## Oracle Licensing Overview
+
+There are 3 types of licenses for the Oracle Database: Packs, Options and Features and 9 Oracle Database Offerings: Standard Edition 2, Enterprise Edition, Oracle Database Appliance, Exadata, Exadata Cloud Service and Cloud@Customer, Database Cloud Service Standard Edition, Database Cloud Service Enterprise Edition, Database Cloud Service Enterprise Edition – High Performance and Database Cloud Service Enterprise Edition – Extreme Performance (you can see their abbreviations in the table below).
+
+[Oracle 19c Licensing](https://docs.oracle.com/en/database/oracle/oracle-database/19/dblic/)
+
+I always like to use the Oracle internal provided APEX tool to check the related Oracle packs, options and features. 
+
+There are multiple approraches to understand Oracle licensing and compare with other cloud vendor or database vendors. 
+
+1. website shop.oracle.com
+2. Oracle price list webpage
+3. license.oracle.com
+4. ULA information
+
+
+
+### Markdown
+
+Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+
+```markdown
+Syntax highlighted code block
+
+# Header 1
+## Header 2
+### Header 3
+
+- Bulleted
+- List
+
+1. Numbered
+2. List
+
+<a href="http://www.informationisbeautiful.net/visualizations/worlds-biggest-data-breaches-hacks/">
+  <img src="/images/posts/2016-11-10/breaches.png">
+</a>
+
+**Bold** and _Italic_ and `Code` text
+
+[Link](url) and ![Image](src)
+```
+
+For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+
+### Jekyll Themes
+
+Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/furoyce/furoyce.github.io/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+
+### Support or Contact
+
+Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+
+

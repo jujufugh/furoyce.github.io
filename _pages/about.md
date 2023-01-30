@@ -7,7 +7,7 @@ Welcome to my blog! My name is Royce Fu and I am a Database Solution Architect a
 
 I created this blog as a way to share my knowledge and insights on the latest trends and use cases in the database and broader data industry. Whether you're a fellow architect, engineer, technologist looking to stay up-to-date on the industry, or just have a general interest in technology, science and engineering, I hope my blog will provide you with valuable and informative content.
 
-A little bit about my background: I have a degree in Computer Science from Saint Joseph's University and have been working in the tech industry for over a decade. Throughout my career, I have had the opportunity to work on a variety of projects ranging from Database Administration, Performance Tuning to Database Platform Engineering.
+A little bit about my background: I am a computer science graduate who have been working in the tech industry for over a decade. Throughout my career, I have had the opportunity to work on a variety of projects ranging from Database Administration, Database and Application Performance Tuning to Database Platform Engineering.
 
 In my free time, you can find me tinkering with the latest gadgets, attending tech conferences, or reading about the latest industry trends.
 
