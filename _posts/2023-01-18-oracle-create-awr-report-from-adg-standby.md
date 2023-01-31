@@ -1,7 +1,7 @@
 ---
 title: "Create AWR report from Active Data Guard Standby database"
-date: 2023-01-18
-last_modified_at: 2023-01-18T16:20:02-05:00
+date: 2023-01-22
+last_modified_at: 2023-01-26T16:20:02-05:00
 categories:
   - Blog
 tags:
