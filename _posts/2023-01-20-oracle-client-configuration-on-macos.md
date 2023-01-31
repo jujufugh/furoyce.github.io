@@ -1,6 +1,6 @@
 ---
 title: "Configure orapki in Oracle Client on macOS"
-date: 2022-07-08
+date: 2023-01-20
 last_modified_at: 2023-01-26T16:20:02-05:00
 categories:
   - Blog
@@ -17,6 +17,7 @@ I recently got a use case to configure SSL/TLS 1.2 network encryption for Oracle
 
 ### Download Oracle instance client and sqlcl for macOS 
 [Download Oracle Client](https://www.oracle.com/database/technologies/instant-client/macos-intel-x86-downloads.html)
+
 [Download SQLcl](https://www.oracle.com/database/sqldeveloper/technologies/sqlcl/download/)
 
 ### Create orapki and mkstore based on SQLcl java library

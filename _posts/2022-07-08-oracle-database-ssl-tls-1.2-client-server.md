@@ -1,7 +1,7 @@
 ---
 title: "Simple steps to enable SSL/TLS encryption for your Oracle database"
-date: 2022-12-07
-last_modified_at: 2023-01-09T16:20:02-05:00
+date: 2022-12-18
+last_modified_at: 2023-01-31T16:20:02-05:00
 categories:
   - Blog
 tags:
@@ -10,8 +10,12 @@ tags:
   - Security
 ---
 
-## Synoposis
+<img src="/images/posts/2023-01-29/ssl-tls-markus-spiske-iar-afB0QQw-unsplash.jpg">
+
+## Synopsis
 Network encryption is an important security measure that provides encryption for data transmitted between the client and the database. It becomes even critical for companies going through cloud transformation journey. It helps protect data from being accessed by unauthorized users, and it helps keep sensitive information, such as credit card numbers, secure. Additionally, enable SSL/TLS 1.2 connection can help meet compliance requirements, such as the Health Insurance Portability and Accountability Act (HIPPA), Payment Card Industry Data Security Standard (PCI DSS), etc. 
+
+
 
 ## How doe SSL/TLS works? 
 
@@ -19,7 +23,9 @@ Secure Socket Layer and Transport Layer Security are transport protocols which r
  
 The SSL certificates used by an Oracle client/database can be self signed with orapki or they can be provided by a 3rd party certification authority.  Depending on the database version the following protocols are available: SSL 1.0/2.0/3.0 and TLS1.0 for 11g, TLS 1.0/1.1/1,2 for 12c. The protocols TLS 1.1/1.2 are implemented in 11.2.0.4 by the usage of MES bundle patches.
 
-The following steps take place during a standard SSL handshake when RSA key exchange algorithm is used:
+SSL/TLS protocol have two implementation forms, 1-way SSL/TLS or 2-way SSL/TLS. 
+
+The following steps take place during 2-way SSL/TLS handshake when RSA key exchange algorithm is used:
 
 ```
 1. Client Hello
@@ -44,12 +50,26 @@ The following steps take place during a standard SSL handshake when RSA key exch
  
 <img src='/images/posts/2023-01-19/e197a6469c0d6874936092c3990e5be711b54883ee1b96712bc8fa95bddb5205.png'/>
 
+In 1-way SSL/TLS, only client will validate server's certificate for identiy verification. The server will not validate the same for the client. During the implementation, the server will have the SSL/TLS certificate in server side wallet, server shares its public SSL/TLS certificates with the clients so that client can use the public certificates to validate server's identity. 
+
+It sounds like a quite straight forward implementation for the 1-way TLS, but is it secure comparing to 2-way TLS(mTLS)? 
+
+The answer is **NO**. Because there is no client certificate validation process, so client doesn't need to share its certificate with server or get its certificate signed by the CA. You might wonder who would want to have 1-way TLS if we can have a much secure alternative, 2-way TLS? 
+
+Following are the benefits of the 1-way TLS: 
+1. No client wallet download required
+   - `Starting from Oracle Client 19.14 and Oracle SQLcl 21.5, public certificates are built-in with the Oracle client`
+2. Client Server handshake round trip is reduced to have better connection latency
+3. You can use OS default truststore for public certificates if the client doesn't have built-in public certificates
+4. 1-way TLS can coexist with 2-way TLS(mTLS)
 
 ## Environment
 * Oracle Database Server: 19c RU4
 * Oracle Database Client: 19c RU4
 * SQL Developer on MacOSX: 21.2
 * Oracle Database Instant Client: 19c RU8
+
+# 2-way TLS (mTLS) implementation 
 
 ## Option 1: Create Server Self-signed Certificate
 - Create Oracle Wallet on the server
@@ -420,11 +440,12 @@ $
 **Note:** As you can see the session context here, we are connecting to the database server via TCPS through the SSL/TLS 1.2 tunnel. 
 
 ## What if you want to setup the SSL/TLS 1.2 connection from your MacOS? 
-Please check out the post: [Create Oracle Wallet and configure SQL Developer to non-default TNS_ADMIN on MacOS.md]({% post_url 2023-01-20-oracle-client-configuration-on-macos %})
+Please check out the post: [Create Oracle Wallet and configure SQL Developer to non-default TNS_ADMIN on MacOS]({% post_url 2023-01-20-oracle-client-configuration-on-macos %})
 
 ## References
 - Primary Note For SSL/TLS (Doc ID 2229775.1)
 - Configuring SSL for Client Authentication and Encryption With Self Signed Certificates On Both Ends Using orapki (Doc ID 401251.1)
 - Step by Step Guide To Configure SSL Authentication (Doc ID 736510.1)
 - Tnsping To A TCPS Endpoint Fails With Ora-12560 (Doc ID 2198446.1)
+- How To Configure SSL for Client Authentication And Encryption Using Microsoft Certificate Store (MCS) (Doc ID 2188562.1)
 - https://docs.oracle.com/en/database/oracle/oracle-database/19/dbseg/configuring-secure-sockets-layer-authentication.html#GUID-6AD89576-526F-4D6B-A539-ADF4B840819F 

@@ -1,7 +1,7 @@
 ---
 title: "Oracle 23c Beta Release"
-date: 2022-10-08
-last_modified_at: 2023-01-20T16:20:02-05:00
+date: 2023-01-26
+last_modified_at: 2023-01-26T16:20:02-05:00
 categories:
   - Blog
 tags:
