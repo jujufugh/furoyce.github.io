@@ -1,5 +1,5 @@
 ---
-permalink: /cloud/kube/    
+permalink: /cloud/k8s/    
 title: "Kubenetes"
 author_profile: false
 classes: wide

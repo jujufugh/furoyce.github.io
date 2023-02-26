@@ -26,7 +26,7 @@ docs:
       - title: "Cloud Databases"
         url: /cloud/database/
       - title: "Kubenetes"
-        url: /cloud/kube/      
+        url: /cloud/k8s/      
       - title: "Observerability and Monitoring"
         url: /cloud/onm/
       - title: "Data Mesh"
