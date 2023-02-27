@@ -1,6 +1,6 @@
 ---
 permalink: /cloud/k8s/    
-title: "Kubenetes"
+title: "Kubernetes"
 author_profile: false
 classes: wide
 sidebar:

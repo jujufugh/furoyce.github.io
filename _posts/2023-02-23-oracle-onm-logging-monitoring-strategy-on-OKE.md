@@ -1,7 +1,7 @@
 ---
 title: "Oracle Cloud Infrastructure - Logging and Monitoring for OKE"
 date: 2023-02-22
-last_modified_at: 2023-02-22T16:20:02-05:00
+last_modified_at: 2023-02-25T22:20:02-05:00
 categories:
   - Blog
 tags:

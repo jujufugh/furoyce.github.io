@@ -5,15 +5,14 @@ last_modified_at: 2023-02-22T16:20:02-05:00
 categories:
   - Blog
 tags:
-  - Kubernetes
   - Observerability and Monitoring
 ---
 
 ### Introduction
-Oracle Kubernetes Engine (OKE) is a fully-managed container orchestration service that simplifies the deployment and management of containerized applications in the cloud. OKE is built on top of Kubernetes, the popular open-source container orchestration platform, and provides enterprise-grade features such as high availability, scalability, and security. In a complex and dynamic environment like OKE, logging and monitoring play a crucial role in ensuring the health and stability of the system. By collecting and analyzing logs and metrics from various sources, such as containers, nodes, and network, OKE administrators can gain insights into the behavior of the system and identify issues before they become critical. Logging and monitoring can also help to optimize resource utilization, troubleshoot performance issues, and meet compliance and security requirements. Therefore, effective logging and monitoring are essential components of any OKE deployment. In this blog, we'll explore how to configure logging and monitoring to gain operations insights from the OKE, and more importantly how to estimate the cost impact on our existing cloud consumption
+When we have increasingly more of the IT infrastructure workload migrated over to the cloud, we see the importance of getting the proper Observability and Monitoring in place so that we can have 24/7 insights about our cloud operation, and we can take immediate action when anything is going south. The important compoenent to collect and stream the metrics to the monitoring control plane is the Cloud Agent, it is a lightweight software agent which manages plugins running on compute instances. Plugins collect performance metrics, install OS updates, and perform other instance management tasks. 
 
-<img src='/images/posts/2023-02/snap-2023-02-23-at-8.46.50-PM.png'>
-![k8s](/images/posts/2023-02/snap-2023-02-23-at-8.46.50-PM.png)
+Following are the functionalities that Cloud Agent Plugins provide: 
+
 
 
 ### Logging architecture
