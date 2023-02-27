@@ -120,8 +120,8 @@ First 1 million delivery operations per month is free. Frist 1000 emails per mon
 Effective logging and monitoring are crucial to maintaining the performance and availability of applications on Oracle Kubernetes Engine (OKE). By setting up customized logging and monitoring components, businesses can proactively detect and troubleshoot issues within their cloud native applications as well as the underlying Kubernetes clusters and computing infrastructures, minimizing the impact on end-users. Furthermore, by leveraging OCI Logging Analytics, OKE users can benefit from an integrated log management and analytics solution, featuring scalable storage, powerful analysis capabilities, and seamless integration with other OCI services. This robust combination of logging and monitoring helps ensure that organizations can efficiently monitor, secure, and optimize their cloud environments for optimal performance.
 
 ## Resource
-[Logging Analytics livelabs](https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3348)
-[GitHub QuickStart for Kubernetes](https://github.com/oracle-quickstart/oci-kubernetes-monitoring)
-[Oracle Logging Analytics documentation](https://docs.oracle.com/en-us/iaas/logging-analytics/index.html)
-[Oracle Logging Analytics FluentD](https://docs.oracle.com/en/learn/oci_logging_analytics_fluentd/)
-[Observability and Management related Kubernetes blog](https://blogs.oracle.com/observability/post/k8s-monitoring)
+- [Logging Analytics livelabs](https://apexapps.oracle.com/pls/apex/r/dbpm/livelabs/view-workshop?wid=3348)
+- [GitHub QuickStart for Kubernetes](https://github.com/oracle-quickstart/oci-kubernetes-monitoring)
+- [Oracle Logging Analytics documentation](https://docs.oracle.com/en-us/iaas/logging-analytics/index.html)
+- [Oracle Logging Analytics FluentD](https://docs.oracle.com/en/learn/oci_logging_analytics_fluentd/)
+- [Observability and Management related Kubernetes blog](https://blogs.oracle.com/observability/post/k8s-monitoring)
