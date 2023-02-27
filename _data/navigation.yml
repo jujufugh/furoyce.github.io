@@ -25,7 +25,7 @@ docs:
     children:
       - title: "Cloud Databases"
         url: /cloud/database/
-      - title: "Kubenetes"
+      - title: "Kubernetes"
         url: /cloud/k8s/      
       - title: "Observerability and Monitoring"
         url: /cloud/onm/
