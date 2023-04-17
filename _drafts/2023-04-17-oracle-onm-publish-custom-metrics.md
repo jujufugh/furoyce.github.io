@@ -9,16 +9,16 @@ tags:
 ---
 
 ### Introduction
-Custom metrics are a powerful tool for monitoring the performance of your applications and infrastructure. Rather than relying on pre-defined metrics provided by your cloud provider, custom metrics allow you to create and publish your own metrics, giving you greater visibility into the specific aspects of your application that matter most to your business.
+With more and more customers embark journey to the Oracle Cloud, we see customers raise questions about Observability and Management best practices for Cloud Resources. OCI offers a range of tools and services for monitoring the health and performance of your cloud resources, including your databases, compute instances, network, application stack, etc. Highly scalable and resilient observability and monitoring solution is an essential part of any cloud deployment.
 
-Custom metrics can be used to track a wide range of metrics, including application performance metrics (such as response time, error rate, and throughput), infrastructure metrics (such as CPU usage, memory usage, and disk utilization), and business metrics (such as user engagement, conversion rates, and revenue).
+While OCI provides default metrics for some databases, there may be instances where custom metrics need to be used to monitor databases that are not monitored by default. Custom metrics allow you to monitor specific aspects of your databases that are critical to your business, but that are not captured by default metrics. For example, you may want to monitor the number of blocking sessions or long running sessions in your database, the response time of specific queries, or your Active Data Guard Transport and Apply lag. 
 
-In addition to providing greater visibility into your application and infrastructure, custom metrics can also be used to trigger alerts and automate remediation workflows. For example, you could set up an alert to trigger when the error rate for a particular endpoint exceeds a certain threshold, or to automatically scale up your application when CPU usage exceeds a certain percentage.
+In this blog post, we will describe how to publish custom metrics to monitor databases that are not monitored by default by Oracle. We will explain how to create custom metrics using Oracle Management Cloud, a comprehensive monitoring solution that provides real-time visibility into your cloud resources, and how to publish these metrics in OCI. With custom metrics, you can gain deeper insights into the health and performance of your databases, detect issues early, and prevent downtime.
 
-Custom metrics can be published to a variety of different services, depending on your cloud provider and specific requirements. For example, if you're using OCI, you can publish custom metrics to OCI Metrics, while if you're using AWS, you can publish custom metrics to AWS CloudWatch.
+### Reference
+Todd Sharp started with an awesome blog [Publishing and Analyzing Custom Applicatino Metrics with The Oracle Cloud Monitoring Service](https://blogs.oracle.com/developers/post/publishing-and-analyzing-custom-application-metrics-with-the-oracle-cloud-monitoring-service) with [Github code examples](https://github.com/recursivecodes/oci-custom-metrics) demonstrating how to create user defined custom metrics and publish them to user defined metric namespace in OCI Monitoring Service
 
-Overall, custom metrics are an essential tool for monitoring and optimizing the performance of your applications and infrastructure. By giving you greater visibility into the specific metrics that matter most to your business, custom metrics can help you make more informed decisions and respond quickly to issues as they arise.
-
+read more about OCI Monitoring service [here](https://docs.oracle.com/en-us/iaas/Content/Monitoring/Concepts/monitoringoverview.htm)
 
 
 ### Output
@@ -94,5 +94,7 @@ com.oracle.bmc.model.BmcException: (404, NotAuthorizedOrNotFound, false) Authori
 17:52:33.090 [Thread-2] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
 17:52:33.187 [Thread-2] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
 ````
+
+### Reference
 
 

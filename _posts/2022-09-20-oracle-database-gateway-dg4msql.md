@@ -41,7 +41,7 @@ The Oracle Database Gateway for MSSQL comes on a separate CD. It can be installe
 ### MSSQL server configuration
 
 - Get the Microsoft SQL Server docker image
-```
+````
 root@wls:~# sudo docker pull mcr.microsoft.com/mssql/server:2022-latest
 2022-latest: Pulling from mssql/server
 9e92253e66cd: Pull complete
@@ -50,11 +50,11 @@ root@wls:~# sudo docker pull mcr.microsoft.com/mssql/server:2022-latest
 Digest: sha256:ea5e3a6dd0535fadeccfc2919a33d81bf9f48f1581681a1454399bce0dd88ba5
 Status: Downloaded newer image for mcr.microsoft.com/mssql/server:2022-latest
 mcr.microsoft.com/mssql/server:2022-latest
-```
+````
 
 - Create docker container instance 
-```
-root@wls:~# sudo docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=pwd$123" \
+````
+root@wls:~# sudo docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=xxxxxxxx" \
   -p 143>    -p 1433:1433 --name mssql1 --hostname mssql1 \
 >    -d \
 >    mcr.microsoft.com/mssql/server:2022-latest
@@ -65,21 +65,21 @@ root@wls:~#
 root@wls:~# docker ps -a
 CONTAINER ID   IMAGE                                        COMMAND                  CREATED         STATUS         PORTS                                                                 NAMES
 978dfb61e243   mcr.microsoft.com/mssql/server:2022-latest   "/opt/mssql/bin/perm…"   4 seconds ago   Up 3 seconds   0.0.0.0:1433->1433/tcp                                                mssql1
-```
+````
 - Execute command in MSSQL docker container
-```
+````
 root@wls:~# docker exec -t mssql1 cat /var/opt/mssql/log/errorlog | grep connection
 2022-09-08 12:15:48.38 Server      The maximum number of dedicated administrator connections for this instance is '1'
 2022-09-08 12:15:49.90 Server      Dedicated admin connection support was established for listening locally on port 1434.
 2022-09-08 12:15:49.91 spid54s     SQL Server is now ready for client connections. This is an informational message; no user action is required.
 2022-09-08 12:15:52.22 spid62s     Always On: The availability replica manager is waiting for the instance of SQL Server to allow client connections. This is an informational message only. No user action is required.
-```
+````
 
 - Query MSSQL database
-```
+````
 root@wls:~# sudo docker exec -it mssql1 "bash"
 mssql@mssql1:/$ bash
-mssql@mssql1:/$ /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "pwd$123"
+mssql@mssql1:/$ /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "xxxxxxxx"
 1> CREATE DATABASE TestDB;
 2>
 3>
@@ -98,10 +98,11 @@ msdb
 TestDB
 
 (5 rows affected)
-```
+````
+
 - Create demo table
 
-```
+````
 1> USE TestDB;
 2> CREATE TABLE Inventory (id INT, name NVARCHAR(50), quantity INT);
 3> INSERT INTO Inventory VALUES (1, 'banana', 150); INSERT INTO Inventory VALUES (2, 'orange', 154);
@@ -141,12 +142,13 @@ id          name                                               quantity
 1> exit;
 2> quit;
 3>
-```
+````
 ### Oracle Databaes configuration
 Oracle VirtualBox Developer Day existing image
 
 ### Step 1 Oracle Database Gateway installation
-```
+
+````
 [oracle@localhost ~]$ cd Downloads/
 [oracle@localhost Downloads]$ ls -ltr
 total 983864
@@ -175,13 +177,14 @@ You can find the log of this install session at:
 
 [oracle@localhost gateways]$
 [oracle@localhost gateways]$
-```
+````
 
 ### Step 2 Oracle Database Gateway software configuration
 TO-DO
 
 ### Step 3 Listener Configuration
-```
+
+````
 [oracle@localhost gateways]$ lsnrctl status
 
 LSNRCTL for Linux: Version 12.2.0.1.0 - Production on 08-SEP-2022 14:34:01
@@ -216,9 +219,11 @@ Service "orcl12c" has 2 instance(s).
 Service "orcl12cXDB" has 1 instance(s).
   Instance "orcl12c", status READY, has 1 handler(s) for this service...
 The command completed successfully
-```
--- Update listener.ora file
-```
+````
+
+- Update listener.ora file
+
+````
 [oracle@localhost admin]$ pwd
 /u01/app/oracle/product/12.2/db_1/network/admin
 [oracle@localhost admin]$ ls -ltr
@@ -267,10 +272,11 @@ LISTENER_GW =
   )
 
 [oracle@localhost admin]$
-```
+````
 
--- Start LISTENER_GW
-```
+- Start LISTENER_GW
+
+````
 [oracle@localhost admin]$ ps -ef | grep tns
 root        23     2  0 13:58 ?        00:00:00 [netns]
 oracle   21907     1  0 17:55 ?        00:00:00 /u01/app/oracle/product/12.2/db_1/bin/tnslsnr LISTENER -inherit
@@ -289,10 +295,11 @@ LSNRCTL for Linux: Version 19.0.0.0.0 - Production on 08-SEP-2022 18:00:32
 Copyright (c) 1991, 2019, Oracle.  All rights reserved.
 
 TNS-01106: Listener using listener name LISTENER has already been started
-```
+````
 
--- Reload listener
-```
+- Reload listener
+
+````
 [oracle@localhost admin]$ lsnrctl reload LISTENER_GW
 
 LSNRCTL for Linux: Version 19.0.0.0.0 - Production on 08-SEP-2022 18:29:50
@@ -307,10 +314,10 @@ oracle   21907     1  0 17:55 ?        00:00:00 /u01/app/oracle/product/12.2/db_
 oracle   22385     1  0 18:08 ?        00:00:00 /u01/app/oracle/product/12.2/gw_mssql/bin/tnslsnr LISTENER_GW -inherit
 oracle   22957 13994  0 18:29 pts/1    00:00:00 grep --color=auto tns
 
-```
+````
 
 ### Step 4 tnsnames.ora file configuration
-```
+````
 [oracle@localhost admin]$ pwd
 /u01/app/oracle/product/12.2/db_1/network/admin
 [oracle@localhost admin]$ ls -ltr
@@ -355,10 +362,10 @@ dg4msql =
     (HS = OK)
   )
 [oracle@localhost admin]$
-```
+````
 
 ### Step 5 initdg4msql.ora file configuration
-```
+````
 [oracle@localhost admin]$ pwd
 /u01/app/oracle/product/12.2/gw_mssql/dg4msql/admin
 [oracle@localhost admin]$ ls -ltr
@@ -385,10 +392,10 @@ HS_FDS_RECOVERY_PWD=RECOVER
 
 [oracle@localhost admin]$
 
-```
+````
 
 ### Step 6 Database Link creation
-```
+````
 [oracle@localhost admin]$ env | grep ORA
 ORACLE_UNQNAME=orcl12c
 ORACLE_SID=orcl12c
@@ -409,15 +416,15 @@ SQL> show con_id
 CON_ID
 ------------------------------
 1
-SQL> create database link GW_LINK connect to "SA" identified by "pwd$123" using 'dg4msql';
+SQL> create database link GW_LINK connect to "SA" identified by "xxxxxxxx" using 'dg4msql';
 
 Database link created.
 
-```
+````
 
 ### Testing the connection
 
-```
+````
 [oracle@localhost oracle]$ . orane
 bash: orane: No such file or directory
 [oracle@localhost oracle]$ . oraenv
@@ -455,14 +462,14 @@ SQL> select * from "inventory"@GW_LINK;
 	 2 orange						     154
 
 SQL>
-```
+````
 
 
 ### Troubleshooting
 
 Error message
 
-```
+````
 SQL> select * from "inventory"@GW_LINK
   2  ;
 select * from "inventory"@GW_LINK
@@ -472,9 +479,9 @@ ORA-28500: connection from ORACLE to a non-Oracle system returned this message:
 [Oracle][ODBC SQL Server Wire Protocol driver]Connection refused. Verify Host
 Name and Port Number. {08001}
 ORA-02063: preceding 2 lines from GW_LINK
-```
+````
 
-```
+````
 SQL> select * from dual@GW_LINK;
 select * from dual@GW_LINK
                    *
@@ -482,4 +489,4 @@ ERROR at line 1:
 ORA-28545: error diagnosed by Net8 when connecting to an agent
 Unable to retrieve text of NETWORK/NCR message 65535
 ORA-02063: preceding 2 lines from GW_LINK
-```
+````
