@@ -26,7 +26,7 @@ tags:
 ### Synaposis
 The Oracle Database Gateway for MSSQL comes on a separate CD. It can be installed into an existing ORACLE_HOME(attention: if the ORACLE_HOME contains an already patched release of the database, you MUST apply the patchset agian.) Recommended installation is to install into a separate home under the same ORACLE_BASE
 
-## Overview installation and configuration steps:
+### Overview installation and configuration steps:
 * MSSQL installation
 * Oracle database setup
 * Software installation
@@ -37,7 +37,6 @@ The Oracle Database Gateway for MSSQL comes on a separate CD. It can be installe
 * Database Link creation
 * Testing the connection
 
-## Prerequisite
 ### MSSQL server configuration
 
 - Get the Microsoft SQL Server docker image
