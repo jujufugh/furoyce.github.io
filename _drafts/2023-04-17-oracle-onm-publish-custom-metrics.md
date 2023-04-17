@@ -18,7 +18,7 @@ In this blog post, we will describe how to publish custom metrics to monitor dat
 ### Reference
 Todd Sharp started with an awesome blog [Publishing and Analyzing Custom Applicatino Metrics with The Oracle Cloud Monitoring Service](https://blogs.oracle.com/developers/post/publishing-and-analyzing-custom-application-metrics-with-the-oracle-cloud-monitoring-service) with [Github code examples](https://github.com/recursivecodes/oci-custom-metrics) demonstrating how to create user defined custom metrics and publish them to user defined metric namespace in OCI Monitoring Service
 
-read more about OCI Monitoring service [here](https://docs.oracle.com/en-us/iaas/Content/Monitoring/Concepts/monitoringoverview.htm)
+**Read more about OCI Monitoring service [here](https://docs.oracle.com/en-us/iaas/Content/Monitoring/Concepts/monitoringoverview.htm)** {: .notice--info}
 
 
 ### Output

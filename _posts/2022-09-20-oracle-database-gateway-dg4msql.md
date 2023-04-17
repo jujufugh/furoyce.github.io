@@ -9,7 +9,7 @@ tags:
   - Oracle 19c
 ---
 
-# Oracle Gateway for MSSQL DG4MSQL configuration
+## Oracle Gateway for MSSQL DG4MSQL configuration
 
 ### Environment
 * MSSQL database on Docker 2022-latest
@@ -41,6 +41,7 @@ The Oracle Database Gateway for MSSQL comes on a separate CD. It can be installe
 ### MSSQL server configuration
 
 - Get the Microsoft SQL Server docker image
+
 ````
 root@wls:~# sudo docker pull mcr.microsoft.com/mssql/server:2022-latest
 2022-latest: Pulling from mssql/server
@@ -53,6 +54,7 @@ mcr.microsoft.com/mssql/server:2022-latest
 ````
 
 - Create docker container instance 
+
 ````
 root@wls:~# sudo docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=xxxxxxxx" \
   -p 143>    -p 1433:1433 --name mssql1 --hostname mssql1 \
@@ -66,7 +68,9 @@ root@wls:~# docker ps -a
 CONTAINER ID   IMAGE                                        COMMAND                  CREATED         STATUS         PORTS                                                                 NAMES
 978dfb61e243   mcr.microsoft.com/mssql/server:2022-latest   "/opt/mssql/bin/perm…"   4 seconds ago   Up 3 seconds   0.0.0.0:1433->1433/tcp                                                mssql1
 ````
+
 - Execute command in MSSQL docker container
+
 ````
 root@wls:~# docker exec -t mssql1 cat /var/opt/mssql/log/errorlog | grep connection
 2022-09-08 12:15:48.38 Server      The maximum number of dedicated administrator connections for this instance is '1'
@@ -76,6 +80,7 @@ root@wls:~# docker exec -t mssql1 cat /var/opt/mssql/log/errorlog | grep connect
 ````
 
 - Query MSSQL database
+
 ````
 root@wls:~# sudo docker exec -it mssql1 "bash"
 mssql@mssql1:/$ bash
@@ -143,6 +148,7 @@ id          name                                               quantity
 2> quit;
 3>
 ````
+
 ### Oracle Databaes configuration
 Oracle VirtualBox Developer Day existing image
 
@@ -317,6 +323,7 @@ oracle   22957 13994  0 18:29 pts/1    00:00:00 grep --color=auto tns
 ````
 
 ### Step 4 tnsnames.ora file configuration
+
 ````
 [oracle@localhost admin]$ pwd
 /u01/app/oracle/product/12.2/db_1/network/admin
@@ -365,6 +372,7 @@ dg4msql =
 ````
 
 ### Step 5 initdg4msql.ora file configuration
+
 ````
 [oracle@localhost admin]$ pwd
 /u01/app/oracle/product/12.2/gw_mssql/dg4msql/admin
@@ -395,6 +403,7 @@ HS_FDS_RECOVERY_PWD=RECOVER
 ````
 
 ### Step 6 Database Link creation
+
 ````
 [oracle@localhost admin]$ env | grep ORA
 ORACLE_UNQNAME=orcl12c
