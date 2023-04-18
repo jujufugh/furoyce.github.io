@@ -191,6 +191,39 @@ Once the local run is successful, we can use Gradle to build the Jar file and re
 
 **Troubleshooting**: You may see exception about Authorization failure when publishing the metrics. The root cause is related to the compute instance instance principal dynamic group permission. You can read more about instance principal [here](https://docs.public.oneportal.content.oci.oraclecloud.com/en-us/iaas/Content/Identity/Tasks/callingservicesfrominstances.htm)
 
+```
+17:46:39.871 [pool-1-thread-1] ERROR i.m.s.DefaultTaskExceptionHandler - Error invoking scheduled task for bean [codes.recursive.job.MetricsPublisherJob@2ee4f54b] (404, NotAuthorizedOrNotFound, false) Authorization failed or requested resource not found. (opc-request-id: F7090AFA22504CF888B3DE59361AB8BD/342EC729DDED03A5DB664735BE56A374/AEF23A5999D5DB5652375CB042CA894D)
+com.oracle.bmc.model.BmcException: (404, NotAuthorizedOrNotFound, false) Authorization failed or requested resource not found. (opc-request-id: F7090AFA22504CF888B3DE59361AB8BD/342EC729DDED03A5DB664735BE56A374/AEF23A5999D5DB5652375CB042CA894D)
+	at com.oracle.bmc.http.internal.ResponseHelper.throwIfNotSuccessful(ResponseHelper.java:137)
+	at com.oracle.bmc.http.internal.ResponseConversionFunctionFactory$ValidatingParseResponseFunction.apply(ResponseConversionFunctionFactory.java:87)
+	at com.oracle.bmc.http.internal.ResponseConversionFunctionFactory$ValidatingParseResponseFunction.apply(ResponseConversionFunctionFactory.java:83)
+	at com.oracle.bmc.monitoring.internal.http.PostMetricDataConverter$1.apply(PostMetricDataConverter.java:71)
+	at com.oracle.bmc.monitoring.internal.http.PostMetricDataConverter$1.apply(PostMetricDataConverter.java:55)
+	at com.oracle.bmc.monitoring.MonitoringClient.lambda$null$16(MonitoringClient.java:684)
+	at com.oracle.bmc.retrier.BmcGenericRetrier.doFunctionCall(BmcGenericRetrier.java:87)
+	at com.oracle.bmc.retrier.BmcGenericRetrier.lambda$execute$0(BmcGenericRetrier.java:58)
+	at com.oracle.bmc.waiter.GenericWaiter.execute(GenericWaiter.java:54)
+	at com.oracle.bmc.retrier.BmcGenericRetrier.execute(BmcGenericRetrier.java:49)
+	at com.oracle.bmc.monitoring.MonitoringClient.lambda$postMetricData$17(MonitoringClient.java:676)
+	at com.oracle.bmc.retrier.BmcGenericRetrier.doFunctionCall(BmcGenericRetrier.java:87)
+	at com.oracle.bmc.retrier.BmcGenericRetrier.lambda$execute$0(BmcGenericRetrier.java:58)
+	at com.oracle.bmc.waiter.GenericWaiter.execute(GenericWaiter.java:54)
+	at com.oracle.bmc.retrier.BmcGenericRetrier.execute(BmcGenericRetrier.java:49)
+	at com.oracle.bmc.monitoring.MonitoringClient.postMetricData(MonitoringClient.java:670)
+	at codes.recursive.service.DBMetricsService.publishMetrics(DBMetricsService.java:107)
+	at codes.recursive.job.MetricsPublisherJob.publishMetricsEverySixtySeconds(MetricsPublisherJob.java:24)
+	at codes.recursive.job.$MetricsPublisherJobDefinition$$exec1.invokeInternal(Unknown Source)
+	at io.micronaut.context.AbstractExecutableMethod.invoke(AbstractExecutableMethod.java:146)
+	at io.micronaut.inject.DelegatingExecutableMethod.invoke(DelegatingExecutableMethod.java:76)
+	at io.micronaut.scheduling.processor.ScheduledMethodProcessor.lambda$process$5(ScheduledMethodProcessor.java:120)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
+	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:305)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:305)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+```
+
 **INSTANCE PRINCIPALS**
 The IAM service feature that enables instances to be authorized actors (or principals) to perform actions on service resources. Each compute instance has its own identity, and it authenticates using the certificates that are added to it. These certificates are automatically created, assigned to instances and rotated, preventing the need for you to distribute credentials to your hosts and rotate them.
 
@@ -231,36 +264,6 @@ Example of the output running the jar file from the VM.
 17:46:39.054 [pool-1-thread-1] INFO  c.o.b.a.i.X509FederationClient - Getting security token from the auth server
 17:46:39.170 [pool-1-thread-1] INFO  com.oracle.bmc.ClientRuntime - Using SDK: Oracle-JavaSDK/1.15.2
 17:46:39.171 [pool-1-thread-1] INFO  com.oracle.bmc.ClientRuntime - User agent set to: Oracle-JavaSDK/1.15.2 (Linux/5.15.0-6.80.3.1.el8uek.x86_64; Java/11.0.18; Java HotSpot(TM) 64-Bit Server VM/11.0.18+9-LTS-195)
-17:46:39.871 [pool-1-thread-1] ERROR i.m.s.DefaultTaskExceptionHandler - Error invoking scheduled task for bean [codes.recursive.job.MetricsPublisherJob@2ee4f54b] (404, NotAuthorizedOrNotFound, false) Authorization failed or requested resource not found. (opc-request-id: F7090AFA22504CF888B3DE59361AB8BD/342EC729DDED03A5DB664735BE56A374/AEF23A5999D5DB5652375CB042CA894D)
-com.oracle.bmc.model.BmcException: (404, NotAuthorizedOrNotFound, false) Authorization failed or requested resource not found. (opc-request-id: F7090AFA22504CF888B3DE59361AB8BD/342EC729DDED03A5DB664735BE56A374/AEF23A5999D5DB5652375CB042CA894D)
-	at com.oracle.bmc.http.internal.ResponseHelper.throwIfNotSuccessful(ResponseHelper.java:137)
-	at com.oracle.bmc.http.internal.ResponseConversionFunctionFactory$ValidatingParseResponseFunction.apply(ResponseConversionFunctionFactory.java:87)
-	at com.oracle.bmc.http.internal.ResponseConversionFunctionFactory$ValidatingParseResponseFunction.apply(ResponseConversionFunctionFactory.java:83)
-	at com.oracle.bmc.monitoring.internal.http.PostMetricDataConverter$1.apply(PostMetricDataConverter.java:71)
-	at com.oracle.bmc.monitoring.internal.http.PostMetricDataConverter$1.apply(PostMetricDataConverter.java:55)
-	at com.oracle.bmc.monitoring.MonitoringClient.lambda$null$16(MonitoringClient.java:684)
-	at com.oracle.bmc.retrier.BmcGenericRetrier.doFunctionCall(BmcGenericRetrier.java:87)
-	at com.oracle.bmc.retrier.BmcGenericRetrier.lambda$execute$0(BmcGenericRetrier.java:58)
-	at com.oracle.bmc.waiter.GenericWaiter.execute(GenericWaiter.java:54)
-	at com.oracle.bmc.retrier.BmcGenericRetrier.execute(BmcGenericRetrier.java:49)
-	at com.oracle.bmc.monitoring.MonitoringClient.lambda$postMetricData$17(MonitoringClient.java:676)
-	at com.oracle.bmc.retrier.BmcGenericRetrier.doFunctionCall(BmcGenericRetrier.java:87)
-	at com.oracle.bmc.retrier.BmcGenericRetrier.lambda$execute$0(BmcGenericRetrier.java:58)
-	at com.oracle.bmc.waiter.GenericWaiter.execute(GenericWaiter.java:54)
-	at com.oracle.bmc.retrier.BmcGenericRetrier.execute(BmcGenericRetrier.java:49)
-	at com.oracle.bmc.monitoring.MonitoringClient.postMetricData(MonitoringClient.java:670)
-	at codes.recursive.service.DBMetricsService.publishMetrics(DBMetricsService.java:107)
-	at codes.recursive.job.MetricsPublisherJob.publishMetricsEverySixtySeconds(MetricsPublisherJob.java:24)
-	at codes.recursive.job.$MetricsPublisherJobDefinition$$exec1.invokeInternal(Unknown Source)
-	at io.micronaut.context.AbstractExecutableMethod.invoke(AbstractExecutableMethod.java:146)
-	at io.micronaut.inject.DelegatingExecutableMethod.invoke(DelegatingExecutableMethod.java:76)
-	at io.micronaut.scheduling.processor.ScheduledMethodProcessor.lambda$process$5(ScheduledMethodProcessor.java:120)
-	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:515)
-	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:305)
-	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:305)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-	at java.base/java.lang.Thread.run(Thread.java:834)
 17:47:39.872 [pool-1-thread-3] INFO  c.recursive.job.MetricsPublisherJob - Publishing metrics...
 17:47:40.556 [pool-1-thread-3] INFO  c.recursive.job.MetricsPublisherJob - Metrics published!
 17:48:40.557 [pool-1-thread-2] INFO  c.recursive.job.MetricsPublisherJob - Publishing metrics...
