@@ -61,22 +61,14 @@ A few configuration changes are required before running the program locally
 * Go to Intellij menu **Run**
 * Select **Edit Configuration**
 * Provide JDK environment and mainClass
-* Provide Environment variables
-  
-	<img src='/images/posts/2023-04/royce-blog-2023-04-custom-metrics.png' alt='Environment variables'/>
-
-* Run/Debug configurations page
-
-	<img src='/images/posts/2023-04/royce-blog-2023-04-custom-metrics02.png' alt='Configuration'/>
+* Provide Environment variables <img src='/images/posts/2023-04/royce-blog-2023-04-custom-metrics.png' alt='Environment variables'/>
+* Run/Debug configurations page<img src='/images/posts/2023-04/royce-blog-2023-04-custom-metrics02.png' alt='Configuration'/>
 
 **Update java file `src/main/java/service/DBMetricsService.java` with proper OCI Telemetry API endpoint before compile the code**
 
 * If you monitoring service is running in US East Ashburn region, please update monitoringClient with correct api endpoint
 * `monitoringClient = MonitoringClient.builder().endpoint("https://telemetry-ingestion.us-ashburn-1.oraclecloud.com").build(provider);`
-* Example
-
-	<img src='/images/posts/2023-04/royce-blog-2023-04-custom-metrics03.png'/>
-
+* Example <img src='/images/posts/2023-04/royce-blog-2023-04-custom-metrics03.png'/>
 * OCI API Reference: https://docs.oracle.com/en-us/iaas/api/#/en/monitoring/20180401/
 
 **Update gradle build file `build.gradle` for the build**
@@ -156,9 +148,7 @@ A few configuration changes are required before running the program locally
 
 * Go to menu **Run**
 * Select **Run 'Application'**
-* See example output below
-
-	<img src='/images/posts/2023-04/royce-blog-2023-04-custom-metrics04.png'/>
+* See example output below <img src='/images/posts/2023-04/royce-blog-2023-04-custom-metrics04.png'/>
 
 ### Run the Java web application in compute instance
 
@@ -177,14 +167,8 @@ Once the local run is successful, we can use Gradle to build the Jar file and re
 
 * Select Gradle window from the right natigation menu
 * Expand build task
-* Double-click build
-  
-	<img src='/images/posts/2023-04/royce-blog-2023-04-custom-metrics05.png'/>
-
-* Build output 
-
-	<img src='/images/posts/2023-04/royce-blog-2023-04-custom-metrics06.png'/>
-
+* Double-click build <img src='/images/posts/2023-04/royce-blog-2023-04-custom-metrics05.png'/>
+* Build output <img src='/images/posts/2023-04/royce-blog-2023-04-custom-metrics06.png'/>
 * You will find the `dbaas-metrics-0.1.jar` and `dbaas-metrics-0.1-all.jar` are generated in `build/libs` directory. 
 * Next step is to copy the jar file `dbaas-metrics-0.1-all.jar` to the compute instance via `scp` command. 
 * Once you have the jar file staged, it's ready to kick off the java application via `java -Dcom.sun.management.jmxremote -noverify ${JAVA_OPTS} -jar dbaas-metrics-0.1-all.jar` command.
