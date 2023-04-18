@@ -46,7 +46,8 @@ export CODES_RECURSIVE_OCI_CONFIG_PATH=[The path to your local OCI config - Defa
 
 After downloading Todd's GitHub code [repo](https://github.com/recursivecodes/oci-custom-metrics), you can open the folder in the [Intellij](https://www.jetbrains.com/help/idea/installation-guide.html).
 
-Prerequisits
+**Prerequisits**
+
 - User account which has the permission to manage metrics
 - User account belongs to groups which have manage metrics permission for the compartment to publish custom metrics
 - Database schema user account created for monitoring and retrieve database table or view data
@@ -55,7 +56,8 @@ Prerequisits
 
 A few configuration changes are required before running the program locally
 
-1. Configure Environment Variables
+**Configure Environment Variables**
+
 - Go to Intellij menu **Run**
 - Select **Edit Configuration**
 - Provide JDK environment and mainClass
@@ -65,16 +67,17 @@ A few configuration changes are required before running the program locally
 - Run/Debug configurations page
 <img src='/images/posts/2023-04/royce-blog-2023-04-custom-metrics02.png' alt='Configuration'/>
 
-2. Update java file `src/main/java/service/DBMetricsService.java` with proper OCI Telemetry API endpoint before compile the code
+**Update java file `src/main/java/service/DBMetricsService.java` with proper OCI Telemetry API endpoint before compile the code**
+
 - If you monitoring service is running in US East Ashburn region, please update monitoringClient with correct api endpoint
 - `monitoringClient = MonitoringClient.builder().endpoint("https://telemetry-ingestion.us-ashburn-1.oraclecloud.com").build(provider);`
 - Example
 <img src='/images/posts/2023-04/royce-blog-2023-04-custom-metrics03.png'/>
 
-
 - OCI API Reference: https://docs.oracle.com/en-us/iaas/api/#/en/monitoring/20180401/
 
-3. Update gradle build file `build.gradle` 
+**Update gradle build file `build.gradle` for the build**
+
 - DriverClass `oracle.jdbc.OracleDriver` no longer works with the Java application, please update it to `com.oracle.database.jdbc` in `build.gradle` file
 - Check following `compile group: 'com.oracle.database.jdbc', name: 'ojdbc8', version: '19.18.0.0'`
 - Validate `build.gradle` file here:
@@ -85,8 +88,6 @@ id "net.ltgt.apt-eclipse" version "0.21"
 id "com.github.johnrengelman.shadow" version "5.2.0"
 id "application"
 }
-
-
 
 version "0.1"
 group "codes.recursive"
@@ -147,7 +148,8 @@ run.classpath += configurations.developmentOnly
 run.jvmArgs('-noverify', '-XX:TieredStopAtLevel=1', '-Dcom.sun.management.jmxremote')
 ```
 
-4. Run the application
+**Run the application**
+
 - Go to menu **Run**
 - Select **Run 'Application'**
 - See example output below
@@ -155,6 +157,15 @@ run.jvmArgs('-noverify', '-XX:TieredStopAtLevel=1', '-Dcom.sun.management.jmxrem
 <img src='/images/posts/2023-04/royce-blog-2023-04-custom-metrics04.png'/>
 
 ### Run the Java web application in compute instance
+
+**Prerequisits**
+
+- Create dynamic group for the compute instance
+- Grant permissions to the dynamic group
+- Dynamic group needs to have the permission to manage metrics
+- Database schema user account created for monitoring and retrieve database table or view data
+- Database connection is accessible from local laptop environment to the database in OCI
+- VCN subnet security list is updated to allow connection from local laptop
 
 The example code has option to be built the application using Gradle. You can follow the Intellij Gradle documentation - [Getting Started with Gradle](https://www.jetbrains.com/help/idea/getting-started-with-gradle.html). 
 
@@ -178,6 +189,21 @@ Once the local run is successful, we can use Gradle to build the Jar file and re
 
 * Congratulations! Now you will see your publish custom metrics application up and running in your compute instance. 
 
+**Troubleshooting**: You may see exception about Authorization failure when publishing the metrics. The root cause is related to the compute instance instance principal dynamic group permission. You can read more about instance principal [here](https://docs.public.oneportal.content.oci.oraclecloud.com/en-us/iaas/Content/Identity/Tasks/callingservicesfrominstances.htm)
+
+**INSTANCE PRINCIPALS**
+The IAM service feature that enables instances to be authorized actors (or principals) to perform actions on service resources. Each compute instance has its own identity, and it authenticates using the certificates that are added to it. These certificates are automatically created, assigned to instances and rotated, preventing the need for you to distribute credentials to your hosts and rotate them.
+
+After updating the policies for the dynamic group of the compute instance to enable the capabilities of manage metrics in the compartment, the issue is fixed. 
+
+**Example of required dynmaic groups and permissions**
+
+```
+ALL {instance.compartment.id='ocid1.compartment.oc1..aaaaaaaaexamplecompartmentocid'}
+Allow dynamic-group obs-mgmt-compute-dg  to manage metrics in compartment obs_mgmt_comp
+```
+
+Example of the output running the jar file from the VM. 
 ```bash
 [opc@webinst01 libs]$ java -Dcom.sun.management.jmxremote -noverify ${JAVA_OPTS} -jar dbaas-metrics-0.1-all.jar
 17:46:35.102 [main] INFO  i.m.context.env.DefaultEnvironment - Established active environments: [oraclecloud, cloud]
