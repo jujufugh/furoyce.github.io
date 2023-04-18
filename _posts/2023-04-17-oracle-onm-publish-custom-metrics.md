@@ -58,32 +58,33 @@ A few configuration changes are required before running the program locally
 
 **Configure Environment Variables**
 
-- Go to Intellij menu **Run**
-- Select **Edit Configuration**
-- Provide JDK environment and mainClass
-- Provide Environment variables
+* Go to Intellij menu **Run**
+* Select **Edit Configuration**
+* Provide JDK environment and mainClass
+* Provide Environment variables
   
 	<img src='/images/posts/2023-04/royce-blog-2023-04-custom-metrics.png' alt='Environment variables'/>
 
-- Run/Debug configurations page
+* Run/Debug configurations page
 
 	<img src='/images/posts/2023-04/royce-blog-2023-04-custom-metrics02.png' alt='Configuration'/>
 
 **Update java file `src/main/java/service/DBMetricsService.java` with proper OCI Telemetry API endpoint before compile the code**
 
-- If you monitoring service is running in US East Ashburn region, please update monitoringClient with correct api endpoint
-- `monitoringClient = MonitoringClient.builder().endpoint("https://telemetry-ingestion.us-ashburn-1.oraclecloud.com").build(provider);`
-- Example
+* If you monitoring service is running in US East Ashburn region, please update monitoringClient with correct api endpoint
+* `monitoringClient = MonitoringClient.builder().endpoint("https://telemetry-ingestion.us-ashburn-1.oraclecloud.com").build(provider);`
+* Example
 
 	<img src='/images/posts/2023-04/royce-blog-2023-04-custom-metrics03.png'/>
 
-- OCI API Reference: https://docs.oracle.com/en-us/iaas/api/#/en/monitoring/20180401/
+* OCI API Reference: https://docs.oracle.com/en-us/iaas/api/#/en/monitoring/20180401/
 
 **Update gradle build file `build.gradle` for the build**
 
-- DriverClass `oracle.jdbc.OracleDriver` no longer works with the Java application, please update it to `com.oracle.database.jdbc` in `build.gradle` file
-- Check following `compile group: 'com.oracle.database.jdbc', name: 'ojdbc8', version: '19.18.0.0'`
-- Validate `build.gradle` file here:
+* DriverClass `oracle.jdbc.OracleDriver` no longer works with the Java application, please update it to `com.oracle.database.jdbc` in `build.gradle` file
+* Check following `compile group: 'com.oracle.database.jdbc', name: 'ojdbc8', version: '19.18.0.0'`
+* Validate `build.gradle` file here:
+
 
 	```java
 	plugins {
@@ -153,9 +154,9 @@ A few configuration changes are required before running the program locally
 
 **Run the application**
 
-- Go to menu **Run**
-- Select **Run 'Application'**
-- See example output below
+* Go to menu **Run**
+* Select **Run 'Application'**
+* See example output below
 
 	<img src='/images/posts/2023-04/royce-blog-2023-04-custom-metrics04.png'/>
 
