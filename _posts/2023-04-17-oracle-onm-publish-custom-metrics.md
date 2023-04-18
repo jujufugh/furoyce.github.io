@@ -47,11 +47,11 @@ export CODES_RECURSIVE_OCI_CONFIG_PATH=[The path to your local OCI config - Defa
 After downloading Todd's GitHub code [repo](https://github.com/recursivecodes/oci-custom-metrics), you can open the folder in the [Intellij](https://www.jetbrains.com/help/idea/installation-guide.html).
 
 * Prerequisits
-- User account which has the permission to manage metrics
-- User account belongs to groups which have manage metrics permission for the compartment to publish custom metrics
-- Database schema user account created for monitoring and retrieve database table or view data
-- Database connection is accessible from local laptop environment to the database in OCI
-- VCN subnet security list is updated to allow connection from local laptop
+  - User account which has the permission to manage metrics
+  - User account belongs to groups which have manage metrics permission for the compartment to publish custom metrics
+  - Database schema user account created for monitoring and retrieve database table or view data
+  - Database connection is accessible from local laptop environment to the database in OCI
+  - VCN subnet security list is updated to allow connection from local laptop
 
 A few configuration changes are required before running the program locally
 
