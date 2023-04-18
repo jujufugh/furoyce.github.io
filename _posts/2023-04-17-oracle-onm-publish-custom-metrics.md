@@ -76,7 +76,8 @@ A few configuration changes are required before running the program locally
 * DriverClass `oracle.jdbc.OracleDriver` no longer works with the Java application, please update it to `com.oracle.database.jdbc` in `build.gradle` file
 * Check following `compile group: 'com.oracle.database.jdbc', name: 'ojdbc8', version: '19.18.0.0'`
 * Validate `build.gradle` file here 
-```
+
+```json
 plugins {
 id "net.ltgt.apt-eclipse" version "0.21"
 id "com.github.johnrengelman.shadow" version "5.2.0"
@@ -221,6 +222,7 @@ Allow dynamic-group obs-mgmt-compute-dg  to manage metrics in compartment obs_mg
 ```
 
 Example of the output running the jar file from the VM. 
+
 ```bash
 [opc@webinst01 libs]$ java -Dcom.sun.management.jmxremote -noverify ${JAVA_OPTS} -jar dbaas-metrics-0.1-all.jar
 17:46:35.102 [main] INFO  i.m.context.env.DefaultEnvironment - Established active environments: [oraclecloud, cloud]
