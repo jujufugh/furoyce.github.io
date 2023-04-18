@@ -166,11 +166,13 @@ Once the local run is successful, we can use Gradle to build the Jar file and re
 
 * Select Gradle window from the right natigation menu
 * Expand build task
-* Double-click build <img src='/images/posts/2023-04/royce-blog-2023-04-custom-metrics05.png'/>
+* Double-click build 
+* <img src='/images/posts/2023-04/royce-blog-2023-04-custom-metrics05.png' height=600/>
 * Build output <img src='/images/posts/2023-04/royce-blog-2023-04-custom-metrics06.png'/>
 * You will find the `dbaas-metrics-0.1.jar` and `dbaas-metrics-0.1-all.jar` are generated in `build/libs` directory. 
 * Next step is to copy the jar file `dbaas-metrics-0.1-all.jar` to the compute instance via `scp` command. 
-* Once you have the jar file staged, it's ready to kick off the java application via `java -Dcom.sun.management.jmxremote -noverify ${JAVA_OPTS} -jar dbaas-metrics-0.1-all.jar` command. <img src='/images/posts/2023-04/royce-blog-2023-04-custom-metrics07.png'/>
+* Once you have the jar file staged, it's ready to kick off the java application via `java -Dcom.sun.management.jmxremote -noverify ${JAVA_OPTS} -jar dbaas-metrics-0.1-all.jar` command. 
+* <img src='/images/posts/2023-04/royce-blog-2023-04-custom-metrics07.png' height=500/>
 * Congratulations! Now you will see your publish custom metrics application up and running in your compute instance. 
 
 **Troubleshooting**: You may see exception about Authorization failure when publishing the metrics. The root cause is related to the compute instance instance principal dynamic group permission. You can read more about instance principal [here](https://docs.public.oneportal.content.oci.oraclecloud.com/en-us/iaas/Content/Identity/Tasks/callingservicesfrominstances.htm)
