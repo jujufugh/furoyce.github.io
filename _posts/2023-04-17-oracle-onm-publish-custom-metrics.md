@@ -60,12 +60,12 @@ A few configuration changes are required before running the program locally
    - Select **Edit Configuration**
    - Provide JDK environment and mainClass
    - Provide Environment variables
-![Environment variables](../images/posts/2023-04/royce-blog-2023-04-custom-metrics.png)
+	<img src='/images/posts/2023-04/royce-blog-2023-04-custom-metrics.png' alt='Environment variables'/>
 
    - Run/Debug configurations page
 ![Configuration](../images/posts/2023-04/royce-blog-2023-04-custom-metrics02.png)
 
-2. Update java file `src/main/java/service/DBMetricsService.java` with proper OCI Telemetry API endpoint before compile the code
+1. Update java file `src/main/java/service/DBMetricsService.java` with proper OCI Telemetry API endpoint before compile the code
    - If you monitoring service is running in US East Ashburn region, please update monitoringClient with correct api endpoint
    - `monitoringClient = MonitoringClient.builder().endpoint("https://telemetry-ingestion.us-ashburn-1.oraclecloud.com").build(provider);`
    - Example
@@ -73,7 +73,7 @@ A few configuration changes are required before running the program locally
 
    - OCI API Reference: https://docs.oracle.com/en-us/iaas/api/#/en/monitoring/20180401/
 
-3. Update gradle build file `build.gradle` 
+1. Update gradle build file `build.gradle` 
    - DriverClass `oracle.jdbc.OracleDriver` no longer works with the Java application, please update it to `com.oracle.database.jdbc` in `build.gradle` file
    - Check following `compile group: 'com.oracle.database.jdbc', name: 'ojdbc8', version: '19.18.0.0'`
    - Validate `build.gradle` file here:

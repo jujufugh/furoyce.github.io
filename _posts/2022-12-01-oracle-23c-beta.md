@@ -12,7 +12,7 @@ tags:
 
 Oracle announced 23c Beta Program on Oct, 2022 at Oracle Cloud World. 
 
-![23c Beta](../images/posts/2023-01-19/rc24-database-innovations.jpg)
+<img src='/images/posts/2023-01-19/rc24-database-innovations.jpg'/>
 
 Oracle Database 23c beta is the latest release of Oracle's leading converged database. It introduces a range of new and enhanced functionality to assist developers, analysts and DBA's in building and deploying their next generation mission-critical, high-performance operational and analytical applications. Innovative new features include JSON Relational Duality, Real-time SQL Plan Management, True Cache, real-time property graph analysis of operational data, and native replication of database shards. Oracle Database 23 beta release will shortly be available (on-premises and in the Cloud) globally for Oracle customers and partners who complete the beta program recruitment sign-up process.
 
