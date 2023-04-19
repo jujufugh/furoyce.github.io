@@ -23,8 +23,8 @@ In this blog post, we will describe how to publish custom metrics to monitor dat
 ### Deployment Options
 [OCI SDK and CLI](https://docs.oracle.com/en-us/iaas/Content/Monitoring/Tasks/publishingcustommetrics.htm) provides very flexible development and deployment options for publishing custom metrics. Not only we can run the Java application in compute instance, we can also build the jar file and run the jar file directly within the cron job. Even we can use Fn project to deploy the java application into Oracle Functions. The implementation and deployment examples are no limited to above, for example, we can also use a shell script deployed in cronjob periodically connect to the database and run the SQL queries to check the long running session and spool the result into log file which subsequently stream log file into logging service and LA. Then we will create detection rule to publish the metrics pass the threshold into the monitoring service custom metric namespaces. 
 
-We will discuss one of the options here: 
-* **Run Java program in Inellij**
+We will discuss two options here: 
+* **Run Java program locally in Inellij**
 * **Build Jar file and schedule the jar file in the cronjob in compute instance**
 
 **Todd** has pretty much all OCI database and compartments as well as API key related configurations mapped into following environment variables.
