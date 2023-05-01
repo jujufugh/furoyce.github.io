@@ -1,12 +1,12 @@
 ---
 title: "OCI Observability and Management - Resource Management and Forecast for Exadata Cloud Service and Exadata Cloud@Customer"
 date: 2023-04-28
-last_modified_at: 2023-04-28T16:20:02-05:00
+last_modified_at: 2023-05-01T16:20:02-05:00
 categories:
   - Blog
 tags:
   - Observerability and Monitoring
-  - Cloud Databases
+  - Cloud Database
 ---
 
 ### Introduction
@@ -152,7 +152,6 @@ $ curl -k -u restapi_user:xxxxxxxxxxxxxhttp://10.0.10.9:7879/MS/RESTService?cmd=
 	 DS_CPUT	 ecc9c1n1	 37.2 %	 2023-04-29T03:13:14+00:00
 	 DS_CPUT	 ecc9c1n1	 45.9 %	 2023-04-29T03:14:14+00:00
 	 DS_CPUT	 ecc9c1n1	 33.2 %	 2023-04-29T03:15:14+00:00
-
 ```
 
 **EM Side: Create an Enterprise Manager group containing the targets for which you want data exported**
