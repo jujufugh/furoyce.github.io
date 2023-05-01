@@ -228,5 +228,7 @@ Some [considerations](https://docs.oracle.com/en/enterprise-manager/cloud-contro
 
 ### Reference
 **[Operations Insights Doc](https://docs.oracle.com/en-us/iaas/operations-insights/doc/get-started-operations-insights.html#GUID-457A50BA-2C88-429B-A0FC-41ACBA55737E)** 
+
 **[Exadata Warehouse Configuration](https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emexw/index.html#before_you_begin)**
+
 **[Integrating Enterprise Manager 13.5 with OCI Services](https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emadm/using-oci-services-enterprise-manager.html#GUID-1F310CD9-23FD-4CF3-8E32-0943F7DB3762)**
