@@ -1,5 +1,5 @@
 ---
-title: "OCI Observability and Management - Resource Management and Forecast for Exadata Cloud Service and Exadata Cloud@Customer"
+title: "OCI O&M - Resource Management and Forecast for Exadata Cloud Service and Exadata Cloud@Customer"
 date: 2023-04-28
 last_modified_at: 2023-05-01T16:20:02-05:00
 categories:
@@ -74,9 +74,9 @@ Exadata Warehouse functions as a long-term storage repository for fine-grained p
 Let's start with the prerequisites from the OCI side!
 
 **OCI Side: Create OCI service user**
-* Under Identity & Security, select Identity -> Users
+* Under **Identity & Security**, select **Identity** -> **Users**
 * Create new serivce user, for example emcloudbridge
-* Under Identity & Security, select Identity -> Groups
+* Under **Identity & Security**, select **Identity** -> **Groups**
 * Create new service user group, for example emcloudbridgegroup
 * Grant Permissions required for configuraion of Cloud Bridge, EM Bridge, Object Storage, Operations Insights
 * An example of the policy for the emcloudbridgegroup 
@@ -96,25 +96,25 @@ chmod go-rwx ~/.oci/oci_api_key.pem
 openssl rsa -pubout -in ~/.oci/oci_api_key.pem -out ~/.oci/oci_api_key_public.pem             
 cat ~/.oci/oci_api_key_public.pem | pbcopy           
 ```
-* Create API key for the service user, under Identity -> Users, select emcloudbridge user
-* Under Resources, select API Keys
+* Create API key for the service user, under **Identity** -> **Users**, select emcloudbridge user
+* Under **Resources**, select **API Keys**
 * Select Add API Key and provide public key file location or paste the public key content <img src='/images/posts/2023-04/royce-blog-2023-04-xawh-api-key.png'/>
 * Copy and save the fingerprint for later use
 
 **IMPORTANT:** in order to create compatible API key between OCI and EM, we can follow [document](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm)
 
 **OCI Side: Create an OCI Object Storage Bucket**
-* From Storage menu, select Object Storage & Archive Storage
-* Create Bucket
+* From **Storage** menu, select **Object Storage & Archive Storage**
+* Create **Bucket**
 * Select Standard Tier and Encrypt using Oracle managed keys <img src='/images/posts/2023-04/royce-blog-2023-04-xawh-oob-create.png'/>
 
 **EM Side: Define a Global Named Credential in Enterprise Manager for OCI**
-* From the Setup menu, choose Security and then Named Credentials
+* From the **Setup** menu, choose **Security** and then **Named Credentials**
 * Use the private key, public key fingerprint and tenancy and user ocid to create the Named Credential to connect to OCI <img src='/images/posts/2023-04/royce-blog-2023-04-oci-named-cred.png'/>
 
 **EM Side: Define a Preferred Credentials for Agent hosts and OMS host**
-* Under Security, click Preferred Credentials and select Host.
-* Set Normal Host Credential and Privileged Host Credential (REST API credential used for compute node).
+* Under **Security**, click **Preferred Credentials** and select Host.
+* Set **Normal Host Credential** and **Privileged Host Credential** (REST API credential used for compute node).
 * For the OMS host, set credentials of the user.<img src='/images/posts/2023-04/royce-blog-2023-04-oci-preferred-cred.png'/>
 
 **EM Side: Create and Test REST API for Storage and Compute nodes**
@@ -142,7 +142,7 @@ $ curl -k -u cloud_user_cluclu062f2:xxxxxxxxxxxxx https://10.0.10.10/MS/RESTServ
 ```
 * Test REST API with compute node
 ```
-$ curl -k -u restapi_user:xxxxxxxxxxxxxhttp://10.0.10.9:7879/MS/RESTService?cmd=list%20metrichistory%20DS_CPUT%20where%20ageInMinutes < 10
+$ curl -k -u restapi_user:xxxxxxxxxxxxx http://10.0.10.9:7879/MS/RESTService?cmd=list%20metrichistory%20DS_CPUT%20where%20ageInMinutes < 10
 	 DS_CPUT	 ecc9c1n1	 6.3 %	 2023-04-29T03:07:14+00:00
 	 DS_CPUT	 ecc9c1n1	 5.8 %	 2023-04-29T03:08:14+00:00
 	 DS_CPUT	 ecc9c1n1	 0.0 %	 2023-04-29T03:09:14+00:00
@@ -161,13 +161,13 @@ $ curl -k -u restapi_user:xxxxxxxxxxxxxhttp://10.0.10.9:7879/MS/RESTService?cmd=
 
 **OCI Side: Provision Autonomous Data Warehouse (ADW) and create an Analytics User to hold the Analytics Schema**
 * Go to OCI tenancy console
-* Oracle Database -> Autonomous Database
-* Create Autonomous Database 
+* **Oracle Database** -> **Autonomous Database**
+* Create **Autonomous Database** 
 * Select Data Warehouse type database
 * Configure proper network access make sure your EM can discover the ADW database
 * Once the ADW is created, click Database connection, download the wallet for connection <img src='/images/posts/2023-04/royce-blog-2023-04-xawh-adw-wallet.png'/>
 * Go to Database Actions
-* In Administration, select Database Users
+* In **Administration**, select **Database Users**
 * Create User - EMCLOUDBRIDGE
 
 Some [considerations](https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emadb/prerequisite-tasks-autonomous-databases-shared.html#GUID-3B415134-6B5E-44A5-BFAA-A3473BDBFE31) when onboarding Autonomous Databases to Oracle Enterprise Manager Deployed in OCI or on-prem
@@ -175,9 +175,9 @@ Some [considerations](https://docs.oracle.com/en/enterprise-manager/cloud-contro
 **EM Side: Discover the ADW on EM**
 * Under EM Secuirty, select **Named Credentials**. Create a new named credential with for EMCLOUDBRIDGE user within the ADW <img src='/images/posts/2023-04/royce-blog-2023-04-xawh-adw-named-credential.png'/>
 * Onboard ADW to EM target 
-* From Setup menu, select Add Target, Add Targets Manually
+* From **Setup** menu, select **Add Target**, Add Targets Manually
 * Add Non-Host Targets Manually
-* Seelect Autonomous Data Warehouse as Target Type
+* Select **Autonomous Data Warehouse** as Target Type
 * Provide Target Name, Wallet and Wallet Password
 * Verify the connection string for the ADW <img src='/images/posts/2023-04/royce-blog-2023-04-xawh-adw-discover.png'/> <img src='/images/posts/2023-04/royce-blog-2023-04-xawh-adw-em-target.png'/>
 
