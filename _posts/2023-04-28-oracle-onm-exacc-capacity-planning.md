@@ -73,7 +73,7 @@ Exadata Warehouse functions as a long-term storage repository for fine-grained p
 
 Let's start with the prerequisites from the OCI side!
 
-**OCI Side: Create OCI service user**
+#### OCI Side: Create OCI service user
 * Under **Identity & Security**, select **Identity** -> **Users**
 * Create new serivce user, for example emcloudbridge
 * Under **Identity & Security**, select **Identity** -> **Groups**
@@ -103,21 +103,21 @@ cat ~/.oci/oci_api_key_public.pem | pbcopy
 
 **IMPORTANT:** in order to create compatible API key between OCI and EM, we can follow [document](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm)
 
-**OCI Side: Create an OCI Object Storage Bucket**
+#### OCI Side: Create an OCI Object Storage Bucket
 * From **Storage** menu, select **Object Storage & Archive Storage**
 * Create **Bucket**
 * Select Standard Tier and Encrypt using Oracle managed keys <img src='/images/posts/2023-04/royce-blog-2023-04-xawh-oob-create.png'/>
 
-**EM Side: Define a Global Named Credential in Enterprise Manager for OCI**
+#### EM Side: Define a Global Named Credential in Enterprise Manager for OCI
 * From the **Setup** menu, choose **Security** and then **Named Credentials**
 * Use the private key, public key fingerprint and tenancy and user ocid to create the Named Credential to connect to OCI <img src='/images/posts/2023-04/royce-blog-2023-04-oci-named-cred.png'/>
 
-**EM Side: Define a Preferred Credentials for Agent hosts and OMS host**
+#### EM Side: Define a Preferred Credentials for Agent hosts and OMS host
 * Under **Security**, click **Preferred Credentials** and select Host.
 * Set **Normal Host Credential** and **Privileged Host Credential** (REST API credential used for compute node).
 * For the OMS host, set credentials of the user.<img src='/images/posts/2023-04/royce-blog-2023-04-oci-preferred-cred.png'/>
 
-**EM Side: Create and Test REST API for Storage and Compute nodes**
+#### EM Side: Create and Test REST API for Storage and Compute nodes
 * Create REST API user for compute nodes
 ```bash
 dbmcli -e 'CREATE ROLE monitor;  GRANT PRIVILEGE list ON ALL OBJECTS ALL ATTRIBUTES WITH ALL OPTIONS TO ROLE monitor;'
@@ -154,12 +154,12 @@ $ curl -k -u restapi_user:xxxxxxxxxxxxx http://10.0.10.9:7879/MS/RESTService?cmd
 	 DS_CPUT	 ecc9c1n1	 33.2 %	 2023-04-29T03:15:14+00:00
 ```
 
-**EM Side: Create an Enterprise Manager group containing the targets for which you want data exported**
+#### EM Side: Create an Enterprise Manager group containing the targets for which you want data exported
 * From the Target menu, select Groups. The Groups page opens
 * Click Create and select Group
 * Select Targt type Oracle Exadata Infrastructure to be added to the group <img src='/images/posts/2023-04/royce-blog-2023-04-em-create-group.png'/> <img src='/images/posts/2023-04/royce-blog-2023-04-em-group.png'/>
 
-**OCI Side: Provision Autonomous Data Warehouse (ADW) and create an Analytics User to hold the Analytics Schema**
+#### OCI Side: Provision Autonomous Data Warehouse (ADW) and create an Analytics User to hold the Analytics Schema
 * Go to OCI tenancy console
 * **Oracle Database** -> **Autonomous Database**
 * Create **Autonomous Database** 
@@ -172,7 +172,7 @@ $ curl -k -u restapi_user:xxxxxxxxxxxxx http://10.0.10.9:7879/MS/RESTService?cmd
 
 Some [considerations](https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emadb/prerequisite-tasks-autonomous-databases-shared.html#GUID-3B415134-6B5E-44A5-BFAA-A3473BDBFE31) when onboarding Autonomous Databases to Oracle Enterprise Manager Deployed in OCI or on-prem
 
-**EM Side: Discover the ADW on EM**
+#### EM Side: Discover the ADW on EM
 * Under EM Secuirty, select **Named Credentials**. Create a new named credential with for EMCLOUDBRIDGE user within the ADW <img src='/images/posts/2023-04/royce-blog-2023-04-xawh-adw-named-credential.png'/>
 * Onboard ADW to EM target 
 * From **Setup** menu, select **Add Target**, Add Targets Manually
@@ -183,19 +183,19 @@ Some [considerations](https://docs.oracle.com/en/enterprise-manager/cloud-contro
 
   **More Details** check [EM 13.5 documentation](https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emadb/discover-autonomous-databases.html) to discover Autonomous Database 
 
-**EM Side: Configure the Cloud Bridge**
+#### EM Side: Configure the Cloud Bridge
 * From **Setup** menu, select **Cloud Bridge**
 * Click **Manage OCI Connectivity** and select **OCI Bridge** tab
 * Sepcify OCI Credeitials we created to connect to OCI, the base URL for the storage bucket(**for example:** objectstorage.us-ashburn-1.oraclecloud.com), the storage bucket name and the OCI Cloud Bridge name <img src='/images/posts/2023-04/royce-blog-2023-04-oci-bridge.png'/>
 * Create the OCI Bridge
 * Click Warehouse tab, specify OCI Service - **Operations Insights: Exadata Warehouse**, OCI Bridge you had created. The Autonomous Data Warehouse you had discovered and the database credential to access the ADW database <img src='/images/posts/2023-04/royce-blog-2023-04-oci-warehouse.png'/>
 
-**EM Side: Kick off the Data Export**
+#### EM Side: Kick off the Data Export
 * Now return to **Cloud Bridge** page and select **Enable Data Export**
 * Specify OCI Service - **Operations Insights: Exadata Warehouse** and EM target group as the **Source** as well as the **OCI Bridge** we had created <img src='/images/posts/2023-04/royce-blog-2023-04-oci-data-export.png'/>
 * Click the Submit button to enable the data export. The data from your EM instance should start uploading to the OCI bucket you speicified. 
 
-**OCI Side: Verify the Exadata Warehouse data in ADW database**
+#### OCI Side: Verify the Exadata Warehouse data in ADW database
 * Cloud Bridge page shows the basic status about the Operations Insights jobs <img src='/images/posts/2023-04/royce-blog-2023-04-oci-bridge-status.png'/>
 * Check the job details, select Jobs tab and pick the **Operations Insights: Exadata Warehouse**, adjust the time window accordingly
 * **GEF_EXTRACT_MAIN_XAWH** framework is the top level job for Exadata Warehouse collection <img src='/images/posts/2023-04/royce-blog-2023-04-xawh-job.png'/>
@@ -204,7 +204,7 @@ Some [considerations](https://docs.oracle.com/en/enterprise-manager/cloud-contro
 * Under **Enterprise** menu, **Provisioning and Patching**, select **Procedure Activity**, you can find the procedure jobs related to **XAWHDataCollection** <img src='/images/posts/2023-04/royce-blog-2023-04-xawh-procedure.png'/>
 * You can also find ExadataAnalytics procedures which is responsible for running ML model to forecast Exadata infrastrcuture resource usage 
 
-**OCI Side: Create Oracle Analytics Cloud**
+#### OCI Side: Create Oracle Analytics Cloud
 * Once the data is fully loaded into ADW, we can access ADW Database via Database Actions SQL Worksheet or via SQL Developer. You can refer to Jeff Smith blog to get more details about [SQL Worksheet](https://www.thatjeffsmith.com/archive/2021/11/database-tools-service-deep-dive-the-sql-worksheet/)
 * or even use [SQL Developer Web](https://www.thatjeffsmith.com/archive/2019/06/sql-developer-web-now-available-for-oracle-autonomous-database/)
 * Inspect the ADW Exadata Warehouse tables and views <img src='/images/posts/2023-04/royce-blog-2023-04-xawh-views.png'/>
@@ -216,7 +216,7 @@ Some [considerations](https://docs.oracle.com/en/enterprise-manager/cloud-contro
 
 **Find more Exadata Warehouse view definition and metadata [here](https://docs.oracle.com/en/enterprise-manager/cloud-control/enterprise-manager-cloud-control/13.5/emexw/index.html#step_fifteen)**
 
-**OCI Side: Visualize the Exadata Warehouse Forecast data via OAC**
+#### OCI Side: Visualize the Exadata Warehouse Forecast data via OAC
 * Click Create Connection in OAC to create ADW database connection <img src='/images/posts/2023-04/royce-blog-2023-04-oac-connection.png'/>
 * After ADW database connection is created, dataset needs to be created. 
 * You can consider to create a user defined view before creating the dataset so that you don't need to join/create complex SQL within OAC.
