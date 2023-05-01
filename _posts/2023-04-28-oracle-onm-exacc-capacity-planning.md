@@ -1,5 +1,5 @@
 ---
-title: "OCI O&M - Resource Management and Forecast for Exadata Cloud Service and Exadata Cloud@Customer"
+title: "OCI O&M - Resource Management and Forecast for Exadata Cloud@Customer"
 date: 2023-04-28
 last_modified_at: 2023-05-01T16:20:02-05:00
 categories:
