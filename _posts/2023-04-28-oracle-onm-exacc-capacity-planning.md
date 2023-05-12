@@ -1,5 +1,5 @@
 ---
-title: "OCI O&M - Resource Management and Forecast for Exadata Cloud@Customer"
+title: "OCI O&M - Monitor Exadata Infrastructure using OCI Operations Insights Exadata Warehouse and Oracle Analytics Cloud"
 date: 2023-04-28
 last_modified_at: 2023-05-01T16:20:02-05:00
 categories:
@@ -10,14 +10,15 @@ tags:
 ---
 
 ### Introduction
-As more organizations started OCI Cloud journey, the importance of optimizing operational efficiency becomes paramount. In the blog, we will explore two strategies for maximizing the resource and performance of the Exadata Cloud Service and Exadata Cloud@Customer deployments, two most popular database cloud solutions among our Exadata customers. 
+As more organizations started Oracle Cloud Infrastructure Cloud journey, the importance of optimizing operational efficiency becomes paramount. In the blog, we will explore the configurations for monitoring the resource and performance of the Exadata infrastructure using Oracle Cloud Infrastructure Operations Insights feature Exadata Warehouse. 
 
-Capacity planning involves forecasting future resource needs and scaling infrastructure accordingly to avoid performance issues and ensure adepuate capacity for growth. By implementing these strategies, organizations can maximize the performance of their Exadata Cloud Service or Exadata Cloud@Customer solutions, resulting in improved uptime, faster performance, and efficient resource utilization. 
+Capacity planning involves forecasting future resource needs and scaling infrastructure accordingly to avoid performance issues and ensure adepuate capacity for growth. By implementing these strategies, organizations can maximize the performance of their Exadata Cloud Service or Exadata Cloud@Customer solutions, resulting in improved uptime, faster performance, and efficient resource utilization.
 
 **Workload Management and Capacity Planning Strategies**
 
-* Exadata Capacity Planning using OCI Operations Insights 
+* Exadata Capacity Planning using OCI Operations Insights Exadata Insights
 * Exadata Workload Forecast and Analysis using OCI Analytic Cloud and Exadata Warehouse
+* Performance management via OCI Database Management Service
 
 ### ExaC@C Architecture
 
@@ -32,7 +33,7 @@ Many customers who have migrated to the ExaCC platforms raised the same request 
 ### Operations Insights
 Operations Insights is an OCI native service that provides holistic insight into database and host resource utilization and capacity.
 
-Operations Insights cnosists of the following integrated applications: 
+Operations Insights cnosists of the following integrated applications, you can check out thte details about each feature [here](https://docs.oracle.com/en-us/iaas/operations-insights/doc/operations-insights.html).
 * **Capacity Planning**
 * **Oracle SQL Warehouse**
 * **Exadata Insights**
@@ -41,7 +42,19 @@ Operations Insights cnosists of the following integrated applications:
 * **Enterprise Manager Warehouse**
 * **Exadata Warehouse**
 
-In this blog, we are going to focus on the use cases about how to use Capacity Planning and Exadata Warehouse to maximize the operational efficiency in our Exadata fleet.
+### Enterprise Manager Cloud Bridge and OCI EM Bridge
+An Enterprise Manager-side bridge to move target-level data from Enterprise Manager and Exadata target level MS metrics to OCI Object Storage bucket.
+An Operations Insights-side bridge to move data from the OCI Object Storage bucket to Operations Insights for analysis.
+
+<img src='/images/posts/2023-04/overview_of_em_data_in_oci.png'/>
+
+Operations Insights features - Exadata Insights and Exadata Warehouse provide our Exadata customers the capabilities for capacity planning and Exadata workload forecast.
+
+### Exadata Insights
+Exadata Insights help you analyze the resource utilization of the Exadata systems and identify the spare capacity for new workloads. This feature is available for Exadata systems that are managed by Oracle Enterprise Manager 13.5 RU01 and later.
+
+Exadata Insights provides visibility into performance of critical workloads running on shared Exadata systems either cloud-based (Exadata Cloud Service) or monitored by Enterprise Manager (Exadata Database Service on Dedicated Infrastructure, Exadata Database Machine, and Exadata Cloud@Customer). A single integrated view of all Exadata systems across your enterprise helps identify issues and troubleshoot them quickly. You can also view the categorization of the Exadata systems based on the fleet type (Exadata Database Machine Bare Metal, Exadata Database Machine Virtualized, Exadata Cloud@Customer, or Exadata Database Service on Dedicated Infrastructure), rack type, the systems with low resource utilization, and the global resource usage in terms of CPU, memory, I/O, and storage.
+<img src='/images/posts/2023-04/exadata_insights_fleet_view.png'/>
 
 ### Exadata Warehouse
 Exadata Warehouse provides intelligent analytics that let you maximize performance and utilization for both on-premises and cloud-based Oracle Engineered Systems, such as Exadata Database Machine.
@@ -204,7 +217,7 @@ Some [considerations](https://docs.oracle.com/en/enterprise-manager/cloud-contro
 * Under **Enterprise** menu, **Provisioning and Patching**, select **Procedure Activity**, you can find the procedure jobs related to **XAWHDataCollection** <img src='/images/posts/2023-04/royce-blog-2023-04-xawh-procedure.png'/>
 * You can also find ExadataAnalytics procedures which is responsible for running ML model to forecast Exadata infrastrcuture resource usage 
 
-#### OCI Side: Create Oracle Analytics Cloud
+#### OCI Side: Create Oracle Analytics Cloud instance for data visualization
 * Once the data is fully loaded into ADW, we can access ADW Database via Database Actions SQL Worksheet or via SQL Developer. You can refer to Jeff Smith blog to get more details about [SQL Worksheet](https://www.thatjeffsmith.com/archive/2021/11/database-tools-service-deep-dive-the-sql-worksheet/)
 * or even use [SQL Developer Web](https://www.thatjeffsmith.com/archive/2019/06/sql-developer-web-now-available-for-oracle-autonomous-database/)
 * Inspect the ADW Exadata Warehouse tables and views <img src='/images/posts/2023-04/royce-blog-2023-04-xawh-views.png'/>

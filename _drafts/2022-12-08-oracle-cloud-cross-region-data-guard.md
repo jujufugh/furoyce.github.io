@@ -13,3 +13,20 @@ tags:
 
 The page is working-in-progress. 
 
+### Introduction
+
+### Oracle Data Guard and Cross Region Replication
+
+### OCI Network Configuration
+
+#### OCI: Create Dynamic Routing Gateway
+
+#### OCI: Attach the DRG to your Primary site VCN
+
+#### OCI: Attach the DRG to yoru Standby site VCN
+
+#### OCI: Create Remote Peering Connection in both VCNs
+
+
+#### OCI: 
+
