@@ -33,7 +33,7 @@ Many customers who have migrated to the ExaCC platforms raised the same request 
 ### Operations Insights
 Operations Insights is an OCI native service that provides holistic insight into database and host resource utilization and capacity.
 
-Operations Insights cnosists of the following integrated applications, you can check out thte details about each feature [here](https://docs.oracle.com/en-us/iaas/operations-insights/doc/operations-insights.html).
+Operations Insights consists of the following integrated applications, you can check out thte details about each feature [here](https://docs.oracle.com/en-us/iaas/operations-insights/doc/operations-insights.html).
 * **Capacity Planning**
 * **Oracle SQL Warehouse**
 * **Exadata Insights**
@@ -66,7 +66,7 @@ Exadata Warehouse functions as a long-term storage repository for fine-grained p
 
 * **EM Side:** ExaC@C Exadata Infrastructure is discovered within EM
 
-**NOTE: Aflredo Krieg** has a great blog post about discovering Exadata Cloud@Customer within Enterprise Manager 13.5, please check [here](https://alfredokriegdba.com/2023/04/21/maximize-your-exadata-cloud-at-customer-efficiency-using-oracle-enterprise-manager-13-5/)
+**NOTE: Alfredo Krieg** has a great blog post about discovering Exadata Cloud@Customer within Enterprise Manager 13.5, please check [here](https://alfredokriegdba.com/2023/04/21/maximize-your-exadata-cloud-at-customer-efficiency-using-oracle-enterprise-manager-13-5/)
 
 * Set up OCI service connectivity.
   * **OCI Side:** Ensure an OCI Object Storage Bucket has already been created
