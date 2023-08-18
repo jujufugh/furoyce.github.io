@@ -106,30 +106,33 @@ sudo ./diagnostic
 ```
 * In any senario, you need to configure proxy for your Oracle Cloud Agent
 
-```
-sudo EDITOR=vi systemctl edit oracle-cloud-agent
-## Add following entries into the editor window
-[Service]
-Environment="http_proxy=<proxy_url>:<proxy_port>"
-Environment="https_proxy=<proxy_url>:<proxy_port>"
-Environment="no_proxy=localhost,127.0.0.1,169.254.169.254"
+  ```
+  sudo EDITOR=vi systemctl edit oracle-cloud-agent
+  ## Add following entries into the editor window
+  [Service]
+  Environment="http_proxy=<proxy_url>:<proxy_port>"
+  Environment="https_proxy=<proxy_url>:<proxy_port>"
+  Environment="no_proxy=localhost,127.0.0.1,169.254.169.254"
 
-sudo EDITOR=vi systemctl edit oracle-cloud-agent-updater
-## Add following entries into the editor window
-[Service]
-Environment="http_proxy=<proxy_url>:<proxy_port>"
-Environment="https_proxy=<proxy_url>:<proxy_port>"
-Environment="no_proxy=localhost,127.0.0.1,169.254.169.254"
+  sudo EDITOR=vi systemctl edit oracle-cloud-agent-updater
+  ## Add following entries into the editor window
+  [Service]
+  Environment="http_proxy=<proxy_url>:<proxy_port>"
+  Environment="https_proxy=<proxy_url>:<proxy_port>"
+  Environment="no_proxy=localhost,127.0.0.1,169.254.169.254"
 
-# Restart the agent
-sudo systemctl daemon-reload
-sudo systemctl restart oracle-cloud-agent oracle-cloud-agent-updater
-```
+  # Restart the agent
+  sudo systemctl daemon-reload
+  sudo systemctl restart oracle-cloud-agent oracle-cloud-agent-updater
+  ```
 
 #### **Oracle Management Agent**
 * **Oracle Management Agent** is a service that provides low latency interactive communication and data collection between Oracle Cloud Infrastructure and IT targets. Oracle Management Agent has plugins integrated with O&M advanced services such as Logging Analytics, Database Management, Operations Insights, Java Management Service, Stack Monitoring, etc. Plugins can collect and ingest data from various cloud resources. Management Agent can be enabled as a plugin of the Oracle Cloud Agent or can install independently. 
 
 <img src='/images/posts/2023-08/royce-blog-oracle-agents-oracle-management-agent-plugins.png'/>
+
+![Oracle Management Agent Plugins](/images/posts/2023-08/royce-blog-oracle-agents-oracle-management-agent-plugins.png){: .align-center}
+
 
 * Supported OS versions
   * Windows-x86_64, Windows-x86
@@ -169,6 +172,7 @@ chmod a+x /home; sudo chmod a+x /home/opc
   * Enable Logging Analytics : Service.plugin.logan.download=true
   * Enable Database Management : Service.plugin.dbaas.download=true
   * Example:
+
 ```
 ########################################################################
     ########################################################################
