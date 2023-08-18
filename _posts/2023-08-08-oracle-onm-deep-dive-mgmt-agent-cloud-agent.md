@@ -23,6 +23,7 @@ Oracle Cloud Infrastructure agents come in various forms, each designed with a s
 *Note: All the configuration details will be Linux OS version based.*
 
 #### OCI Agents Comparison
+
 | Categories	| Oracle Cloud Agent	| Oracle Management Agent	| Oracle Unified Monitoring Agent | 
 |-------------|---------------------|-------------------------|---------------------------------|
 | Monitoring	| via Compute Instance Monitoring Plugin	| N/A	| N/A |
@@ -63,51 +64,51 @@ For unsupported OS version, **Oracle Management Agent** and **Unified Monitoring
   | OS Management Service Agent | Manages updates and patches for the operating system environment on the instance | [OS Management](https://docs.oracle.com/iaas/os-management/osms/index.htm) |
   | Vulnerability Scanning | 	Scans the instance for potential security vulnerabilities like OS packages that require updates | [Scanning Overview](https://docs.oracle.com/iaas/scanning/using/overview.htm) |
 
-* Oracle Cloud Agent Installation and Configuration
-* Note: When we can't install Oracle Cloud Agent in the VM, the workaround is to use Oracle Management Agent or Oracle Unified Monitoring Agent to collect and ingest logs for Logging Analytics Service or Logging Service. 
-  * Policy to read instance agent plugins
-  * `Allow group PluginUsers to read instance-agent-plugins in compartment ABC`
-  * Check if Oracle Cloud Agent software is installed
-    `sudo yum info oracle-cloud-agent`
-  * Install Oracle Cloud Agent
-    `sudo yum install -y oracle-cloud-agent`
-  * Restart Oracle Cloud Agent
-  * `sudo systemctl restart oracle-cloud-agent`
-  * Validate the Oracle Cloud Agent installation
-  * `rpm -q oracle-cloud-agent && echo "OCA Installed" || echo "OCA not Installed"`
-  * Verify the Oracle Cloud Agent is running
-    ```
-    systemctl is-enabled oracle-cloud-agent &>/dev/null && echo "OCA is enabled" || echo "OCA is disabled" && systemctl is-active oracle-cloud-agent &> /dev/null && echo "OCA is running" || echo "OCA is not running"
-    ```
-  * Verify that the instance can access the instance metadata service endpoint
-  * `curl -v -H 'Authorization: Bearer Oracle' http://169.254.169.254/opc/v2/instance/`
-  * Check Clock Skew errors which can potentially cause TLS negotiations to fail and prevent instance connecting to Oracle services
-  * `sudo tail -15 /var/log/oracle-cloud-agent/plugins/gomon/monitoring.log`
-  * When you work with support engineer to troubleshoot issues with the Oracle Cloud Agent, you can generate diagnostic data for your agent, the tool will generate a TAR file with a name in the format `oca-diag-<date>.<identifier>.tar.gz`
+##### Oracle Cloud Agent Installation and Configuration
+*Note: When we can't install Oracle Cloud Agent in the VM, the workaround is to use Oracle Management Agent or Oracle Unified Monitoring Agent to collect and ingest logs for Logging Analytics Service or Logging Service. *
+* Policy to read instance agent plugins
+  ```Allow group PluginUsers to read instance-agent-plugins in compartment ABC```
+* Check if Oracle Cloud Agent software is installed
+  ```sudo yum info oracle-cloud-agent```
+* Install Oracle Cloud Agent
+  ```sudo yum install -y oracle-cloud-agent```
+* Restart Oracle Cloud Agent
+  ```sudo systemctl restart oracle-cloud-agent```
+* Validate the Oracle Cloud Agent installation
+  ```rpm -q oracle-cloud-agent && echo "OCA Installed" || echo "OCA not Installed"```
+* Verify the Oracle Cloud Agent is running
   ```
-  cd /usr/bin/ocatools
-  sudo ./diagnostic
+  systemctl is-enabled oracle-cloud-agent &>/dev/null && echo "OCA is enabled" || echo "OCA is disabled" && systemctl is-active oracle-cloud-agent &> /dev/null && echo "OCA is running" || echo "OCA is not running"
   ```
-  * In any senario, you need to configure proxy for your Oracle Cloud Agent
-    ```
-    sudo EDITOR=vi systemctl edit oracle-cloud-agent
-    ## Add following entries into the editor window
-    [Service]
-    Environment="http_proxy=<proxy_url>:<proxy_port>"
-    Environment="https_proxy=<proxy_url>:<proxy_port>"
-    Environment="no_proxy=localhost,127.0.0.1,169.254.169.254"
+* Verify that the instance can access the instance metadata service endpoint
+  ```curl -v -H 'Authorization: Bearer Oracle' http://169.254.169.254/opc/v2/instance/```
+* Check Clock Skew errors which can potentially cause TLS negotiations to fail and prevent instance connecting to Oracle services
+  ```sudo tail -15 /var/log/oracle-cloud-agent/plugins/gomon/monitoring.log```
+* When you work with support engineer to troubleshoot issues with the Oracle Cloud Agent, you can generate diagnostic data for your agent, the tool will generate a TAR file with a name in the format `oca-diag-<date>.<identifier>.tar.gz`
+```
+cd /usr/bin/ocatools
+sudo ./diagnostic
+```
+* In any senario, you need to configure proxy for your Oracle Cloud Agent
+  ```
+  sudo EDITOR=vi systemctl edit oracle-cloud-agent
+  ## Add following entries into the editor window
+  [Service]
+  Environment="http_proxy=<proxy_url>:<proxy_port>"
+  Environment="https_proxy=<proxy_url>:<proxy_port>"
+  Environment="no_proxy=localhost,127.0.0.1,169.254.169.254"
 
-    sudo EDITOR=vi systemctl edit oracle-cloud-agent-updater
-    ## Add following entries into the editor window
-    [Service]
-    Environment="http_proxy=<proxy_url>:<proxy_port>"
-    Environment="https_proxy=<proxy_url>:<proxy_port>"
-    Environment="no_proxy=localhost,127.0.0.1,169.254.169.254"
+  sudo EDITOR=vi systemctl edit oracle-cloud-agent-updater
+  ## Add following entries into the editor window
+  [Service]
+  Environment="http_proxy=<proxy_url>:<proxy_port>"
+  Environment="https_proxy=<proxy_url>:<proxy_port>"
+  Environment="no_proxy=localhost,127.0.0.1,169.254.169.254"
 
-    # Restart the agent
-    sudo systemctl daemon-reload
-    sudo systemctl restart oracle-cloud-agent oracle-cloud-agent-updater
-    ```
+  # Restart the agent
+  sudo systemctl daemon-reload
+  sudo systemctl restart oracle-cloud-agent oracle-cloud-agent-updater
+  ```
 
 #### **Oracle Management Agent**
 * **Oracle Management Agent** is a service that provides low latency interactive communication and data collection between Oracle Cloud Infrastructure and IT targets. Oracle Management Agent has plugins integrated with O&M advanced services such as Logging Analytics, Database Management, Operations Insights, Java Management Service, Stack Monitoring, etc. Plugins can collect and ingest data from various cloud resources. Management Agent can be enabled as a plugin of the Oracle Cloud Agent or can install independently. 
