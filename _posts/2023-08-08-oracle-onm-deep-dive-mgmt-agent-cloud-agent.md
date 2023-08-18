@@ -105,6 +105,7 @@ sudo tail -15 /var/log/oracle-cloud-agent/plugins/gomon/monitoring.log
 cd /usr/bin/ocatools
 sudo ./diagnostic
 ```
+
 * In any senario, you need to configure proxy for your Oracle Cloud Agent
 
   ```
