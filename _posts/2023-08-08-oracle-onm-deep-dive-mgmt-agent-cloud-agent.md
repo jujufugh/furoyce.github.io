@@ -15,7 +15,8 @@ tags:
 In the ever-evolving landscape of cloud computing, the ability to efficiently log, monitor and manage resources has become a cornerstone of operational success. At the heart of this intricate ecosystem are OCI agents such as Oracle Cloud Agent, Oracle Management Agent, and Unified Monitoring Agent emerge as crucial players in ensuring observability and management is seamless and tightly integrated with OCI cloud resources.
 
 #### OCI Observability & Management Reference Architecture
-<img src='/images/posts/2023-08/royce-blog-onm_reference_architecture_review.color.png'/>
+
+![Oracle Cloud Infrastrcuture Observability & Management Architecture](/images/posts/2023-08/royce-blog-onm_reference_architecture_review.color.png){: .align-center}
 
 ### OCI Agents Overview
 Oracle Cloud Infrastructure agents come in various forms, each designed with a specific set of capabilities to address different use cases. However, while these agents offer powerful functionalities, navigating the landscape and choosing the right agent for your unique requirements can sometimes be a daunting task. This overview aims to shed light on the types of OCI agents available, their key features, and how to approach selecting the most suitable agent for your use cases.
@@ -48,7 +49,7 @@ Oracle Cloud Infrastructure agents come in various forms, each designed with a s
 For unsupported OS version, **Oracle Management Agent** and **Unified Monitoring Agent** can be used for collecting log and cloud resource data for OCI Observability and Management services. 
 * Oracle Cloud Agent manages the following plugins for the OCI Observability and Management, it is considered as the best practice to use Oracle Cloud Agent whenever it is possible.
 
-<img src='/images/posts/2023-08/royce-blog-oracle-agents-oracle_cloud_agent_architecture.png'/>
+![Oracle Cloud Agent Plugins](/images/posts/2023-08/royce-blog-oracle-agents-oracle_cloud_agent_architecture.png){: .align-center}
 
 
   | Plugin Name | Description | Reference  |
@@ -129,8 +130,6 @@ sudo ./diagnostic
 #### **Oracle Management Agent**
 * **Oracle Management Agent** is a service that provides low latency interactive communication and data collection between Oracle Cloud Infrastructure and IT targets. Oracle Management Agent has plugins integrated with O&M advanced services such as Logging Analytics, Database Management, Operations Insights, Java Management Service, Stack Monitoring, etc. Plugins can collect and ingest data from various cloud resources. Management Agent can be enabled as a plugin of the Oracle Cloud Agent or can install independently. 
 
-<img src='/images/posts/2023-08/royce-blog-oracle-agents-oracle-management-agent-plugins.png'/>
-
 ![Oracle Management Agent Plugins](/images/posts/2023-08/royce-blog-oracle-agents-oracle-management-agent-plugins.png){: .align-center}
 
 
@@ -173,22 +172,22 @@ chmod a+x /home; sudo chmod a+x /home/opc
   * Enable Database Management : Service.plugin.dbaas.download=true
   * Example:
 
-```
-########################################################################
-    ########################################################################
-    ManagementAgentInstallKey = <install_key_place_holder>
-    AgentDisplayName = emdbhost1-mgmt-agent
-    #Please uncomment the below tags properties and provide values as needed
-    #FreeFormTags = [{"<key1>":"<value1>"}, {"<key2>":"<value2>"}]
-    #DefinedTags = [{"namespace1":{"<key1>":"<value1>"}}, {"namespace2":{"<key2>":"<value2>"}}]
-    #CredentialWalletPassword = 
-    Service.plugin.appmgmt.download=true
-    #Service.plugin.jms.download=true
-    Service.plugin.dbaas.download=true
-    Service.plugin.logan.download=true
-    Service.plugin.opsiHost.download=true
-    #Service.plugin.jm.download=true
-```
+  ```
+  ########################################################################
+      ########################################################################
+      ManagementAgentInstallKey = <install_key_place_holder>
+      AgentDisplayName = emdbhost1-mgmt-agent
+      #Please uncomment the below tags properties and provide values as needed
+      #FreeFormTags = [{"<key1>":"<value1>"}, {"<key2>":"<value2>"}]
+      #DefinedTags = [{"namespace1":{"<key1>":"<value1>"}}, {"namespace2":{"<key2>":"<value2>"}}]
+      #CredentialWalletPassword = 
+      Service.plugin.appmgmt.download=true
+      #Service.plugin.jms.download=true
+      Service.plugin.dbaas.download=true
+      Service.plugin.logan.download=true
+      Service.plugin.opsiHost.download=true
+      #Service.plugin.jm.download=true
+  ```
 * Run the Agent configuration
 ```
 $ sudo /opt/oracle/mgmt_agent/agent_inst/bin/setup.sh opts=/home/opc/input.rsp
@@ -199,14 +198,16 @@ $ sudo /opt/oracle/mgmt_agent/agent_inst/bin/setup.sh opts=/home/opc/input.rsp
   * Enable Management Agent as a Plugin of Oracle Cloud Agent
     <img src='/images/posts/2023-08/royce-blog-oracle-agents-plugins_view02.png'/>
 * Generate Management Agent diagnostic support bundle
-* If Management Agent is enabled on compute instance via Oracle Cloud Agent
-```
-sudo -u oracle-cloud-agent /var/lib/oracle-cloud-agent/plugins/oci-managementagent/polaris/agent_inst/bin/generateDiagnosticBundle.sh
-```
-* If Management Agent is deployed as standalone installation
-```
-# sudo -u mgmt_agent /opt/oracle/mgmt_agent/agent_inst/bin/generateDiagnosticBundle.sh
-``` 
+  * If Management Agent is enabled on compute instance via Oracle Cloud Agent
+
+  ```
+  sudo -u oracle-cloud-agent /var/lib/oracle-cloud-agent/plugins/oci-managementagent/polaris/agent_inst/bin/generateDiagnosticBundle.sh
+  ```
+  * If Management Agent is deployed as standalone installation
+
+  ```
+  # sudo -u mgmt_agent /opt/oracle/mgmt_agent/agent_inst/bin/generateDiagnosticBundle.sh
+  ``` 
   
 #### **Unified Monitoring Agent** 
 * **Unified Monitoring Agent** is [fluentd-based](https://www.fluentd.org/) open-source agent to ingest custom logs such as syslogs, application logs, security logs to Oracle Logging Service. With proper agent configuration, it allows you to control exactly which logs you want to collect, how to parse them, and more.
@@ -257,7 +258,7 @@ oci logging agent-configuration create-log-configuration --compartment-id compar
 oci logging agent-configuration update-log-configuration --config-id config_ocid --display-name display_name --is-enabled [true|false] [OPTIONS]
 ```
 * Permissions to read logs from the host
-* Determine the agent OS user validate from the /etc/passwd on the server
+  * Determine the agent OS user validate from the /etc/passwd on the server
   *Note: On Unix-based hosts, the user that installs management agent is mgmt_agent for the manually installed management agent, and oracle-cloud-agent when the management agent is a plugin enabled with Oracle Cloud Agent.*
 * Check the log files permission with the agent user
 ```
