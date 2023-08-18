@@ -165,7 +165,8 @@ sudo ./diagnostic
   * Enable Logging Analytics : Service.plugin.logan.download=true
   * Enable Database Management : Service.plugin.dbaas.download=true
   * Example:
-  ```########################################################################
+  ```
+  ########################################################################
       ########################################################################
       ManagementAgentInstallKey = <install_key_place_holder>
       AgentDisplayName = emdbhost1-mgmt-agent
@@ -248,28 +249,28 @@ sudo ./diagnostic
   oci logging agent-configuration update-log-configuration --config-id config_ocid --display-name display_name --is-enabled [true|false] [OPTIONS]
   ```
 * Permissions to read logs from the host
-  * Determine the agent OS user validate from the /etc/passwd on the server
-    *Note: On Unix-based hosts, the user that installs management agent is mgmt_agent for the manually installed management agent, and oracle-cloud-agent when the management agent is a plugin enabled with Oracle Cloud Agent.*
-  * Check the log files permission with the agent user
-    ```
-    sudo -u <agentuser> /bin/bash -c "cat <log file with complete path>"
-    ```
-  * Setup ACL if the tool doesn't exist
-    ```
-    rpm -q acl
-    ```
-  * Grant the agent user READ access to the required log file
-    ```
-    setfacl -m u:<agentuser>:r <path to the log file/log file name>
-    ```
-  * Grant READ and EXECUTE with recursive options on parent folder in the log file path
-    ```
-    setfacl -R -m u:<agentuser>:rx <path to the folder>
-    ```
-  * Grant READ and EXECUTE with default option to allow all future log files created
-    ```
-    setfacl -d -m u:<agentuser>:rx <path to the folder>
-    ```
+* Determine the agent OS user validate from the /etc/passwd on the server
+  *Note: On Unix-based hosts, the user that installs management agent is mgmt_agent for the manually installed management agent, and oracle-cloud-agent when the management agent is a plugin enabled with Oracle Cloud Agent.*
+* Check the log files permission with the agent user
+  ```
+  sudo -u <agentuser> /bin/bash -c "cat <log file with complete path>"
+  ```
+* Setup ACL if the tool doesn't exist
+  ```
+  rpm -q acl
+  ```
+* Grant the agent user READ access to the required log file
+  ```
+  setfacl -m u:<agentuser>:r <path to the log file/log file name>
+  ```
+* Grant READ and EXECUTE with recursive options on parent folder in the log file path
+  ```
+  setfacl -R -m u:<agentuser>:rx <path to the folder>
+  ```
+* Grant READ and EXECUTE with default option to allow all future log files created
+  ```
+  setfacl -d -m u:<agentuser>:rx <path to the folder>
+  ```
 * Permissions to upload to Logging Service
   Dynamic group: 
   ```
