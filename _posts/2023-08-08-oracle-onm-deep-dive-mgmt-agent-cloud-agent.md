@@ -67,23 +67,37 @@ For unsupported OS version, **Oracle Management Agent** and **Unified Monitoring
 ##### Oracle Cloud Agent Installation and Configuration
 *Note: When we can't install Oracle Cloud Agent in the VM, the workaround is to use Oracle Management Agent or Oracle Unified Monitoring Agent to collect and ingest logs for Logging Analytics Service or Logging Service. *
 * Policy to read instance agent plugins
-  ```Allow group PluginUsers to read instance-agent-plugins in compartment ABC```
+  ```
+  Allow group PluginUsers to read instance-agent-plugins in compartment ABC
+  ```
 * Check if Oracle Cloud Agent software is installed
-  ```sudo yum info oracle-cloud-agent```
+  ```
+  sudo yum info oracle-cloud-agent
+  ```
 * Install Oracle Cloud Agent
-  ```sudo yum install -y oracle-cloud-agent```
+  ```
+  sudo yum install -y oracle-cloud-agent
+  ```
 * Restart Oracle Cloud Agent
-  ```sudo systemctl restart oracle-cloud-agent```
+  ```
+  sudo systemctl restart oracle-cloud-agent
+  ```
 * Validate the Oracle Cloud Agent installation
-  ```rpm -q oracle-cloud-agent && echo "OCA Installed" || echo "OCA not Installed"```
+  ```
+  rpm -q oracle-cloud-agent && echo "OCA Installed" || echo "OCA not Installed"
+  ```
 * Verify the Oracle Cloud Agent is running
   ```
   systemctl is-enabled oracle-cloud-agent &>/dev/null && echo "OCA is enabled" || echo "OCA is disabled" && systemctl is-active oracle-cloud-agent &> /dev/null && echo "OCA is running" || echo "OCA is not running"
   ```
 * Verify that the instance can access the instance metadata service endpoint
-  ```curl -v -H 'Authorization: Bearer Oracle' http://169.254.169.254/opc/v2/instance/```
+  ```
+  curl -v -H 'Authorization: Bearer Oracle' http://169.254.169.254/opc/v2/instance/
+  ```
 * Check Clock Skew errors which can potentially cause TLS negotiations to fail and prevent instance connecting to Oracle services
-  ```sudo tail -15 /var/log/oracle-cloud-agent/plugins/gomon/monitoring.log```
+  ```
+  sudo tail -15 /var/log/oracle-cloud-agent/plugins/gomon/monitoring.log
+  ```
 * When you work with support engineer to troubleshoot issues with the Oracle Cloud Agent, you can generate diagnostic data for your agent, the tool will generate a TAR file with a name in the format `oca-diag-<date>.<identifier>.tar.gz`
 ```
 cd /usr/bin/ocatools
@@ -119,55 +133,71 @@ sudo ./diagnostic
   * Windows-x86_64, Windows-x86
   * Solaris-Sparc64
   * Linux-x86_64, Linux-Aarch64
-* Oracle Management Agent Installation and Configuration
-  * Prerequisites, [doc reference](https://docs.oracle.com/en-us/iaas/management-agents/doc/perform-prerequisites-deploying-management-agents.html)
-    * Ceate or designate compartments for Oracle Management Agent
-    * Create a user group to manage Oracle Management Agent
-    * Create policies for user group
-  * Oracle Management Agent download can be done via Management Agent Cloud Service UI or via CLI
-  * Obtain the object-url value using cli command
-  * `oci management-agent agent-image list --compartment-id <tenancyId>`
-  * The return object-url value is similar to the following
-  * `https://objectstorage.<region_identifier>.oraclecloud.com/n/<namespace>/b/<bucketName>/o/Linux-x86_64/latest/oracle.mgmt_agent.rpm`
-  * Download the Management Agent software with OCI authenticated pricing using 
-  * `oci os object get --namespace <namespace> --bucket-name <bucketName> --name Linux-x86_64/latest/oracle.mgmt_agent.rpm --file oracle.mgmt_agent.rpm`
-  * Run rpm installation
-  * `$ sudo rpm -ivh oracle.mgmt_agent.rpm`
-  * Fix the permission issue
-  * `chmod a+x /home; sudo chmod a+x /home/opc`
-  * Modify the install key for the response file
-    * Fill AgentDisplayName field
-    * Enable APM and Stack Monitoring : Service.plugin.appmgmt.download=true
-    * Enable Logging Analytics : Service.plugin.logan.download=true
-    * Enable Database Management : Service.plugin.dbaas.download=true
-    * Example:
-    ```########################################################################
-        ########################################################################
-        ManagementAgentInstallKey = <install_key_place_holder>
-        AgentDisplayName = emdbhost1-mgmt-agent
-        #Please uncomment the below tags properties and provide values as needed
-        #FreeFormTags = [{"<key1>":"<value1>"}, {"<key2>":"<value2>"}]
-        #DefinedTags = [{"namespace1":{"<key1>":"<value1>"}}, {"namespace2":{"<key2>":"<value2>"}}]
-        #CredentialWalletPassword = 
-        Service.plugin.appmgmt.download=true
-        #Service.plugin.jms.download=true
-        Service.plugin.dbaas.download=true
-        Service.plugin.logan.download=true
-        Service.plugin.opsiHost.download=true
-        #Service.plugin.jm.download=true
-    ```
-  * Run the Agent configuration
-  * `$ sudo /opt/oracle/mgmt_agent/agent_inst/bin/setup.sh opts=/home/opc/input.rsp`
-  * Enable additional Plugins, you might see different plugin views when you enable/deploy Oracle Management Agent differently
-    * Install Oracle Management Agent independently 
-      <img src='/images/posts/2023-08/royce-blog-oracle-agents-plugins_view01.png'/>
-    * Enable Management Agent as a Plugin of Oracle Cloud Agent
-      <img src='/images/posts/2023-08/royce-blog-oracle-agents-plugins_view02.png'/>
-  * Generate Management Agent diagnostic support bundle
-  * If Management Agent is enabled on compute instance via Oracle Cloud Agent
-  * `sudo -u oracle-cloud-agent /var/lib/oracle-cloud-agent/plugins/oci-managementagent/polaris/agent_inst/bin/generateDiagnosticBundle.sh`
-  * If Management Agent is deployed as standalone installation
-  * `# sudo -u mgmt_agent /opt/oracle/mgmt_agent/agent_inst/bin/generateDiagnosticBundle.sh` 
+##### Oracle Management Agent Installation and Configuration
+* Prerequisites, [doc reference](https://docs.oracle.com/en-us/iaas/management-agents/doc/perform-prerequisites-deploying-management-agents.html)
+  * Ceate or designate compartments for Oracle Management Agent
+  * Create a user group to manage Oracle Management Agent
+  * Create policies for user group
+* Oracle Management Agent download can be done via Management Agent Cloud Service UI or via CLI
+* Obtain the object-url value using cli command
+  ```
+  oci management-agent agent-image list --compartment-id <tenancyId>
+  ```
+* The return object-url value is similar to the following
+  ```
+  https://objectstorage.<region_identifier>.oraclecloud.com/n/<namespace>/b/<bucketName>/o/Linux-x86_64/latest/oracle.mgmt_agent.rpm
+  ```
+* Download the Management Agent software with OCI authenticated pricing using 
+  ```
+  oci os object get --namespace <namespace> --bucket-name <bucketName> --name Linux-x86_64/latest/oracle.mgmt_agent.rpm --file oracle.mgmt_agent.rpm
+  ```
+* Run rpm installation
+  ```
+  $ sudo rpm -ivh oracle.mgmt_agent.rpm
+  ```
+* Fix the permission issue
+  ```
+  chmod a+x /home; sudo chmod a+x /home/opc
+  ```
+* Modify the install key for the response file
+  * Fill AgentDisplayName field
+  * Enable APM and Stack Monitoring : Service.plugin.appmgmt.download=true
+  * Enable Logging Analytics : Service.plugin.logan.download=true
+  * Enable Database Management : Service.plugin.dbaas.download=true
+  * Example:
+  ```########################################################################
+      ########################################################################
+      ManagementAgentInstallKey = <install_key_place_holder>
+      AgentDisplayName = emdbhost1-mgmt-agent
+      #Please uncomment the below tags properties and provide values as needed
+      #FreeFormTags = [{"<key1>":"<value1>"}, {"<key2>":"<value2>"}]
+      #DefinedTags = [{"namespace1":{"<key1>":"<value1>"}}, {"namespace2":{"<key2>":"<value2>"}}]
+      #CredentialWalletPassword = 
+      Service.plugin.appmgmt.download=true
+      #Service.plugin.jms.download=true
+      Service.plugin.dbaas.download=true
+      Service.plugin.logan.download=true
+      Service.plugin.opsiHost.download=true
+      #Service.plugin.jm.download=true
+  ```
+* Run the Agent configuration
+  ```
+  $ sudo /opt/oracle/mgmt_agent/agent_inst/bin/setup.sh opts=/home/opc/input.rsp
+  ```
+* Enable additional Plugins, you might see different plugin views when you enable/deploy Oracle Management Agent differently
+  * Install Oracle Management Agent independently 
+    <img src='/images/posts/2023-08/royce-blog-oracle-agents-plugins_view01.png'/>
+  * Enable Management Agent as a Plugin of Oracle Cloud Agent
+    <img src='/images/posts/2023-08/royce-blog-oracle-agents-plugins_view02.png'/>
+* Generate Management Agent diagnostic support bundle
+* If Management Agent is enabled on compute instance via Oracle Cloud Agent
+  ```
+  sudo -u oracle-cloud-agent /var/lib/oracle-cloud-agent/plugins/oci-managementagent/polaris/agent_inst/bin/generateDiagnosticBundle.sh
+  ```
+* If Management Agent is deployed as standalone installation
+  ```
+  # sudo -u mgmt_agent /opt/oracle/mgmt_agent/agent_inst/bin/generateDiagnosticBundle.sh
+  ``` 
   
 #### **Unified Monitoring Agent** 
 * **Unified Monitoring Agent** is [fluentd-based](https://www.fluentd.org/) open-source agent to ingest custom logs such as syslogs, application logs, security logs to Oracle Logging Service. With proper agent configuration, it allows you to control exactly which logs you want to collect, how to parse them, and more.
@@ -177,55 +207,87 @@ sudo ./diagnostic
   * CentOS 7, CentOS Stream 8
   * Windows Server 2012 R2, Windows Server 2016, Windows Server 2019
   * Ubuntu 16.04, Ubuntu 18.04, Ubuntu 20.04
-* Oracle Unified Monitoring Agent Installation and Configuration
-  * Login server
-  * Download the downloadAgent.sh script [here](https://objectstorage.us-phoenix-1.oraclecloud.com/n/axmjwnk4dzjv/b/upload-agent-script/o/downloadAgent.sh)
-  * Run the script, use Oracle Linux as an example: `./downloadAgent.sh oel8`
-  * Configure User Principals to communiate with OCI native services ([Further reading about User Principals](https://database-heartbeat.com/2021/10/05/auth-cli/))
-  * Validate the agent - Linux 
-    `systemctl status unified-monitoring-agent`
-  * Create an Agent Configuration via CLI 
-    `oci logging agent-configuration create compartment-id compartment_ocid --is-enabled [true|false] --service-configuration service_configuration [OPTIONS]`
-  * List Agents Configurations via CLI 
-    `oci logging agent-configuration list --compartment-id compartment_ocid [OPTIONS]`
-  * Get Agent Configuration's Details via CLI 
-    `oci logging agent-configuration get --config-id config_ocid [OPTIONS]`
-  * Edit Agent Configuration 
-    `oci logging agent-configuration update --config-id config_ocid --display-name display_name --is-enabled is-enabled [true|false] --service-configuration service_configuration [OPTIONS]`
-  * Delete Agent Configuration 
-    `oci logging agent-configuration delete --config-id config_ocid [OPTIONS]`
-  * Create a Log Configuration for an Agent Configuration 
-    `oci logging agent-configuration create-log-configuration --compartment-id compartment_ocid --is-enabled [true|false] [OPTIONS]`
-  * Edit a Log Configuration for an Agent Configuration 
-    `oci logging agent-configuration update-log-configuration --config-id config_ocid --display-name display_name --is-enabled [true|false] [OPTIONS]`
-  * Permissions to read logs from the host
-    * Determine the agent OS user validate from the /etc/passwd on the server
-      *Note: On Unix-based hosts, the user that installs management agent is mgmt_agent for the manually installed management agent, and oracle-cloud-agent when the management agent is a plugin enabled with Oracle Cloud Agent.*
-    * Check the log files permission with the agent user
-      `sudo -u <agentuser> /bin/bash -c "cat <log file with complete path>"`
-    * Setup ACL if the tool doesn't exist
-      `rpm -q acl`
-    * Grant the agent user READ access to the required log file
-      `setfacl -m u:<agentuser>:r <path to the log file/log file name>`
-    * Grant READ and EXECUTE with recursive options on parent folder in the log file path
-      `setfacl -R -m u:<agentuser>:rx <path to the folder> `
-    * Grant READ and EXECUTE with default option to allow all future log files created
-      `setfacl -d -m u:<agentuser>:rx <path to the folder>`
-  * Permissions to upload to Logging Service
-    Dynamic group: `ANY {instance.id = 'ocid1.instance.<region>.<location>.<unique_ID>', instance.compartment.id = 'ocid1.compartment.<region>..<unique_ID>'}`
-    `allow dynamic-group <dynamic_group_name> to use log-content in tenancy`
-  * Supported parsers in Logging Service
-    * Auditd (https://github.com/linux-audit/audit-documentation/wiki)
-    * CRI (https://github.com/fluent/fluent-plugin-parser-cri)
-    * JSON (https://docs.fluentd.org/parser/json)
-    * CSV (https://docs.fluentd.org/parser/csv)
-    * TSV (https://docs.fluentd.org/parser/tsv)
-    * Syslog (https://docs.fluentd.org/parser/syslog)
-    * Apache2 (https://docs.fluentd.org/parser/apache2)
-    * Apache_Error (https://docs.fluentd.org/parser/apache_error)
-    * Msgpack (https://docs.fluentd.org/parser/msgpack)
-    * Regexp (https://docs.fluentd.org/parser/regexp)
-    * Multiline (https://docs.fluentd.org/parser/multiline)
+##### Oracle Unified Monitoring Agent Installation and Configuration
+* Login server
+* Download the downloadAgent.sh script [here](https://objectstorage.us-phoenix-1.oraclecloud.com/n/axmjwnk4dzjv/b/upload-agent-script/o/downloadAgent.sh)
+* Run the script, use Oracle Linux as an example: 
+  ```
+  ./downloadAgent.sh oel8
+  ```
+* Configure User Principals to communiate with OCI native services ([Further reading about User Principals](https://database-heartbeat.com/2021/10/05/auth-cli/))
+* Validate the agent - Linux 
+  ```
+  systemctl status unified-monitoring-agent
+  ```
+* Create an Agent Configuration via CLI 
+  ```
+  oci logging agent-configuration create compartment-id compartment_ocid --is-enabled [true|false] --service-configuration service_configuration [OPTIONS]
+  ```
+* List Agents Configurations via CLI 
+  ```
+  oci logging agent-configuration list --compartment-id compartment_ocid [OPTIONS]
+  ```
+* Get Agent Configuration's Details via CLI 
+  ```
+  oci logging agent-configuration get --config-id config_ocid [OPTIONS]
+  ```
+* Edit Agent Configuration 
+  ```
+  oci logging agent-configuration update --config-id config_ocid --display-name display_name --is-enabled is-enabled [true|false] --service-configuration service_configuration [OPTIONS]
+  ```
+* Delete Agent Configuration 
+  ```
+  oci logging agent-configuration delete --config-id config_ocid [OPTIONS]
+  ```
+* Create a Log Configuration for an Agent Configuration 
+  ```
+  oci logging agent-configuration create-log-configuration --compartment-id compartment_ocid --is-enabled [true|false] [OPTIONS]
+  ```
+* Edit a Log Configuration for an Agent Configuration 
+  ```
+  oci logging agent-configuration update-log-configuration --config-id config_ocid --display-name display_name --is-enabled [true|false] [OPTIONS]
+  ```
+* Permissions to read logs from the host
+  * Determine the agent OS user validate from the /etc/passwd on the server
+    *Note: On Unix-based hosts, the user that installs management agent is mgmt_agent for the manually installed management agent, and oracle-cloud-agent when the management agent is a plugin enabled with Oracle Cloud Agent.*
+  * Check the log files permission with the agent user
+    ```
+    sudo -u <agentuser> /bin/bash -c "cat <log file with complete path>"
+    ```
+  * Setup ACL if the tool doesn't exist
+    ```
+    rpm -q acl
+    ```
+  * Grant the agent user READ access to the required log file
+    ```
+    setfacl -m u:<agentuser>:r <path to the log file/log file name>
+    ```
+  * Grant READ and EXECUTE with recursive options on parent folder in the log file path
+    ```
+    setfacl -R -m u:<agentuser>:rx <path to the folder>
+    ```
+  * Grant READ and EXECUTE with default option to allow all future log files created
+    ```
+    setfacl -d -m u:<agentuser>:rx <path to the folder>
+    ```
+* Permissions to upload to Logging Service
+  Dynamic group: 
+  ```
+  ANY {instance.id = 'ocid1.instance.<region>.<location>.<unique_ID>', instance.compartment.id = 'ocid1.compartment.<region>..<unique_ID>'}
+  allow dynamic-group <dynamic_group_name> to use log-content in tenancy
+  ```
+* Supported parsers in Logging Service
+  * Auditd (https://github.com/linux-audit/audit-documentation/wiki)
+  * CRI (https://github.com/fluent/fluent-plugin-parser-cri)
+  * JSON (https://docs.fluentd.org/parser/json)
+  * CSV (https://docs.fluentd.org/parser/csv)
+  * TSV (https://docs.fluentd.org/parser/tsv)
+  * Syslog (https://docs.fluentd.org/parser/syslog)
+  * Apache2 (https://docs.fluentd.org/parser/apache2)
+  * Apache_Error (https://docs.fluentd.org/parser/apache_error)
+  * Msgpack (https://docs.fluentd.org/parser/msgpack)
+  * Regexp (https://docs.fluentd.org/parser/regexp)
+  * Multiline (https://docs.fluentd.org/parser/multiline)
 
 #### Oracle Management Agent Use Cases
 1. Collect application custom logs into Logging Analytics
