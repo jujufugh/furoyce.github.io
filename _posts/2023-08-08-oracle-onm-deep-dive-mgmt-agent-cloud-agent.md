@@ -64,7 +64,7 @@ For unsupported OS version, **Oracle Management Agent** and **Unified Monitoring
   | OS Management Service Agent | Manages updates and patches for the operating system environment on the instance | [OS Management](https://docs.oracle.com/iaas/os-management/osms/index.htm) |
   | Vulnerability Scanning | 	Scans the instance for potential security vulnerabilities like OS packages that require updates | [Scanning Overview](https://docs.oracle.com/iaas/scanning/using/overview.htm) |
 
-##### Oracle Cloud Agent Installation and Configuration
+#### Oracle Cloud Agent Installation and Configuration
 *Note: When we can't install Oracle Cloud Agent in the VM, the workaround is to use Oracle Management Agent or Oracle Unified Monitoring Agent to collect and ingest logs for Logging Analytics Service or Logging Service. *
 * Policy to read instance agent plugins
   ```
@@ -133,7 +133,7 @@ sudo ./diagnostic
   * Windows-x86_64, Windows-x86
   * Solaris-Sparc64
   * Linux-x86_64, Linux-Aarch64
-##### Oracle Management Agent Installation and Configuration
+#### Oracle Management Agent Installation and Configuration
 * Prerequisites, [doc reference](https://docs.oracle.com/en-us/iaas/management-agents/doc/perform-prerequisites-deploying-management-agents.html)
   * Ceate or designate compartments for Oracle Management Agent
   * Create a user group to manage Oracle Management Agent
@@ -208,7 +208,7 @@ sudo ./diagnostic
   * CentOS 7, CentOS Stream 8
   * Windows Server 2012 R2, Windows Server 2016, Windows Server 2019
   * Ubuntu 16.04, Ubuntu 18.04, Ubuntu 20.04
-##### Oracle Unified Monitoring Agent Installation and Configuration
+#### Oracle Unified Monitoring Agent Installation and Configuration
 * Login server
 * Download the downloadAgent.sh script [here](https://objectstorage.us-phoenix-1.oraclecloud.com/n/axmjwnk4dzjv/b/upload-agent-script/o/downloadAgent.sh)
 * Run the script, use Oracle Linux as an example: 
