@@ -1,7 +1,7 @@
 ---
-title: "A Technical Comparison among OCI Logging and Monitoring Agent Types - Oracle Cloud Agent, Management Agent and Unified Monitoring Agent"
-date: 2023-08-17
-last_modified_at: 2023-08-17T16:20:02-05:00
+title: "Demisyfying OCI Logging and Monitoring Agent Types - Oracle Cloud Agent, Management Agent and Unified Monitoring Agent"
+date: 2023-08-08
+last_modified_at: 2023-08-18T16:20:02-05:00
 categories:
   - Blog
 tags:
