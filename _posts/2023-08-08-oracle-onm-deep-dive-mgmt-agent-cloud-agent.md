@@ -28,14 +28,14 @@ Oracle Cloud Infrastructure agents come in various forms, each designed with a s
 | Monitoring	| via Compute Instance Monitoring Plugin	| N/A	| N/A |
 | Logging	| via Unified Monitoring Agent Plugin	| N/A	| Integration with Loggin Service via User Principal |
 | Logging Analytics	| via Management Agent Plugin	| via Logging Analytics Plugin	| N/A |
-| Stack Monitoring	| via Management Agent Plugin	via Stack Monitoring Plugin	| N/A |
-| Database Management	| via Management Agent Plugin	via Database Management Plugin	| N/A |
-| Operations Insights	| via Management Agent Plugin	via Operations Insights Plugin	| N/A |
-| Java Usage Tracking	| via Management Agent Plugin	via Java Usage Tracking Plugin	| N/A |
-| Java Management Service	| via Java Management Service Plugin	via Java Management Service Plugin	| N/A |
-| OS Management Hub	| via OS Management Service Plugin	via OS Management Hub Plugin	| N/A |
-| Agent Installation	| Preinstalled for OCI compute, manual installation(zip, rpm)	Manual installation(zip, rpm)	| Manual installation(zip, rpm) |
-| Authentication/Authorization	| Resource Principal, Instance Principal	Resource Principal, Instance Principal	| User Principal |
+| Stack Monitoring	| via Management Agent Plugin	| via Stack Monitoring Plugin	| N/A |
+| Database Management	| via Management Agent Plugin	| via Database Management Plugin	| N/A |
+| Operations Insights	| via Management Agent Plugin	| via Operations Insights Plugin	| N/A |
+| Java Usage Tracking	| via Management Agent Plugin	| via Java Usage Tracking Plugin	| N/A |
+| Java Management Service	| via Java Management Service Plugin |	via Java Management Service Plugin	| N/A |
+| OS Management Hub	| via OS Management Service Plugin |	via OS Management Hub Plugin	| N/A |
+| Agent Installation	| Preinstalled for OCI compute, manual installation(zip, rpm) |	Manual installation(zip, rpm)	| Manual installation(zip, rpm) |
+| Authentication/Authorization	| Resource Principal, Instance Principal | Resource Principal, Instance Principal	| User Principal |
 | Agent Management	| Fully Integrated	| Fully Integrated	| Partially Integrated, no UI |
 | Compute Instance Support	| Yes	| Yes	| Yes |
 | Oracle Base Database Service Support	| No	| Yes	| Yes* |
