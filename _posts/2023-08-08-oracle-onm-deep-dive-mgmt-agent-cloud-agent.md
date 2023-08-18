@@ -105,6 +105,7 @@ cd /usr/bin/ocatools
 sudo ./diagnostic
 ```
 * In any senario, you need to configure proxy for your Oracle Cloud Agent
+
 ```
 sudo EDITOR=vi systemctl edit oracle-cloud-agent
 ## Add following entries into the editor window
