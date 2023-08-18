@@ -101,11 +101,11 @@ curl -v -H 'Authorization: Bearer Oracle' http://169.254.169.254/opc/v2/instance
 sudo tail -15 /var/log/oracle-cloud-agent/plugins/gomon/monitoring.log
 ```
 * When you work with support engineer to troubleshoot issues with the Oracle Cloud Agent, you can generate diagnostic data for your agent, the tool will generate a TAR file with a name in the format `oca-diag-<date>.<identifier>.tar.gz`
-```
-cd /usr/bin/ocatools
-sudo ./diagnostic
-```
 
+  ```
+  cd /usr/bin/ocatools
+  sudo ./diagnostic
+  ```
 * In any senario, you need to configure proxy for your Oracle Cloud Agent
 
   ```
