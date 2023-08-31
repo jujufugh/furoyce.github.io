@@ -43,6 +43,8 @@ Oracle Cloud Infrastructure agents come in various forms, each designed with a s
 | Oracle Base Database Service Support	| No	| Yes	| Yes* |
 | Oracle Exadata Database Service Dedicated Support	| No	| Yes	| Yes* |
 
+*NOTE * : The Unified Monitoring Agent can be installed in Oracle Base Database system or ExaDB-D VMs. After configure the instance to use the user principal, we can send the custom logs into OCI Loggign Service. However, we don't have proper parser to parse difference logs associated with Oracle databases (such as alert logs, trace files, listener logs, Grid Infrastructure logs etc).*
+
 #### **Oracle Cloud Agent** 
 * **Oracle Cloud Agent** is a lightweight process that manages plugins running on compute instances. Oracle Cloud Agent plugins collect host logs, performance metrics, install OS updates, and perform other instance management tasks. Oracle Cloud Agent is installed by default for OCI compute instances.
 * **Oracle Cloud Agent supports the [Platform Images](https://docs.oracle.com/en-us/iaas/Content/Compute/References/images.htm#OracleProvided_Images)**
@@ -64,6 +66,12 @@ For unsupported OS version, **Oracle Management Agent** and **Unified Monitoring
   | Oracle Java Management Service | Monitors and performs Java Development Kit (JDK) lifecycle management for Java deployments on instances managed by the Java Management service | [Java Management](https://docs.oracle.com/iaas/jms/index.html) |
   | OS Management Service Agent | Manages updates and patches for the operating system environment on the instance | [OS Management](https://docs.oracle.com/iaas/os-management/osms/index.htm) |
   | Vulnerability Scanning | 	Scans the instance for potential security vulnerabilities like OS packages that require updates | [Scanning Overview](https://docs.oracle.com/iaas/scanning/using/overview.htm) |
+
+* Supported OS versions
+  * Windows-x86_64, Windows-x86
+  * Oracle Linux
+  * CentOS
+  * Ubuntu
 
 ##### Oracle Cloud Agent Installation and Configuration
 
@@ -92,41 +100,49 @@ rpm -q oracle-cloud-agent && echo "OCA Installed" || echo "OCA not Installed"
 ```
 systemctl is-enabled oracle-cloud-agent &>/dev/null && echo "OCA is enabled" || echo "OCA is disabled" && systemctl is-active oracle-cloud-agent &> /dev/null && echo "OCA is running" || echo "OCA is not running"
 ```
+
 * Verify that the instance can access the instance metadata service endpoint
 ```
 curl -v -H 'Authorization: Bearer Oracle' http://169.254.169.254/opc/v2/instance/
 ```
+
 * Check Clock Skew errors which can potentially cause TLS negotiations to fail and prevent instance connecting to Oracle services
 ```
 sudo tail -15 /var/log/oracle-cloud-agent/plugins/gomon/monitoring.log
 ```
-* When you work with support engineer to troubleshoot issues with the Oracle Cloud Agent, you can generate diagnostic data for your agent, the tool will generate a TAR file with a name in the format `oca-diag-<date>.<identifier>.tar.gz`
 
-  ```
-  cd /usr/bin/ocatools
-  sudo ./diagnostic
-  ```
+* Oracle Cloud Agent - management agent plugin Log location
+```
+/var/lib/oracle-cloud-agent/plugins/oci-managementagent/polaris/agent_inst/log
+```
+
+* When you work with support engineer to troubleshoot issues with the Oracle Cloud Agent, you can generate diagnostic data for your agent, the tool will generate a TAR file with a name in the format `oca-diag-<date>.<identifier>.tar.gz`
+```
+cd /usr/bin/ocatools
+sudo ./diagnostic
+```
+
 * In any senario, you need to configure proxy for your Oracle Cloud Agent
 
-  ```
-  sudo EDITOR=vi systemctl edit oracle-cloud-agent
-  ## Add following entries into the editor window
-  [Service]
-  Environment="http_proxy=<proxy_url>:<proxy_port>"
-  Environment="https_proxy=<proxy_url>:<proxy_port>"
-  Environment="no_proxy=localhost,127.0.0.1,169.254.169.254"
+```
+sudo EDITOR=vi systemctl edit oracle-cloud-agent
+## Add following entries into the editor window
+[Service]
+Environment="http_proxy=<proxy_url>:<proxy_port>"
+Environment="https_proxy=<proxy_url>:<proxy_port>"
+Environment="no_proxy=localhost,127.0.0.1,169.254.169.254"
 
-  sudo EDITOR=vi systemctl edit oracle-cloud-agent-updater
-  ## Add following entries into the editor window
-  [Service]
-  Environment="http_proxy=<proxy_url>:<proxy_port>"
-  Environment="https_proxy=<proxy_url>:<proxy_port>"
-  Environment="no_proxy=localhost,127.0.0.1,169.254.169.254"
+sudo EDITOR=vi systemctl edit oracle-cloud-agent-updater
+## Add following entries into the editor window
+[Service]
+Environment="http_proxy=<proxy_url>:<proxy_port>"
+Environment="https_proxy=<proxy_url>:<proxy_port>"
+Environment="no_proxy=localhost,127.0.0.1,169.254.169.254"
 
-  # Restart the agent
-  sudo systemctl daemon-reload
-  sudo systemctl restart oracle-cloud-agent oracle-cloud-agent-updater
-  ```
+# Restart the agent
+sudo systemctl daemon-reload
+sudo systemctl restart oracle-cloud-agent oracle-cloud-agent-updater
+```
 
 #### **Oracle Management Agent**
 * **Oracle Management Agent** is a service that provides low latency interactive communication and data collection between Oracle Cloud Infrastructure and IT targets. Oracle Management Agent has plugins integrated with O&M advanced services such as Logging Analytics, Database Management, Operations Insights, Java Management Service, Stack Monitoring, etc. Plugins can collect and ingest data from various cloud resources. Management Agent can be enabled as a plugin of the Oracle Cloud Agent or can install independently. 
@@ -193,6 +209,12 @@ chmod a+x /home; sudo chmod a+x /home/opc
 ```
 $ sudo /opt/oracle/mgmt_agent/agent_inst/bin/setup.sh opts=/home/opc/input.rsp
 ```
+
+* Oracle Management Agent log location
+```
+/opt/oracle/mgmt_agent/agent_inst/log
+```
+
 * Enable additional Plugins, you might see different plugin views when you enable/deploy Oracle Management Agent differently
   * Install Oracle Management Agent independently 
     <img src='/images/posts/2023-08/royce-blog-oracle-agents-plugins_view01.png'/>
@@ -200,12 +222,11 @@ $ sudo /opt/oracle/mgmt_agent/agent_inst/bin/setup.sh opts=/home/opc/input.rsp
     <img src='/images/posts/2023-08/royce-blog-oracle-agents-plugins_view02.png'/>
 * Generate Management Agent diagnostic support bundle
   * If Management Agent is enabled on compute instance via Oracle Cloud Agent
-
   ```
   sudo -u oracle-cloud-agent /var/lib/oracle-cloud-agent/plugins/oci-managementagent/polaris/agent_inst/bin/generateDiagnosticBundle.sh
   ```
-  * If Management Agent is deployed as standalone installation
 
+  * If Management Agent is deployed as standalone installation
   ```
   # sudo -u mgmt_agent /opt/oracle/mgmt_agent/agent_inst/bin/generateDiagnosticBundle.sh
   ``` 
@@ -289,6 +310,23 @@ setfacl -d -m u:<agentuser>:rx <path to the folder>
 ANY {instance.id = 'ocid1.instance.<region>.<location>.<unique_ID>', instance.compartment.id = 'ocid1.compartment.<region>..<unique_ID>'}
 allow dynamic-group <dynamic_group_name> to use log-content in tenancy
 ```
+
+* Unified Monitoring Agent log location
+```
+/var/log/unified-monitoring-agent/unified-monitoring-agent.log
+```
+You can also use journalctl to view system logs specific to Unified Monitoring Agent unit
+  * unified-monitoring-agent.service
+  * unified-monitoring-agent_config_downloader.service
+  * unified-monitoring-agent_config_downloader.timer
+  * unified-monitoring-agent_restarter.path
+
+```
+journalctl -u <unit_name>
+example:
+journalctl -u unified-monitoring-agent_config_downloader.service --since "2023-2-30 00:00:01" --until "2023-08-31 23:59:59"
+```
+
 * Supported parsers in Logging Service
   * Auditd (https://github.com/linux-audit/audit-documentation/wiki)
   * CRI (https://github.com/fluent/fluent-plugin-parser-cri)
