@@ -123,7 +123,6 @@ sudo ./diagnostic
 ```
 
 * In any senario, you need to configure proxy for your Oracle Cloud Agent
-
 ```
 sudo EDITOR=vi systemctl edit oracle-cloud-agent
 ## Add following entries into the editor window
@@ -222,11 +221,13 @@ $ sudo /opt/oracle/mgmt_agent/agent_inst/bin/setup.sh opts=/home/opc/input.rsp
     <img src='/images/posts/2023-08/royce-blog-oracle-agents-plugins_view02.png'/>
 * Generate Management Agent diagnostic support bundle
   * If Management Agent is enabled on compute instance via Oracle Cloud Agent
+
   ```
   sudo -u oracle-cloud-agent /var/lib/oracle-cloud-agent/plugins/oci-managementagent/polaris/agent_inst/bin/generateDiagnosticBundle.sh
   ```
 
   * If Management Agent is deployed as standalone installation
+
   ```
   # sudo -u mgmt_agent /opt/oracle/mgmt_agent/agent_inst/bin/generateDiagnosticBundle.sh
   ``` 
@@ -320,11 +321,23 @@ You can also use journalctl to view system logs specific to Unified Monitoring A
   * unified-monitoring-agent_config_downloader.service
   * unified-monitoring-agent_config_downloader.timer
   * unified-monitoring-agent_restarter.path
-
 ```
-journalctl -u <unit_name>
-example:
 journalctl -u unified-monitoring-agent_config_downloader.service --since "2023-2-30 00:00:01" --until "2023-08-31 23:59:59"
+```
+
+* If you work with the Oracle support engineer regarding Unified Monitoring Agent troubleshooting, you can use following commands to create the support bundle
+```
+yum info unified-monitoring-agent
+rpm -ql unified-monitoring-agent |  xargs sha512sum
+systemctl status --full unified-monitoring-agent.service
+systemctl status --full unified-monitoring-agent_config_downloader.service
+systemctl status --full unified-monitoring-agent_config_downloader.timer
+systemctl status --full unified-monitoring-agent_restarter.path
+journalctl -a --no-pager -u unified-monitoring-agent.service
+journalctl -a --no-pager -u unified-monitoring-agent_config_downloader.service
+journalctl -a --no-pager -u unified-monitoring-agent_config_downloader.timer
+journalctl -a --no-pager -u unified-monitoring-agent_restarter.path
+tar cvzf agent_logs_$(date +%s).tar.gz /var/log/unified-monitoring-agent/ /var/log/oracle-cloud-agent/
 ```
 
 * Supported parsers in Logging Service
