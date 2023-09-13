@@ -16,28 +16,6 @@ As the OCI central log repository for log analysis, we can ingest logs from OCI 
 
 ![OCI Logging Analytics Ingestion](/images/posts/2023-09/royce_blog_syslog_listener1.png){: .align-center}
 
-#### Continous Custom Logs Collection based on Source Types Reference
-Based on your log source type, we can collect logs and ingest logs using the following types:
-* File
-  * For collecting most types of logs, such as Application, and Infrastructure logs.
-  * [Ingest Application, Infrastructure, Database and other Generic Logs](https://docs.oracle.com/en-us/iaas/logging-analytics/doc/ingest-application-infrastructure-database-and-other-generic-logs.html#GUID-A7635D4D-830A-43A2-A687-120A2C8D3BBD)
-* Syslog Listener
-  * System event messages streaming or log forwarding
-  * [Set Up Syslog Monitoring](https://docs.oracle.com/en-us/iaas/logging-analytics/doc/set-syslog-monitoring.html#GUID-A71EC8F1-1C79-4CEF-B096-20DCDC5BE9F8)
-* Database
-  * Collect logs stored in tables and views of a database like Oracle Database Instance, Oracle Pluggable Database, Oracle Autonomous Database, Microsoft SQL Server Database Instance, and MySQL Database Instance.
-  * [Set Up Database Instance Monitoring](https://docs.oracle.com/en-us/iaas/logging-analytics/doc/set-database-instance-monitoring.html#GUID-8C3BB4F1-1930-4106-BA0C-79C92E5DD2C3)
-* REST API
-  * Collect logs periodically through REST API calls.
-  * [Set Up REST API Log Collection](https://docs.oracle.com/en-us/iaas/logging-analytics/doc/set-rest-api-log-collection.html#GUID-D0FFEA92-A264-4F2C-AEAB-324B85FC64A0)
-* Windows Event Messages
-  * All historic Windows Event Log entries as well as custom event channels.
-  * [Set Up Windows Event Monitoring](https://docs.oracle.com/en-us/iaas/logging-analytics/doc/set-windows-event-monitoring.html#GUID-10129DF6-C54E-4F09-B7AE-56990C465F3F)
-* Oracle Diagnostic Logs (ODL)
-  * These are typically the diagnostic logs for Oracle Fusion Middleware and Oracle Applications.
-  * [Ingest Logs of Oracle Diagnostic Logging(ODL) format](https://docs.oracle.com/en-us/iaas/logging-analytics/doc/ingest-logs-oracle-diagnostic-logging-odl-format.html#GUID-E668E3F3-8031-4C49-9390-87B63E2DBEC8)
-
-
 ### Logging Analytics Syslog Listener Configuration
 Syslog is a commonly used standard for logging the system event messages. The destination of these messages can include the system console, files, remote syslog servers, or relays. In this blog, we will configure a central syslog server for log-consolidation and log-forwarding scenario. The syslog server is meant to gather log data from all the clients and then forward the log data to Logging Analytics using Oracle Management Agent.
 
@@ -90,7 +68,8 @@ rsyslog-gnutls-8.2102.0-10.el8.x86_64
 rsyslog-8.2102.0-10.el8.x86_64
 rsyslog-relp-8.2102.0-10.el8.x86_64
 rsyslog-gssapi-8.2102.0-10.el8.x86_64
-[root@webinst01 etc]# rsyslogd -version
+
+# rsyslogd -version
 rsyslogd  8.2102.0-10.el8 (aka 2021.02) compiled with:
 	PLATFORM:				x86_64-redhat-linux-gnu
 	PLATFORM (lsb_release -d):		
@@ -130,11 +109,10 @@ Sep 11 18:24:57 webinst01 systemd[1]: Starting System Logging Service...
 Sep 11 18:24:57 webinst01 systemd[1]: Started System Logging Service.
 Sep 11 18:24:57 webinst01 rsyslogd[3516314]: [origin software="rsyslogd" swVersion="8.2102.0-10.el8" x-pid="3516314" x-info="https://www.rsyslog.com"] start
 Sep 11 18:24:57 webinst01 rsyslogd[3516314]: imjournal: journal files changed, reloading...  [v8.2102.0-10.el8 try https://www.rsyslog.com/e/0 ]
-[root@webinst01 ~]# 
 ```
 
 #### Update the rsyslog.conf configuration file 
-Edit file /etc/rsyslog.conf and add the following lines to the end of the config file
+Edit file `/etc/rsyslog.conf` and add the following lines to the end of the config file
 ```
 # ### sample forwarding rule ###
 #action(type="omfwd"  
@@ -190,10 +168,30 @@ You should see the log entries are forwarded by Syslog Listener to Logging Analy
 2023-09-13 03:12:39,723 [LOG.Executor.34 (LA_TASK_syslog)-282] INFO  - The channel is closed on port 8008 from 0:0:0:0:0:0:0:1:48438
 ```
 
+*Note: If the Management Agent is down on Syslog server, the log data streaming to the Syslog listener port might be lost*
+
 #### Visualize Syslog Data using Logging Analytics Log Explorer
 Logging Analytics displays the syslog data from all the configured listener ports. You can analyze syslog data from different hosts or devices. For example, you can search RSYSLOG keyword in the command line prompt. 
 
 ![Visualize syslog data in OCI Logging Analytics](/images/posts/2023-09/royce_blog_syslog_listener4.png){: .align-center}
+
+#### Other Custom Logs Collection based on Source Types
+Based on your log source type, we can collect logs and ingest logs using the following types:
+* **File**
+  * For collecting most types of logs, such as Application, and Infrastructure logs.
+  * [Ingest Application, Infrastructure, Database and other Generic Logs](https://docs.oracle.com/en-us/iaas/logging-analytics/doc/ingest-application-infrastructure-database-and-other-generic-logs.html#GUID-A7635D4D-830A-43A2-A687-120A2C8D3BBD)
+* **Database**
+  * Collect logs stored in tables and views of a database like Oracle Database Instance, Oracle Pluggable Database, Oracle Autonomous Database, Microsoft SQL Server Database Instance, and MySQL Database Instance.
+  * [Set Up Database Instance Monitoring](https://docs.oracle.com/en-us/iaas/logging-analytics/doc/set-database-instance-monitoring.html#GUID-8C3BB4F1-1930-4106-BA0C-79C92E5DD2C3)
+* **REST API**
+  * Collect logs periodically through REST API calls.
+  * [Set Up REST API Log Collection](https://docs.oracle.com/en-us/iaas/logging-analytics/doc/set-rest-api-log-collection.html#GUID-D0FFEA92-A264-4F2C-AEAB-324B85FC64A0)
+* **Windows Event Messages**
+  * All historic Windows Event Log entries as well as custom event channels.
+  * [Set Up Windows Event Monitoring](https://docs.oracle.com/en-us/iaas/logging-analytics/doc/set-windows-event-monitoring.html#GUID-10129DF6-C54E-4F09-B7AE-56990C465F3F)
+* **Oracle Diagnostic Logs (ODL)**
+  * These are typically the diagnostic logs for Oracle Fusion Middleware and Oracle Applications.
+  * [Ingest Logs of Oracle Diagnostic Logging(ODL) format](https://docs.oracle.com/en-us/iaas/logging-analytics/doc/ingest-logs-oracle-diagnostic-logging-odl-format.html#GUID-E668E3F3-8031-4C49-9390-87B63E2DBEC8)
 
 ### Conclusion
 Oracle Logging Analytics allows you to collect and analyze syslog data from various sources. You just need to configure the syslog output ports in the syslog servers. Oracle Logging Analytics monitors those output ports, accesses the remote syslog contents, and performs the analysis. Syslog monitoring in Oracle Logging Analytics lets you listen to multiple hosts and ports. The protocols supported are TCP and UDP.
