@@ -35,6 +35,7 @@ The File Storage service supports the Network File System version 3.0 (NFSv3) pr
 * Create a file system in OCI FSS
   * OCI Console: Home -> Storage -> File Storage -> File Systems -> Create File System
   * ![Create File System in OCI File Storage Service](/images/posts/2023-09/royce_blog_fss_adb_1.png){: .align-center}
+
 * Configure the Mount Target so that it can be cross mounted between Autonomous Database and Compute instance
   ![OCI File Storage Service Mount Target](/images/posts/2023-09/royce_blog_fss_adb2.png){: .align-center}
 
@@ -144,8 +145,12 @@ BEGIN
 
 #### Mount File System in Compute instance
 * Get the oracle user and dba group uid and gid from the Autonomous Database
-  * oracle uid is 1001
-  * dba group gid 1006
+
+```
+oracle uid is 1001
+dba group gid 1006
+```
+
 * Create oracle user with the uid and dba group with the same gid in the compute instance
 
 ```
