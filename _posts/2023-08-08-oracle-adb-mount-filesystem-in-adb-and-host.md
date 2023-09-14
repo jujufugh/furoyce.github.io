@@ -36,13 +36,14 @@ The File Storage service supports the Network File System version 3.0 (NFSv3) pr
   * OCI Console: Home -> Storage -> File Storage -> File Systems -> Create File System
   * ![Create File System in OCI File Storage Service](/images/posts/2023-09/royce_blog_fss_adb_1.png){: .align-center}
 * Configure the Mount Target so that it can be cross mounted between Autonomous Database and Compute instance
-
-![OCI File Storage Service Mount Target](/images/posts/2023-09/royce_blog_fss_adb2.png){: .align-center}
+  ![OCI File Storage Service Mount Target](/images/posts/2023-09/royce_blog_fss_adb2.png){: .align-center}
 
 * Get the FQDN for attaching the file system in ADB
 
 #### Attach File System in Autonomous Database via DBMS_CLOUD_ADMIN package
+
 * Create Oracle Database Directories
+
 ```
 SQL> CREATE DIRECTORY PPFSS_DIR AS 'fss'; 
 
@@ -55,6 +56,7 @@ Directory created.
 ```
 
 * Attach the File System
+
 ```
 SQL> BEGIN
 DBMS_CLOUD_ADMIN.ATTACH_FILE_SYSTEM (
@@ -67,6 +69,7 @@ DBMS_CLOUD_ADMIN.ATTACH_FILE_SYSTEM (
 ```
 
 * Verify the File System is attached
+
 ```
 SQL> SELECT file_system_name, file_system_location, directory_path FROM dba_cloud_file_systems;
 
@@ -83,6 +86,7 @@ ppfsstest.testsubnet.test.oraclevcn.com:/ppfss
 
 * Create a file using UTL_FILE package
 Create file in root directory of the mount target
+
 ```
 DECLARE
   l_file         UTL_FILE.FILE_TYPE;
@@ -119,6 +123,7 @@ END;
 ```
 
 * Verify the file is created
+
 ```
 SELECT object_name FROM DBMS_CLOUD.LIST_FILES('PPFSS_DIR');
 
@@ -128,6 +133,7 @@ test_root.csv
 ```
 
 * If you need to detach the file system from the ADB
+
 ```
 BEGIN
   DBMS_CLOUD_ADMIN.DETACH_FILE_SYSTEM (
@@ -141,6 +147,7 @@ BEGIN
   * oracle uid is 1001
   * dba group gid 1006
 * Create oracle user with the uid and dba group with the same gid in the compute instance
+
 ```
 $ sudo groupadd -g 1006 dba
 $ sudo useradd -u 1001 -g 1006 -m -s /bin/bash oracle
@@ -154,6 +161,7 @@ We can use Squash UID and Squash GID to map to particular uid and gid for the ta
 **More reading regarding Squash Identity: **[Exploring Identity Squash with OCI File Storage Service](https://blogs.oracle.com/cloud-infrastructure/post/exploring-identity-squash-with-oci-file-storage-service)
 
 * Mount the File System in the compute instance (Oracle Linux)
+
 ```
 sudo yum install nfs-utils
 sudo mkdir -p /mnt/ppfss
@@ -161,6 +169,7 @@ sudo mount ppfsstest.testsubnet.test.oraclevcn.com:/ppfss /mnt/ppfss
 ```
 
 * Verify that you can see the file from the File Storage Service mount target in compute instance
+
 ```
 $ cd /mnt/ppfss/test/logs/PPADB1/
 $ ls -ltr
