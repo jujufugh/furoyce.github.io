@@ -6,7 +6,8 @@ categories:
   - Blog
 tags:
   - Observerability and Monitoring
-  - Management Agent
+  - F5
+  - Logging Analytics
   - Integration
 ---
 
@@ -25,116 +26,108 @@ In the sections that follow, we'll walk you through the process of configuring F
 
 #### Prerequisites
 
-Logging Analytics should be set up in your tenancy
+**Logging Analytics should be set up in your tenancy**
 
--   [Logging Analytics](https://docs.oracle.com/en-us/iaas/logging-analytics/index.html)
+* [Logging Analytics](https://docs.oracle.com/en-us/iaas/logging-analytics/index.html)
+* [Configure Your Logging Analytics Service](https://docs.oracle.com/en-us/iaas/logging-analytics/doc/configure-your-service.html)
+* [Prerequisite IAM Policies](https://docs.oracle.com/en-us/iaas/logging-analytics/doc/prerequisite-iam-policies.html)
+* [Enable Access to Logging Analytics and Its Resource](https://docs.oracle.com/en-us/iaas/logging-analytics/doc/enable-access-logging-analytics-and-its-resources.html)
 
--   [Configure Your Logging Analytics Service](https://docs.oracle.com/en-us/iaas/logging-analytics/doc/configure-your-service.html)
+**Compute Instance for Syslog Server**
 
--   [Prerequisite IAM Policies](https://docs.oracle.com/en-us/iaas/logging-analytics/doc/prerequisite-iam-policies.html)
+* [Create Oracle Linux compute instance in OCI](https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/launchinginstance.htm)
 
--   [Enable Access to Logging Analytics and Its Resource](https://docs.oracle.com/en-us/iaas/logging-analytics/doc/enable-access-logging-analytics-and-its-resources.html)
-
-Compute Instance for Syslog Server
-
--   [Create Oracle Linux compute instance in OCI](https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/launchinginstance.htm)
-
-Network security configuration
+**Network security configuration**
 
 Note: We need to make sure we have egress traffic from F5 to syslog server port 514 and the Management Agent needs to be communicated with Oracle Service Network.
 
--   [Security Lists](https://docs.oracle.com/en-us/iaas/Content/Network/Concepts/securitylists.htm)
+* [Security Lists](https://docs.oracle.com/en-us/iaas/Content/Network/Concepts/securitylists.htm)
+* [Network Security Groups](https://docs.oracle.com/en-us/iaas/Content/Network/Concepts/networksecuritygroups.htm)
+* [Service Gateway](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/servicegateway.htm)
+* [Internet Gateway](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/managingIGs.htm#Internet_Gateway)
 
--   [Network Security Groups](https://docs.oracle.com/en-us/iaas/Content/Network/Concepts/networksecuritygroups.htm)
+* [NAT Gateway](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/NATgateway.htm)
 
--   [Service Gateway](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/servicegateway.htm)
+**F5 appliance and remote syslog server integration**
 
--   [Internet Gateway](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/managingIGs.htm#Internet_Gateway)
-
--   [NAT Gateway](https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/NATgateway.htm)
-
-F5 appliance and remote syslog server integration
-
--   Your system is running BIG-IP 11.x and later.
-
--   The remote syslog server is accessible from your BIG-IP system on the default route domain (Domain 0) or management network, and conversely, your BIG-IP system is accessible from the remote syslog server.
-
--   If you want to use a fully qualified domain name (FQDN) for the syslog servers, configuration of DNS servers is required.
+* Your system is running BIG-IP 11.x and later.
+* The remote syslog server is accessible from your BIG-IP system on the default route domain (Domain 0) or management network, and conversely, your BIG-IP system is accessible from the remote syslog server.
+* If you want to use a fully qualified domain name (FQDN) for the syslog servers, configuration of DNS servers is required.
 
 Note: The remote servers to which syslog sends messages must reside on either the management network or route domain 0 of the BIG-IP system. If log messages must be sent to remote servers that reside outside of the management network or route domain 0, consider using remote high-speed logging. Refer to the Configuring Remote High-Speed Logging chapter of the BIG-IP LTM External Monitoring of BIG-IP Systems: Implementations manual.
 
 #### Setup OCI Management Agent on the Syslog server
 
--   Enable the Management plugin in Oracle Cloud Agent tag
+* Enable the Management plugin in Oracle Cloud Agent tag
 
-    -   OCI Navigation Menu -\> Compute -\> Instances -\> Select syslog_server instance
+  * OCI Navigation Menu -\> Compute -\> Instances -\> Select syslog_server instance
 
-    -   Click Oracle Cloud Agent tab
+  * Click Oracle Cloud Agent tab
 
-    -   Click Enable plugin for Management Agent
+  * Click Enable plugin for Management Agent
 
--   Verify the Management Agent is up and running from OCI and on the VM
+* Verify the Management Agent is up and running from OCI and on the VM
 
-    -   See the Status of Management Agent plugin shows **Running**
+  * See the Status of Management Agent plugin shows **Running**
 
     ![OCI syslog server Oracle Cloud Agent](/images/posts/2023-10/royce-blog-syslog-server-oracle-cloud-agent.png){: .align-center}
 
-    -   Log in syslog server host, verify the Management Agent logs
+  * Log in syslog server host, verify the Management Agent logs
 
-    -   Management Agent plugin log location: /var/lib/oracle-cloud-agent/plugins/oci-managementagent/polaris/agent_inst/log
+  * Management Agent plugin log location: /var/lib/oracle-cloud-agent/plugins/oci-managementagent/polaris/agent_inst/log
 
-    -   Check log file mgmt_agent.log to see if any error related to Management Agent
+  * Check log file mgmt_agent.log to see if any error related to Management Agent
 
--   Enable Logging Analytics Plugin in Management Agent Cloud Service
+* Enable Logging Analytics Plugin in Management Agent Cloud Service
 
-    -   OCI Navigation Menu -\> Observability & Management -\> Management Agent -\> Agents
+  * OCI Navigation Menu -\> Observability & Management -\> Management Agent -\> Agents
 
-    -   Select a specific agent related to your syslog server
+  * Select a specific agent related to your syslog server
 
-    -   Verify the Agent availability and the corresponding metrics
+  * Verify the Agent availability and the corresponding metrics
 
     ![OCI syslog server management agent](/images/posts/2023-10/royce-blog-syslog-server-mgmt-agent-1.png){: .align-center}
 
-    -   Click **Deploy plug-ins**
+  * Click **Deploy plug-ins**
 
     ![OCI syslog server management agent plugins](/images/posts/2023-10/royce-blog-syslog-server-mgmt-agent-plugin.png){: .align-center}
 
 Reference:
 
--   [Enable Management Agent Plugin for Oracle Cloud Agent](https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/manage-plugins.htm)
+* [Enable Management Agent Plugin for Oracle Cloud Agent](https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/manage-plugins.htm)
 
--   [Management Agents deploy Logging Analytics plugins](https://docs.oracle.com/en-us/iaas/management-agents/doc/management-agents-administration-tasks.html)
+* [Management Agents deploy Logging Analytics plugins](https://docs.oracle.com/en-us/iaas/management-agents/doc/management-agents-administration-tasks.html)
 
 
 #### Configure F5 log forwarding in F5 console
 
 The Configuration utility provides a basic means of configuring the syslog configurations, such as defining the log levels. To configure extensive syslog-ng customizations, you must use the command line.
 
--   Log in to the Configuration utility.
+* Log in to the Configuration utility.
 
 ![OCI F5 Configuration Utility](/images/posts/2023-10/royce-blog-f5-configuration-utility.png){: .align-center}
 
--   Go to System \> Logs \> Configuration \> Remote Logging.
+* Go to System \> Logs \> Configuration \> Remote Logging.
 
 ![OCI F5 Configuration Utility System Logs](/images/posts/2023-10/royce-blog-f5-ui-system-logs.png){: .align-center}
 
--   For Remote IP, enter the destination syslog server IP address, or FQDN. (DNS server configuration required)
+* For Remote IP, enter the destination syslog server IP address, or FQDN. (DNS server configuration required)
 
--   For Remote Port, enter the remote syslog server UDP port (default is 514).
+* For Remote Port, enter the remote syslog server UDP port (default is 514).
 
--   (Optional) For Local IP, enter the local IP address of the BIG-IP system.
+* (Optional) For Local IP, enter the local IP address of the BIG-IP system.
 
--   Note: For BIG-IP systems in a high availability (HA) configuration, the non-floating self IP address is recommended if using a Traffic Management Microkernel (TMM) based IP address.
+* Note: For BIG-IP systems in a high availability (HA) configuration, the non-floating self IP address is recommended if using a Traffic Management Microkernel (TMM) based IP address.
 
 ![OCI F5 Remote Logging](/images/posts/2023-10/royce-blog-f5-remote-logging.png){: .align-center}
 
 Note: 10.0.027 is syslog server IP whereas 10.0.0.33 is the F5 appliance IP
 
--   Select Add.
+* Select Add.
 
--   Select Update.
+* Select Update.
 
--   For BIG-IP systems in a high availability (HA) configuration, perform a ConfigSync to synchronize the changes to the other devices in the device group.
+* For BIG-IP systems in a high availability (HA) configuration, perform a ConfigSync to synchronize the changes to the other devices in the device group.
 
 #### Configure the F5 BIG-IP system to log to remote syslog server using TCP protocol
 
@@ -172,15 +165,15 @@ sys syslog {
 
 Reference:
 
--   [Configure the BIG-IP system to log to a remote syslog server](https://my.f5.com/manage/s/article/K13080)
+* [Configure the BIG-IP system to log to a remote syslog server](https://my.f5.com/manage/s/article/K13080)
 
 #### Configure rsyslogd for syslog server to collect F5 logs
 
 rsyslog is the log processor module available on Linux and Windows releases. While it started as a regular syslogd, rsyslog has evolved into a kind of swiss army knife of logging, being able to accept inputs from a wide variety of sources, transform them, and output to the results to diverse destinations.
 
--   Log in syslog server host
+* Log in syslog server host
 
--   Edit /etc/rsyslog.conf to enable the TCP syslog reception
+* Edit /etc/rsyslog.conf to enable the TCP syslog reception
 
 ```
 # vi /etc/rsyslog.conf
@@ -194,9 +187,9 @@ $template remote-incoming-logs, "/var/log/remote/%HOSTNAME%"
 *.* ?remote-incoming-logs
 ```
 
--   Save the /etc/rsyslog.conf
+* Save the /etc/rsyslog.conf
 
--   Restart rsyslogd and check the status
+* Restart rsyslogd and check the status
 
 ```
 # systemctl restart rsyslog
@@ -218,7 +211,7 @@ Oct 04 22:36:32 syslog-server systemd[1]: Started System Logging Service.
 Oct 04 22:36:32 syslog-server rsyslogd[11078]: imjournal: journal files changed, reloading...  [v8.2102.0-13.el8 try https://www.rsyslog.com/e/0 ]
 ```
 
--   Add port 514 to the firewall
+* Add port 514 to the firewall
 
 ```
 # firewall-cmd --permanent --add-port=514/tcp
@@ -242,57 +235,57 @@ public (active)
 
 #### Configure Logging Analytics Entity and Log Sources for F5 Syslog
 
--   Create an Entity for F5 syslog
+* Create an Entity for F5 syslog
 
-    -   OCI Navigation Menu -\> Observability & Management -\> Logging Analytics -\> Administration
+  * OCI Navigation Menu -\> Observability & Management -\> Logging Analytics -\> Administration
 
-    -   Click **Entities** from the Resources menu and select **Create Entity**
+  * Click **Entities** from the Resources menu and select **Create Entity**
 
-    -   Use Host(Linux) as Entity Type
+  * Use Host(Linux) as Entity Type
 
-    -   Pick the Management Agent Compartment and corresponding Management Agent
+  * Pick the Management Agent Compartment and corresponding Management Agent
 
     ![OCI Logging Analytics Create Entity](/images/posts/2023-10/royce-blog-la-entity-creation.png){: .align-center}
 
--   Create Log Source for F5 syslog
+* Create Log Source for F5 syslog
 
-    -   Click **Sources** from the Resource menu
+  * Click **Sources** from the Resource menu
 
-    -   Search F5 from the search box
+  * Search F5 from the search box
 
-    -   Locate the F5 Big IP logs Log Source, click **Duplicate** in the action menu
+  * Locate the F5 Big IP logs Log Source, click **Duplicate** in the action menu
 
     ![OCI Logging Analytics Duplicate Log Source](/images/posts/2023-10/royce-blog-la-log-source-duplicate.png){: .align-center}
 
--   A new name for the new Log Source, for example, F5test Big IP Logs
+* A new name for the new Log Source, for example, F5test Big IP Logs
 
-    -   Add Entity Types
+  * Add Entity Types
 
-    -   Add Included Patterns for the file names and locations to be ingested
+  * Add Included Patterns for the file names and locations to be ingested
 
     ![OCI Logging Analytics F5 Log Source](/images/posts/2023-10/royce-blog-la-create-log-source.png){: .align-center}
 
--   F5 Entity and Log Source association
+* F5 Entity and Log Source association
 
-    -   In Logging Analytics Sources page, select **Unassociated Entities** from the Resources page
+  * In Logging Analytics Sources page, select **Unassociated Entities** from the Resources page
 
-    -   Select the Entity to be associated with the Log Source F5test Big IP Logs
+  * Select the Entity to be associated with the Log Source F5test Big IP Logs
 
     ![OCI Logging Analytics F5 Log Source](/images/posts/2023-10/royce-blog-la-f5test-big-ip-log-source.png){: .align-center}
 
--   Click **Add association**
+* Click **Add association**
 
-    -   Select Logging Analytics Log Group or Create a new Log Group
+  * Select Logging Analytics Log Group or Create a new Log Group
 
     ![OCI Logging Analytics Log Source - Entity association](/images/posts/2023-10/royce-blog-la-f5-log-entity-association.png){: .align-center}
 
-    -   Click Submit
+  * Click Submit
 
-    -   Monitor the Agent Collection Warning for any error messages
+  * Monitor the Agent Collection Warning for any error messages
 
-    -   Monitor the syslog server Management Agent Logging Analytics plugin logs
+  * Monitor the syslog server Management Agent Logging Analytics plugin logs
 
-        -   Log file: /var/lib/oracle-cloud-agent/plugins/oci-managementagent/polaris/agent_inst/log/ mgmt_agent_logan.log
+      * Log file: /var/lib/oracle-cloud-agent/plugins/oci-managementagent/polaris/agent_inst/log/ mgmt_agent_logan.log
 
 **(Optional) Configure OCI Unified Monitoring Agent on the syslog server to forward logs to the OCI Logging Service**
 
@@ -300,23 +293,23 @@ Unified Monitoring Agent is fluentd-based open-source agent to ingest custom log
 
 Note: The Unified Monitoring Agent is a fully managed agent, and custom client configuration is not officially supported. For example, gathering logs from remote sources is not recommended, since doing so can have serious security implications (because the log source cannot be verified).
 
--   Create API key for the service account user
+* Create API key for the service account user
 
-    -   OCI user profile -\> My profile
+  * OCI user profile -\> My profile
 
-    -   In Resources menu, select **API keys**
+  * In Resources menu, select **API keys**
 
     ![OCI user API Key](/images/posts/2023-10/royce-blog-la-user-api-key-1.png){: .align-center}
 
-    -   Add **API keys**
+  * Add **API keys**
 
-    -   Select **Generate API key pair**
+  * Select **Generate API key pair**
 
-    -   Click **Add**
+  * Click **Add**
 
     ![OCI create API Key](/images/posts/2023-10/royce-blog-la-user-api-key-2.png){: .align-center}
 
--   Create OCI user principal on syslog server
+* Create OCI user principal on syslog server
 
 ```
 [root@syslog-server log]# cd /etc/unified-monitoring-agent/.oci
@@ -335,9 +328,9 @@ region=eu-frankfurt-1
 key_file=/etc/unified-monitoring-agent/.oci/oci_api_key.pem
 [root@syslog-server .oci]# 
 ```
--   Configure Unified Monitoring Agent
+* Configure Unified Monitoring Agent
 
-    -   Add configuration into /etc/unified-monitoring-agent/conf.d/fluentd_config/fluentd.conf
+  * Add configuration into /etc/unified-monitoring-agent/conf.d/fluentd_config/fluentd.conf
 
     ```
     [root@syslog-server .oci]# cat /etc/unified-monitoring-agent/conf.d/fluentd_config/fluentd.conf
@@ -357,7 +350,7 @@ key_file=/etc/unified-monitoring-agent/.oci/oci_api_key.pem
       </match>
     ```
 
--   Restart the Unified Monitoring Agent
+* Restart the Unified Monitoring Agent
 
 ```
 # systemctl restart unified-monitoring-agent.service
@@ -378,7 +371,7 @@ Oct 05 04:05:41 syslog-server systemd[1]: Stopped unified-monitoring-agent: Flue
 Oct 05 04:05:41 syslog-server systemd[1]: Started unified-monitoring-agent: Fluentd based data collector for Oracle Cloud Infrastructure.
 ```
 
--   Monitor the Unified Monitoring Agent log
+* Monitor the Unified Monitoring Agent log
 
 ```
 # tail -50f /var/log/unified-monitoring-agent/unified-monitoring-agent.log
