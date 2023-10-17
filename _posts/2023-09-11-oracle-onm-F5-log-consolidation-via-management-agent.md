@@ -59,31 +59,21 @@ Note: The remote servers to which syslog sends messages must reside on either th
 #### Setup OCI Management Agent on the Syslog server
 
 * Enable the Management plugin in Oracle Cloud Agent tag
-
   * OCI Navigation Menu -\> Compute -\> Instances -\> Select syslog_server instance
-
   * Click Oracle Cloud Agent tab
-
   * Click Enable plugin for Management Agent
 
 * Verify the Management Agent is up and running from OCI and on the VM
-
   * See the Status of Management Agent plugin shows **Running**
-
     ![OCI syslog server Oracle Cloud Agent](/images/posts/2023-10/royce-blog-syslog-server-oracle-cloud-agent.png){: .align-center}
 
   * Log in syslog server host, verify the Management Agent logs
-
   * Management Agent plugin log location: /var/lib/oracle-cloud-agent/plugins/oci-managementagent/polaris/agent_inst/log
-
   * Check log file mgmt_agent.log to see if any error related to Management Agent
 
 * Enable Logging Analytics Plugin in Management Agent Cloud Service
-
   * OCI Navigation Menu -\> Observability & Management -\> Management Agent -\> Agents
-
   * Select a specific agent related to your syslog server
-
   * Verify the Agent availability and the corresponding metrics
 
     ![OCI syslog server management agent](/images/posts/2023-10/royce-blog-syslog-server-mgmt-agent-1.png){: .align-center}
