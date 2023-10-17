@@ -89,37 +89,27 @@ The Configuration utility provides a basic means of configuring the syslog confi
 
 * Log in to the Configuration utility.
 ![OCI F5 Configuration Utility](/images/posts/2023-10/royce-blog-f5-configuration-utility.png){: .align-center}
-
 * Go to System \> Logs \> Configuration \> Remote Logging.
 ![OCI F5 Configuration Utility System Logs](/images/posts/2023-10/royce-blog-f5-ui-system-logs.png){: .align-center}
-
 * For Remote IP, enter the destination syslog server IP address, or FQDN. (DNS server configuration required)
-
 * For Remote Port, enter the remote syslog server UDP port (default is 514).
-
 * (Optional) For Local IP, enter the local IP address of the BIG-IP system.
-
 * Note: For BIG-IP systems in a high availability (HA) configuration, the non-floating self IP address is recommended if using a Traffic Management Microkernel (TMM) based IP address.
-
 ![OCI F5 Remote Logging](/images/posts/2023-10/royce-blog-f5-remote-logging.png){: .align-center}
-
 Note: 10.0.027 is syslog server IP whereas 10.0.0.33 is the F5 appliance IP
-
 * Select Add.
-
 * Select Update.
-
 * For BIG-IP systems in a high availability (HA) configuration, perform a ConfigSync to synchronize the changes to the other devices in the device group.
 
 #### Configure the F5 BIG-IP system to log to remote syslog server using TCP protocol
 
-1.  Log in to F5 BIG-IP using tmsh using the following command
+* Log in to F5 BIG-IP using tmsh using the following command
 
 ```
 # tmsh
 ```
 
-2.  List current remote server configurations
+* List current remote server configurations
 
 ```
 # list /sys syslog remote-servers
@@ -133,13 +123,13 @@ sys syslog {
 }
 ```
 
-3.  To forward the syslogs to remote syslog server using the TCP protocol
+* To forward the syslogs to remote syslog server using the TCP protocol
 
 ```
 # modify /sys syslog include "destination remote_server {tcp(\"10.0.0.27\" port (514));};filter f_alllogs {level (debug...emerg);};log {source(s_syslog_pipe);filter(f_alllogs);destination(remote_server);};"
 ```
 
-4.  To save the configuration
+* To save the configuration
 
 ```
 # save /sys config
@@ -152,7 +142,6 @@ Reference:
 #### Configure rsyslogd for syslog server to collect F5 logs
 
 rsyslog is the log processor module available on Linux and Windows releases. While it started as a regular syslogd, rsyslog has evolved into a kind of swiss army knife of logging, being able to accept inputs from a wide variety of sources, transform them, and output to the results to diverse destinations.
-
 * Log in syslog server host
 
 * Edit /etc/rsyslog.conf to enable the TCP syslog reception
@@ -218,7 +207,6 @@ public (active)
 #### Configure Logging Analytics Entity and Log Sources for F5 Syslog
 
 * Create an Entity for F5 syslog
-
   * OCI Navigation Menu -\> Observability & Management -\> Logging Analytics -\> Administration
 
   * Click **Entities** from the Resources menu and select **Create Entity**
