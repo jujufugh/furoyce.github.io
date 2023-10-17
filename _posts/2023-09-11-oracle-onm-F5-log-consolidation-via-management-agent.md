@@ -79,9 +79,7 @@ Note: The remote servers to which syslog sends messages must reside on either th
   ![OCI syslog server management agent plugins](/images/posts/2023-10/royce-blog-syslog-server-mgmt-agent-plugin.png){: .align-center}
 
 Reference:
-
 * [Enable Management Agent Plugin for Oracle Cloud Agent](https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/manage-plugins.htm)
-
 * [Management Agents deploy Logging Analytics plugins](https://docs.oracle.com/en-us/iaas/management-agents/doc/management-agents-administration-tasks.html)
 
 
@@ -90,11 +88,9 @@ Reference:
 The Configuration utility provides a basic means of configuring the syslog configurations, such as defining the log levels. To configure extensive syslog-ng customizations, you must use the command line.
 
 * Log in to the Configuration utility.
-
 ![OCI F5 Configuration Utility](/images/posts/2023-10/royce-blog-f5-configuration-utility.png){: .align-center}
 
 * Go to System \> Logs \> Configuration \> Remote Logging.
-
 ![OCI F5 Configuration Utility System Logs](/images/posts/2023-10/royce-blog-f5-ui-system-logs.png){: .align-center}
 
 * For Remote IP, enter the destination syslog server IP address, or FQDN. (DNS server configuration required)
