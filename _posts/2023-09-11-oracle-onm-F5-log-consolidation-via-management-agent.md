@@ -76,7 +76,7 @@ Note: The remote servers to which syslog sends messages must reside on either th
   * Verify the Agent availability and the corresponding metrics
   ![OCI syslog server management agent](/images/posts/2023-10/royce-blog-syslog-server-mgmt-agent-1.png){: .align-center}
   * Click **Deploy plug-ins**
-  ![OCI syslog server management agent plugins](/images/posts/2023-10/royce-blog-syslog-server-mgmt-agent-plugin.png)
+  * ![OCI syslog server management agent plugins](/images/posts/2023-10/royce-blog-syslog-server-mgmt-agent-plugin.png)
 
 Reference:
 * [Enable Management Agent Plugin for Oracle Cloud Agent](https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/manage-plugins.htm)
