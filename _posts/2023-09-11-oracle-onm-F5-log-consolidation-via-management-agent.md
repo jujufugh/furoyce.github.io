@@ -76,7 +76,7 @@ Note: The remote servers to which syslog sends messages must reside on either th
   * Verify the Agent availability and the corresponding metrics
   ![OCI syslog server management agent](/images/posts/2023-10/royce-blog-syslog-server-mgmt-agent-1.png){: .align-center}
   * Click **Deploy plug-ins**
-  ![OCI syslog server management agent plugins](/images/posts/2023-10/royce-blog-syslog-server-mgmt-agent-plugin.png){: .align-center}
+  * ![OCI syslog server management agent plugins](/images/posts/2023-10/royce-blog-syslog-server-mgmt-agent-plugin.png){: .align-center}
 
 Reference:
 * [Enable Management Agent Plugin for Oracle Cloud Agent](https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/manage-plugins.htm)
@@ -193,14 +193,12 @@ rsyslog is the log processor module available on Linux and Windows releases. Whi
   ```
 
 #### Configure Logging Analytics Entity and Log Sources for F5 Syslog
-
 * Create an Entity for F5 syslog
   * OCI Navigation Menu -\> Observability & Management -\> Logging Analytics -\> Administration
   * Click **Entities** from the Resources menu and select **Create Entity**
   * Use Host(Linux) as Entity Type
   * Pick the Management Agent Compartment and corresponding Management Agent
   ![OCI Logging Analytics Create Entity](/images/posts/2023-10/royce-blog-la-entity-creation.png){: .align-center}
-
 * Create Log Source for F5 syslog
   * Click **Sources** from the Resource menu
   * Search F5 from the search box
@@ -254,24 +252,24 @@ Note: The Unified Monitoring Agent is a fully managed agent, and custom client c
   [root@syslog-server .oci]# 
   ```
 * Configure Unified Monitoring Agent
-  * Add configuration into /etc/unified-monitoring-agent/conf.d/fluentd_config/fluentd.conf
-  ```
-  [root@syslog-server .oci]# cat /etc/unified-monitoring-agent/conf.d/fluentd_config/fluentd.conf
-    <source>
-      @type tail
-      path /var/log/remote/f5test.oci-cloud.lab
-      pos_file /var/log/td-agent/f5test.oci-cloud.lab.pos
-      tag f5test_message
-      <parse>
-        @type none
-      </parse>
-    </source>
-    <match f5test_message>
-        @type oci_logging
-        principal_override user
-        log_object_id ocid1.log.oc1.eu-frankfurt-1.amaaaaaac3adhhqahafowmpmlzwfdfavnazgxhtzfg3iicnxsvx5i7cur6aa 
-    </match>
-  ```
+* Add configuration into /etc/unified-monitoring-agent/conf.d/fluentd_config/fluentd.conf
+```
+[root@syslog-server .oci]# cat /etc/unified-monitoring-agent/conf.d/fluentd_config/fluentd.conf
+  <source>
+    @type tail
+    path /var/log/remote/f5test.oci-cloud.lab
+    pos_file /var/log/td-agent/f5test.oci-cloud.lab.pos
+    tag f5test_message
+    <parse>
+      @type none
+    </parse>
+  </source>
+  <match f5test_message>
+      @type oci_logging
+      principal_override user
+      log_object_id ocid1.log.oc1.eu-frankfurt-1.amaaaaaac3adhhqahafowmpmlzwfdfavnazgxhtzfg3iicnxsvx5i7cur6aa 
+  </match>
+```
 * Restart the Unified Monitoring Agent
   ```
   # systemctl restart unified-monitoring-agent.service
