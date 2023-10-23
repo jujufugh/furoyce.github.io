@@ -5,9 +5,9 @@ last_modified_at: 2023-10-25T16:20:02-05:00
 categories:
   - Blog
 tags:
-  - Oracle 19c
-  - Cloud Database
-  - Oracle License
+  - Observerability and Monitoring
+  - Management Agent
+  - Integration
 ---
 
 ### Synopsis
