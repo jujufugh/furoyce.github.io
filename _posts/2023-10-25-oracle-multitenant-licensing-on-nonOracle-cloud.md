@@ -1,5 +1,5 @@
 ---
-title: "Oracle Multitenant licensing change on Non-Oracle Cloud"
+title: "Considerations of using Oracle Multitenant Databases in non-OCI Cloud"
 date: 2023-10-25
 last_modified_at: 2023-10-25T16:20:02-05:00
 categories:
