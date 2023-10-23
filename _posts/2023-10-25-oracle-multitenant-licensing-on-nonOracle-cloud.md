@@ -8,6 +8,7 @@ tags:
   - Oracle 19c
   - Oracle License
   - Oracle Multitenant
+  - Cloud Database
 ---
 
 ### Synopsis
