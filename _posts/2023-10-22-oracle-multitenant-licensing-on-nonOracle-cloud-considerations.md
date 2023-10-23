@@ -1,13 +1,14 @@
 ---
 title: "Considerations of using Oracle Multitenant Databases in non-OCI Cloud"
-date: 2023-10-25
-last_modified_at: 2023-10-25T16:20:02-05:00
+date: 2023-10-22
+last_modified_at: 2023-10-22T16:20:02-05:00
 categories:
   - Blog
 tags:
-  - Observerability and Monitoring
-  - Management Agent
-  - Integration
+  - Oracle 19c
+  - Oracle License
+  - Oracle Multitenant
+  - Cloud Database
 ---
 
 ### Synopsis
