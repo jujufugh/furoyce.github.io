@@ -6,9 +6,8 @@ categories:
   - Blog
 tags:
   - Oracle 19c
-  - Oracle License
-  - Oracle Multitenant
   - Cloud Database
+  - Oracle License
 ---
 
 ### Synopsis
