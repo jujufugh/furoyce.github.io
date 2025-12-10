@@ -1,4 +1,15 @@
-# Collecting Oracle Cloud Database Backup metadata in OCI Log Analytics via multi-leg REST API calls - Part 2
+---
+title: "Collecting Oracle Cloud Database Backup metadata in OCI Log Analytics via multi-tier REST API calls - Part 2"
+date: 2025-12-02
+last_modified_at: 2025-12-02T09:00:00-05:00
+categories:
+  - Blog
+tags:
+  - Observability and Monitoring
+  - Database Backup
+  - OCI Log Analytics
+  - Cloud Database
+---
 
 ## Introduction
 

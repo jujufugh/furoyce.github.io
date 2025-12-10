@@ -1,6 +1,15 @@
-# Collecting Database Backup and Recovery metrics in OCI Log Analytics via OCI Monitoring and OCI REST API- Part 1
-
-**Description: Monitoring the health and compliance of cloud databases requires visibility into key operational metrics. While OCI exposes this information through its comprehensive REST APIs, aggregating and analyzing these metrics across a fleet of databases can be complex and time-consuming. In this blog post, we’ll show you how to leverage Oracle Log Analytics’ REST API Log Source to collect database backup and recovery information to build centralized dashboards for the database operations.**
+---
+title: "Collecting OCI Monitoring Metrics in OCI Log Analytics for Database Backup Dashboard - Part 1"
+date: 2025-09-08
+last_modified_at: 2025-09-08T09:00:00-05:00
+categories:
+  - Blog
+tags:
+  - Observability and Monitoring
+  - Database Backup
+  - OCI Log Analytics
+  - Cloud Database
+---
 
 ## Introduction
 
