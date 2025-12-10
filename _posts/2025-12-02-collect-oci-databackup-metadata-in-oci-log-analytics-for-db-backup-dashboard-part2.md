@@ -31,7 +31,7 @@ The key to this approach is using **JSON path variables** to pass data from the 
 
 Reference Architecture: 
 
-![Reference Architecture for Database Backup](images/posts/2025-oci-backup/blog-oci_db_backup_recovery_ref_architecture.png)
+![Reference Architecture for Database Backup](/images/posts/2025-oci-backup/blog-oci_db_backup_recovery_ref_architecture.png)
 
 *Figure 1: Reference Architecture illustrating the multi-tier REST API collection of database and corresponding backup info from OCI Database service REST API to OCI Log Analytics*
 
@@ -132,7 +132,7 @@ The child endpoint uses the `dbHomeId` parameter, which we'll extract from the p
    - Click the **OCI_Database_INFO** log source
    - In the **Endpoints** tab, Check the "\*\*\*" of the **Enabled** Log endpoint: **ListDBHomes**
    - Click **Edit**
-   - ![OCI_Database_INFO_ListDBHomes_Edit](images/posts/2025-oci-backup/blog-oci_database_info_listdbhomes_edit.png)
+   - ![OCI_Database_INFO_ListDBHomes_Edit](/images/posts/2025-oci-backup/blog-oci_database_info_listdbhomes_edit.png)
    - *Figure 2: OCI Database INFO Log Source Edit List Endpoint for Multiple Logs*
    - Update the **Log list URL** with the compartmentId matches your environment
 
@@ -153,7 +153,7 @@ The child endpoint uses the `dbHomeId` parameter, which we'll extract from the p
    
    - Click **Next** 
    - Update the **Log URL** with the correct compartmentId that matches your environment
-   - ![OCI_Database_INFO_ListDatabases_Edit_multiple_logs](images/posts/2025-oci-backup/blog-oci_database_info_listdatabases_edit_multiple_logs.png)
+   - ![OCI_Database_INFO_ListDatabases_Edit_multiple_logs](/images/posts/2025-oci-backup/blog-oci_database_info_listdatabases_edit_multiple_logs.png)
    - **Request Headers**: Click **Show request headers** and add:
      - **Name**: `Accept`
      - **Value**: `application/json`
@@ -166,7 +166,7 @@ The child endpoint uses the `dbHomeId` parameter, which we'll extract from the p
    - Verify that the list of URLs is displayed correctly (you should see multiple database URLs, one for each DB Home ID that would be extracted)
    - If there are any errors, go back and fix them
    - Click **Save** to create the source
-   - ![OCI_Database_INFO_ListDatabases_Review_and_Add](images/posts/2025-oci-backup/blog-oci_database_info_listdatabases_review_and_add.png)
+   - ![OCI_Database_INFO_ListDatabases_Review_and_Add](/images/posts/2025-oci-backup/blog-oci_database_info_listdatabases_review_and_add.png)
    - *Figure 4: OCI Database INFO listdatabase list endpoint for multiple logs review and add*
 
 ### Step 4: Understanding JSON Path Variable Syntax
@@ -227,12 +227,12 @@ The JSON path variable syntax is crucial for multi-tier collection. Here's a det
    - Click on **Unassociated Entities** menu
    - Select your Management Agent host entity
    - Click **Add Association**
-   - ![OCI_Database_INFO_Entity_Association](images/posts/2025-oci-backup/blog-oci_database_info_entity_association.png)
+   - ![OCI_Database_INFO_Entity_Association](/images/posts/2025-oci-backup/blog-oci_database_info_entity_association.png)
 
 - **Configure Log Group**
    - In the association dialog, select or create a log group for database metadata
    - Click **Submit** to finalize the association
-   - ![OCI_Database_INFO_Log_Group_Association](images/posts/2025-oci-backup/blog-oci_database_info_log_group_association.png)
+   - ![OCI_Database_INFO_Log_Group_Association](/images/posts/2025-oci-backup/blog-oci_database_info_log_group_association.png)
 
 The Management Agent will now begin collecting database metadata using the multi-tier REST API approach. It will:
 - Periodically call the DB Homes API to get the list of DB Homes
@@ -250,7 +250,7 @@ The Management Agent will now begin collecting database metadata using the multi
      ```
    - Select time range for 24 hours as needed
    - Verify that database backup information is being collected
-   - ![OCI_Database_INFO_Log_Explorer](images/posts/2025-oci-backup/blog-oci_database_info_log_explorer.png)
+   - ![OCI_Database_INFO_Log_Explorer](/images/posts/2025-oci-backup/blog-oci_database_info_log_explorer.png)
 
 
 ## Best Practices

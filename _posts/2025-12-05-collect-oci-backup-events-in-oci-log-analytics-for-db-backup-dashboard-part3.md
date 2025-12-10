@@ -40,7 +40,7 @@ The solution architecture flows as follows:
 
 Reference Architecture:
 
-![Reference Architecture for Database Backup Events](images/posts/2025-oci-backup/blog-oci_backup_events_ref_architecture.png)
+![Reference Architecture for Database Backup Events](/images/posts/2025-oci-backup/blog-oci_backup_events_ref_architecture.png)
 
 *Figure 1: Reference Architecture showing the flow of Database Backup Events from OCI Events Service through Streaming and Service Connector Hub to OCI Log Analytics*
 
@@ -78,14 +78,14 @@ Let's walk through the implementation process for collecting OCI backup events u
    - **Select endpoint type**: Select **Public endpoint** 
       - *NOTE*: OCI Event service onyl supports a public endpoint to access the stream, if you want to use a private endpoint, you need to use OCI Functions to publish the events to the private stream. Please refer to [Write Events to an OCI Private Stream using OCI Events Service and OCI Functions
 ](https://docs.oracle.com/en/learn/ocievents-to-private-stream/index.html)
-   - ![OCI Streaming Stream Endpoint Type](images/posts/2025-oci-backup/blog-oci_streaming_stream_endpoint_type.png)
+   - ![OCI Streaming Stream Endpoint Type](/images/posts/2025-oci-backup/blog-oci_streaming_stream_endpoint_type.png)
       *Figure 2: OCI Streaming Stream Endpoint Type*
    - **Configure encryption settings**: Select Encrypt using Oracle-managed keys
    - **Define stream settings**: 
       - **Retention**: Set retention period (e.g., 24 hours)
       - **Partition count**: Set to 1 (default is sufficient for most use cases)
    - Click **Create**
-   - ![OCI Streaming Stream Creation](images/posts/2025-oci-backup/blog-oci_streaming_stream_creation.png)
+   - ![OCI Streaming Stream Creation](/images/posts/2025-oci-backup/blog-oci_streaming_stream_creation.png)
    - *Figure 3: OCI Streaming Stream Creation*
 
 ### Step 2: Configure OCI Events Rule
@@ -120,7 +120,7 @@ Let's walk through the implementation process for collecting OCI backup events u
 
 - **Click Create Rule**
 
-- ![OCI Events Rule Creation](images/posts/2025-oci-backup/blog-oci_events_rule_creation.png)
+- ![OCI Events Rule Creation](/images/posts/2025-oci-backup/blog-oci_events_rule_creation.png)
 - *Figure 4: OCI Events Rule Creation*
 
 ### Step 3: Import the OCI_Backup_Event_Source log source
@@ -150,7 +150,7 @@ Let's walk through the implementation process for collecting OCI backup events u
    - **Stream**: Select the stream created in Step 1 (e.g., `events_stream`)
    - **Stream pool**: Select the stream pool created in Step 1 (e.g., `events_stream_pool`)
    - **Read position**: Select **Latest**
-   - ![OCI Service Connector Hub Source Configuration](images/posts/2025-oci-backup/blog-oci_service_connector_hub_source_config.png)
+   - ![OCI Service Connector Hub Source Configuration](/images/posts/2025-oci-backup/blog-oci_service_connector_hub_source_config.png)
    - *Figure 5: OCI Service Connector Hub Source Configuration*
 
 4. **Configure Target**
@@ -158,7 +158,7 @@ Let's walk through the implementation process for collecting OCI backup events u
    - **Target**: Select **Logging Analytics**
    - **Log Group**: Select an existing log group or create a new one (e.g., `OCI Backup Events`)
    - **Log source identifier**: Select **OCI_Backup_Event_Source**
-   - ![OCI Service Connector Hub Target Configuration](images/posts/2025-oci-backup/blog-oci_service_connector_hub_target_config.png)
+   - ![OCI Service Connector Hub Target Configuration](/images/posts/2025-oci-backup/blog-oci_service_connector_hub_target_config.png)
    - *Figure 6: OCI Service Connector Hub Target Configuration*
 
 
@@ -185,7 +185,7 @@ Let's walk through the implementation process for collecting OCI backup events u
      'Log Source' = OCI_Backup_Event_Source | fields -'Entity Type', -'Host Name (Server)', -'Problem Priority', -Label, -Entity, -'Log Source', 'Compartment Name', DBUniqueName, LifecycleState, 'OCI Resource Name', BackupDestinationType, backupType, recoveryWindowInDays, DatabaseEdition, autoBackupEnabled, dbVersion, isCdb
      ```
    - Verify that events are being ingested
-   - ![OCI Backup Event Dashboard](images/posts/2025-oci-backup/blog-oci_backup_event_ingestion.png)
+   - ![OCI Backup Event Dashboard](/images/posts/2025-oci-backup/blog-oci_backup_event_ingestion.png)
    - *Figure 7: OCI Backup Event Ingestion*
 
 ### Step 6: OCI Backup EventDashboard Widgets
@@ -200,7 +200,7 @@ Create a dashboard with the following widgets:
       ```
       'Log Source' = OCI_Backup_Event_Source | timestats count as logrecords by Datasource
       ```
-   - ![OCI Backup Trend by Backup Type](images/posts/2025-oci-backup/blog-oci_backup_trend_by_backup_type.png)
+   - ![OCI Backup Trend by Backup Type](/images/posts/2025-oci-backup/blog-oci_backup_trend_by_backup_type.png)
    - *Figure 8: OCI Backup Trend by Backup Type*
 
 - **OCI Backup by Status Pie Chart**
@@ -211,7 +211,7 @@ Create a dashboard with the following widgets:
       ```
       'Log Source' = OCI_Backup_Event_Source | stats count as logrecords by BackupStatus
       ```
-   - ![OCI Backup by Status Pie Chart](images/posts/2025-oci-backup/blog-oci_backup_by_status_pie_chart.png)
+   - ![OCI Backup by Status Pie Chart](/images/posts/2025-oci-backup/blog-oci_backup_by_status_pie_chart.png)
    - *Figure 9: OCI Backup by Status Pie Chart*
 
 - **OCI BAckup Schedule Heatmap**
@@ -222,7 +222,7 @@ Create a dashboard with the following widgets:
       ```
       'Log Source' = OCI_Backup_Event_Source | timestats count as logrecords by Datasource, BackupStatus
       ```
-   - ![OCI Backup Schedule Heatmap](images/posts/2025-oci-backup/blog-oci_backup_schedule_heatmap.png)
+   - ![OCI Backup Schedule Heatmap](/images/posts/2025-oci-backup/blog-oci_backup_schedule_heatmap.png)
    - *Figure 10: OCI Backup Schedule Heatmap*
 
 - **OCI Database Backup Report**
@@ -233,7 +233,7 @@ Create a dashboard with the following widgets:
       ```
       'Log Source' = OCI_Backup_Event_Source | stats count as logrecords by DBUniqueName, backupType
       ```
-   - ![OCI Database Backup Report](images/posts/2025-oci-backup/blog-oci_database_backup_report.png)
+   - ![OCI Database Backup Report](/images/posts/2025-oci-backup/blog-oci_database_backup_report.png)
    - *Figure 11: OCI Database Backup Report*
 
 - **OCI Volume Backup Report**
@@ -244,7 +244,7 @@ Create a dashboard with the following widgets:
       ```
       'Log Source' = OCI_Backup_Event_Source | stats count as logrecords by VolumeName, backupType
       ```
-   - ![OCI Volume Backup Report](images/posts/2025-oci-backup/blog-oci_volume_backup_report.png)
+   - ![OCI Volume Backup Report](/images/posts/2025-oci-backup/blog-oci_volume_backup_report.png)
    - *Figure 12: OCI Volume Backup Report*
 
 

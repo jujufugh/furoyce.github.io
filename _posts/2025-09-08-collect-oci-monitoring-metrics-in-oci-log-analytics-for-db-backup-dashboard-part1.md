@@ -26,7 +26,7 @@ Oracle Log Analytics enables you to collect OCI Monitoring metrics by configurin
 
 Reference Architecture: 
 
-![Reference Architecture for Database Backup and Recovery](images/posts/2025-oci-backup/blog-oci_db_backup_recovery_ref_architecture.png)
+![Reference Architecture for Database Backup and Recovery](/images/posts/2025-oci-backup/blog-oci_db_backup_recovery_ref_architecture.png)
 
 *Figure 1: Reference Architecture showing the flow of Database Backup and Recovery from OCI Monitoring and OCI REST API to OCI Log Analytics*
 
@@ -156,13 +156,13 @@ To enable the Management Agent to use the REST API for log collection, you need 
 4. Click **Update Chart**
 5. Verify the metrics are being collected
 
-![OCI Monitoring Metrics Explorer](images/posts/2025-oci-backup/blog-oci_db_backup_metrics_explorer.png)
+![OCI Monitoring Metrics Explorer](/images/posts/2025-oci-backup/blog-oci_db_backup_metrics_explorer.png)
 
 *Figure 2: Verify the Monitoring Metrics in OCI Monitoring Metrics Explorer*
 
 Or you can use the Advanced Mode to create a custom chart with the metrics via the MQL (Monitoring Query Language) query.
 
-![OCI Monitoring Metrics Explorer](images/posts/2025-oci-backup/blog-oci_db_backup_metrics_explorer_mql.png)
+![OCI Monitoring Metrics Explorer](/images/posts/2025-oci-backup/blog-oci_db_backup_metrics_explorer_mql.png)
 
 *Figure 3: Verify the Monitoring Metrics in OCI Monitoring Metrics Explorer*
 
@@ -211,7 +211,7 @@ Or you can use the Advanced Mode to create a custom chart with the metrics via t
         "query": "BackupDuration[1h].groupBy(resourceName,deviceType).mean()"
       }
 
-   ![OCI Backup Duration Logs Source Configuration](images/posts/2025-oci-backup/blog-oci_db_backup_duration_logs_source_config.png)
+   ![OCI Backup Duration Logs Source Configuration](/images/posts/2025-oci-backup/blog-oci_db_backup_duration_logs_source_config.png)
 
    *Figure 4: Configure the OCI Backup Duration logs source settings*
 
@@ -236,7 +236,7 @@ To create an OCI Log Analytics REST API-based log source, follow these steps:
    - **Entity Type**: Choose "Host(Linux)" as the Entity Type.
    - **Parser**: Select "OCI_DB_Recovery_Logs" as the Parser.
 
-   ![OCI DB Recovery Logs Source Configuration](images/posts/2025-oci-backup/blog-oci_db_recovery_logs_source_config.png)
+   ![OCI DB Recovery Logs Source Configuration](/images/posts/2025-oci-backup/blog-oci_db_recovery_logs_source_config.png)
    *Figure 5: Configure the OCI DB recovery logs source settings*
 
 4. **Define REST API Endpoint**
@@ -252,7 +252,7 @@ To create an OCI Log Analytics REST API-based log source, follow these steps:
    - Credentials
      - **Log credentials type: None**
 
-   ![OCI DB Recovery Logs Source Configuration](images/posts/2025-oci-backup/blog-oci_db_recovery_logs_source_config2.png)
+   ![OCI DB Recovery Logs Source Configuration](/images/posts/2025-oci-backup/blog-oci_db_recovery_logs_source_config2.png)
    *Figure 6: Configure the OCI DB recovery logs source settings*
 
 5. **Validate** configuration and click **Save changes**
@@ -268,7 +268,7 @@ To create an OCI Log Analytics REST API-based log source, follow these steps:
 6. In the **Log Group** section, select an existing log group or create a new one for your log source data
 6. Click **Submit** to finalize the association
 
-![OCI Backup Duration Logs Source Association](images/posts/2025-oci-backup/blog-oci_db_backup_duration_logs_source_association.png)
+![OCI Backup Duration Logs Source Association](/images/posts/2025-oci-backup/blog-oci_db_backup_duration_logs_source_association.png)
 
 *Figure 7: Associate the Management Agent host entity with the OCI_Backup_Duration log source and configure log group*
 
@@ -282,7 +282,7 @@ To create an OCI Log Analytics REST API-based log source, follow these steps:
 4. Click **Run**
 5. Verify the query results
 
-![OCI Backup Duration query results](images/posts/2025-oci-backup/blog-oci_db_backup_duration_query_results.png)
+![OCI Backup Duration query results](/images/posts/2025-oci-backup/blog-oci_db_backup_duration_query_results.png)
 
 *Figure 8: OCI Backup Duration query results*
 
