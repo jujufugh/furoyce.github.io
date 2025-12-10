@@ -1,6 +1,6 @@
 ---
 permalink: /oracle/mig_upg/
-title: "Oracle Cloud Migration"
+title: "Migration and Upgrade"
 author_profile: false
 classes: wide
 sidebar:

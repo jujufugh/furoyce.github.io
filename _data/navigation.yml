@@ -9,6 +9,18 @@ main:
     url: /about/
 
 docs:
+  - title: AI
+    children:
+      - title: "AI Operations"
+        url: /ai/ops/
+      - title: "AI Security"
+        url: /ai/security/
+      - title: "AI Development"
+        url: /ai/dev/
+  - title: AI for Business
+    children:
+      - title: "AI for Business"
+        url: /ai/business/
   - title: Oracle Database
     children:
       - title: "23c"

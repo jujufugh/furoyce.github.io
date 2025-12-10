@@ -13,13 +13,13 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Royce Fu's Database Insights
+title: Royce Fu's AI and Cloud Insights
 email:
 description: >- # this means to ignore newlines until "baseurl:"
-  Use cases of Database Engineering, Cloud, Development and and Technologies
-  Oracle Cloud Infrastructure, Oracle Database, Exadata, Platform Engineering
+  Use cases of AI, Cloud, Development and and Technologies
+  AI Operations and Security, Cloud Infrastructure, Development, Platform Engineering, Oracle Database, Exadata, Platform Engineering, Observability and Management
 twitter_username: roycefugh
-github_username: furoyce
+github_username: jujufuget
 minimal_mistakes_skin: default
 search: true
 
