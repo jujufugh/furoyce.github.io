@@ -5,7 +5,7 @@ last_modified_at: 2023-08-18T16:20:02-05:00
 categories:
   - Blog
 tags:
-  - Observerability and Monitoring
+  - Observability and Monitoring
   - Management Agent
   - Oracle Cloud Agent
   - Unified Monitoring Agent

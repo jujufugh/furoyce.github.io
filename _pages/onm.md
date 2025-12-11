@@ -1,6 +1,6 @@
 ---
 permalink: /cloud/onm/
-title: "Observerability and Monitoring"
+title: "Observability and Monitoring"
 author_profile: false
 classes: wide
 sidebar:
@@ -8,7 +8,7 @@ sidebar:
 ---
 
 {% for tag in site.tags %}
-{% if tag[0] == "Observerability and Monitoring" %}
+{% if tag[0] == "Observability and Monitoring" %}
   <!--<h3>{{ tag[0] }}</h3>-->
   <ul>
     {% for post in tag[1] %}

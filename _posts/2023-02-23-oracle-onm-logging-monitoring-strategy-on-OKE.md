@@ -6,7 +6,7 @@ categories:
   - Blog
 tags:
   - Kubernetes
-  - Observerability and Monitoring
+  - Observability and Monitoring
 ---
 ## Introduction
 Oracle Kubernetes Engine (OKE) is a fully-managed container orchestration service that simplifies the deployment and management of containerized applications in the Oracle Cloud Infrastructure(OCI). OKE is built on top of Kubernetes, the popular open-source container orchestration platform, and provides enterprise-grade features such as high availability, scalability, and security. In a complex and dynamic environment like OKE, logging and monitoring play a crucial role in ensuring the health and stability of the system. By collecting and analyzing logs and metrics from various sources, such as containers, nodes, and network, OKE administrators can gain insights into the behavior of the system and identify issues before they become critical. Logging and monitoring can also help to optimize resource utilization, troubleshoot performance issues, and meet compliance and security requirements. Therefore, effective logging and monitoring are essential components of any OKE deployment. 

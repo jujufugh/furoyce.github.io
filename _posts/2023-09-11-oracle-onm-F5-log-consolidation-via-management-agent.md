@@ -5,7 +5,7 @@ last_modified_at: 2023-10-06T16:20:02-05:00
 categories:
   - Blog
 tags:
-  - Observerability and Monitoring
+  - Observability and Monitoring
   - F5
   - Logging Analytics
   - Integration

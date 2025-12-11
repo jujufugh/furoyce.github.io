@@ -39,7 +39,7 @@ docs:
         url: /cloud/database/
       - title: "Kubernetes"
         url: /cloud/k8s/      
-      - title: "Observerability and Monitoring"
+      - title: "Observability and Monitoring"
         url: /cloud/onm/
       - title: "Data Mesh"
         url: /cloud/datamesh/

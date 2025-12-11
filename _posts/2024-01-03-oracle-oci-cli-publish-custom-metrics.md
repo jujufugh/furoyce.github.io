@@ -5,7 +5,7 @@ last_modified_at: 2024-01-04T16:20:02-05:00
 categories:
   - Blog
 tags:
-  - Observerability and Monitoring
+  - Observability and Monitoring
 ---
 
 I have covered how to use Java SDK to publish custom database metrics to OCI Monitoring service, folks who followed my blog [How to Publish Custom Metrics to OCI Monitoring Service](https://roycefu.com/blog/oracle-onm-publish-custom-metrics/) found it difficult for a quick lab demo project setup. BTW, if you want to use another OCI SDK flavor Python to publish custom metrics to OCI Monitoring service, you can refer to Alfredo's blog [Extract OCI Monitoring Metrics Using REST APIs](https://alfredokriegdba.com/2023/10/12/extract-oci-monitoring-metrics-using-rest-apis/). 
