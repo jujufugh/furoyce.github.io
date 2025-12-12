@@ -17,12 +17,24 @@ docs:
         url: /ai/security/
       - title: "AI Development"
         url: /ai/dev/
-  - title: AI for Business
-    children:
       - title: "AI for Business"
         url: /ai/business/
+  - title: Cloud Engineering
+    children:
+      - title: "Observability and Monitoring"
+        url: /cloud/onm/
+      - title: "Integration"
+        url: /cloud/integration/
+      - title: "Kubernetes"
+        url: /cloud/k8s/
+      - title: "SaaS"
+        url: /cloud/saas/
+      - title: "Security"
+        url: /cloud/security/
   - title: Oracle Database
     children:
+      - title: "26ai"
+        url: /oracle/26ai/
       - title: "23c"
         url: /oracle/23c/
       - title: "19c"
@@ -33,19 +45,4 @@ docs:
         url: /oracle/mig_upg/
       - title: "MAA"
         url: /oracle/maa/
-  - title: Cloud Engineering
-    children:
-      - title: "Cloud Databases"
-        url: /cloud/database/
-      - title: "Kubernetes"
-        url: /cloud/k8s/      
-      - title: "Observability and Monitoring"
-        url: /cloud/onm/
-      - title: "Data Mesh"
-        url: /cloud/datamesh/
-      - title: "Integration"
-        url: /cloud/integration/
-      - title: "Blockchain"
-        url: /cloud/blockchain/
-      - title: "Security"
-        url: /cloud/security/
+
