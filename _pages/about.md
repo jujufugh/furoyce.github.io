@@ -3,15 +3,13 @@ permalink: /about/
 title: "About"
 ---
 
-Welcome to my blog! My name is Royce Fu and I am a Database Solution Architect at Oracle with a passion for database technology and engineering.
+Welcome to my blog! My name is Royce Fu, and I am the Master Principal Cloud Architect with Oracle North America Gen AI Data Platform Engineering. I have a diverse background and experience across IT infrastructure operations, engineering, and architecture. As a member of the Oracle Database Certified Masters, I have deep expertise in Oracle Database Technologies, OCI Observability and Management, and Gen AI Data Platform Engineering, Architecture, and Integration. I began my career as a software engineer, and have spent over a decade specializing in database and system integration engineering and architecture.
 
-I created this blog as a way to share my knowledge and insights on the latest trends and use cases in the database and broader data industry. Whether you're a fellow architect, engineer, technologist looking to stay up-to-date on the industry, or just have a general interest in technology, science and engineering, I hope my blog will provide you with valuable and informative content.
+My current work centers on the convergence of data, cloud, and artificial intelligence, with a particular emphasis on AI Operations (AIOps) and AI Security. I'm passionate about leveraging AI to enhance operational efficiency and proactively secure modern data platforms.
 
-A little bit about my background: I am a computer science graduate who have been working in the tech industry for over a decade. Throughout my career, I have had the opportunity to work on a variety of projects ranging from Database Administration, Database and Application Performance Tuning to Database Platform Engineering.
+I created this blog to share insights, experiences, and the latest developments from the world of data, cloud, and AI. Whether you are an architect, engineer, technologist, or simply interested in the fast-changing landscape of IT, AI, and databases, I hope you find the content here valuable and inspiring—especially around the areas of AI-driven operations and security.
 
-In my free time, you can find me tinkering with the latest gadgets, attending tech conferences, or reading about the latest industry trends.
-
-Thank you for visiting my blog. I hope you enjoy reading my content as much as I enjoy creating it!
+Thank you for visiting my blog. I hope you enjoy reading the posts as much as I enjoy creating them!
 
 {% capture notice-1 %}
 #### Disclaimer

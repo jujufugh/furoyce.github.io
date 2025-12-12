@@ -19,7 +19,7 @@ description: >- # this means to ignore newlines until "baseurl:"
   Use cases of AI, Cloud, Development and and Technologies
   AI Operations and Security, Cloud Infrastructure, Development, Platform Engineering, Oracle Database, Exadata, Platform Engineering, Observability and Management
 twitter_username: roycefugh
-github_username: jujufuget
+github_username: jujufugh
 minimal_mistakes_skin: default
 search: true
 
@@ -28,7 +28,7 @@ markdown: kramdown
 remote_theme: mmistakes/minimal-mistakes
 # Outputting
 permalink: /:categories/:title/
-paginate: 5 # amount of posts to show
+paginate: 10 # amount of posts to show
 paginate_path: /page:num/
 timezone: # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
